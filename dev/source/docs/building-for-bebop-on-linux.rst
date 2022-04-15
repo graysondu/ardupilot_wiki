@@ -68,6 +68,10 @@ In order to upgrade to this version:
 
        telnet 192.168.42.1
 
+   .. note::
+
+      A telnet error here indicates the Bebop's current firmware does not have the correct port open. Manually reboot the Bebop to complete the update.
+
 #. Sync and reboot
 
    ::
@@ -290,7 +294,7 @@ rcS file.
    steps, at least for the GPS config, copying arducopter and modifying the
    init scripts. Regarding the need to upgrade to a custom version, it will
    depend on whether some options will or won't be available in the
-   following release. Informations to follow... 
+   following release. Information to follow... 
 
 .. _building-for-bebop-on-linux_recovery:
 

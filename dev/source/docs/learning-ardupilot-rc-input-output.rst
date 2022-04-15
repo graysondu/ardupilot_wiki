@@ -66,7 +66,7 @@ The hal.rcin and hal.rcout objects discussed above are low level
 functions. The usual way of handling RC input and output in ArduPilot is
 via a higher level object called RC_Channel. That object has user
 configurable parameters for the min/max/trim of each channel, as well as
-support for auxillary channel function, scaling of inputs and outputs
+support for auxiliary channel function, scaling of inputs and outputs
 and many other features.
 
 Go and have a look at
@@ -76,26 +76,6 @@ to output values. Run that on your board and check that transmitter
 input is passed through to a servo. Try changing it to reverse a
 channel, and change the min/max/trim on a channel. Have a look through
 RC_Channel.h to see what API functions are available.
-
-The strange input/output setup in RC_Channel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you look at RC_Channel carefully you'll notice something strange. A
-lot of variables apply to both the input side and the output side. For
-example, the rc1->radio_trim applies to channel 1 as an input
-(specifying the trim point for calculation a input proportion), plus as
-an output, specifying the midpoint of a servo attached to that channel.
-
-This ties input channels numbers to output channel numbers, when really
-they are separate concepts. You may want to use channel 1 input as "roll
-input", but use channel 1 output for steering a nose wheel on an
-aircraft. With RC_Channel you can't really do that, or at least if you
-do it you will end up with some very odd code. This is an artifact of
-how RC_Channel was originally developed, where pass-thru from input
-channels to output channels on a fixed wing aircraft in manual mode was
-normal. Someday we may change it to break apart the two concepts in a
-more logical fashion, but for now just be aware that it is strange, so
-when you see odd bits of code working around this you'll know why.
 
 The RC_Channel_aux object
 ---------------------------

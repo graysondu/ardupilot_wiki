@@ -7,7 +7,7 @@ Download and Installation
 The following instructions are for user that just want to run MAVProxy. Developers should look at the :ref:`Developer's Guide <mavproxy-development>` for setting up the development environment.
 
 MAVProxy is distributed as a Python package (see `PyPI <https://pypi.org/project/MAVProxy/>`__) and can run under Python 2 or 3.
-A number of pre-requisite packages are required to run MAVProxy, as detailed in the individiual sections below.
+A number of pre-requisite packages are required to run MAVProxy, as detailed in the individual sections below.
 
 .. _mavproxy-downloadinstallwindows:
 
@@ -69,6 +69,33 @@ the user permissions may need to be changed:
     sudo usermod -a -G dialout <username>
 
 The system will need to be restarted to apply the above change.
+
+Updating
+--------
+
+To update an existing installation with the current release on Python 3 based systems:
+
+.. code:: bash
+
+    pip3 install mavproxy pymavlink --user --upgrade
+
+or for Python 2 systems:
+
+.. code:: bash
+
+    pip install mavproxy pymavlink --user --upgrade
+
+To update an existing installation with the current development version (ie, from its master branch) for Python 3 systems:
+
+.. code:: bash
+
+    pip3 install mavproxy --user git+https://github.com/ArduPilot/mavproxy.git@master
+
+or for Python 2 systems:
+
+.. code:: bash
+
+    pip install mavproxy --user git+https://github.com/ArduPilot/mavproxy.git@master
 
 .. _mavproxy-downloadinstallmac:
 

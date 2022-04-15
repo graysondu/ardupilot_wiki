@@ -14,7 +14,7 @@ Overview
 ========
 
 The MAVLink protocol defines a large number of
-`MAV_CMD <https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L531>`__
+`MAV_CMD <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__
 waypoint command types (sent in a ``MAVLink_mission_item_message``).
 ArduPilot implements handling for the subset of these commands and
 command-parameters that are *most relevant* and meaningful for each of
@@ -23,9 +23,9 @@ autopilot will simply be dropped.
 
 This article lists and describes the commands and command-parameters
 that are supported on each of the vehicle types. Any parameter that is
-"grey" is not supported by the autopilot and will be ignored (they are
+"grey" is not supported by the autopilot and will be ignored. They are
 still documented to make it clear which properties that are supported by
-the `MAV_CMD protocol <https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L531>`__
+the `MAV_CMD protocol <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__
 are not implemented by the vehicle.
 
 Some commands and command-parameters are not implemented because they
@@ -34,7 +34,7 @@ are not relevant for particular vehicle types (for example
 not Rover, and the pitch parameter only makes sense for Plane). There
 are also some potentially useful command-parameters that are not handled
 because there is a limit to the message size, and a decision has been
-made to prioritise some parameters over others.
+made to prioritize some parameters over others.
 
 .. note::
 
@@ -98,7 +98,7 @@ defined in a terrain database).
 .. note::
 
    The other frame types defined in the MAVLink protocol (see
-   `MAV_FRAME <https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L434>`__)
+   `MAV_FRAME <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L795>`__)
    are not supported for mission commands.
 
 How accurate is the information?
@@ -166,75 +166,38 @@ Commands supported by Copter
 This list of commands was inferred from the command handler in
 `/ArduCopter/mode_auto.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_auto.cpp#L388>`__. 
 
-:ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
-
-:ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
-
-:ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`
-
-:ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`
-
-:ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`
-
-:ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`
-
-:ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`
-
-:ref:`MAV_CMD_NAV_SPLINE_WAYPOINT <mav_cmd_nav_spline_waypoint>`
-
-:ref:`MAV_CMD_NAV_GUIDED_ENABLE <mav_cmd_nav_guided_enable>`
-(NAV_GUIDED only)
-
-:ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
-
-:ref:`MAV_CMD_MISSION_START <mav_cmd_mission_start>`
-
-:ref:`MAV_CMD_COMPONENT_ARM_DISARM <mav_cmd_component_arm_disarm>`
-
-:ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
-
-:ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
-
-:ref:`MAV_CMD_CONDITION_YAW <mav_cmd_condition_yaw>`
-
-:ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
-
-:ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
-
-:ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
-
-:ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
-
-:ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
-
-:ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
-
-:ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera
-enabled only)
-
-:ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`
-
-:ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
-
-:ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
-
-:ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>` (Parachute enabled
-only)
-
-:ref:`MAV_CMD_DO_GRIPPER <mav_cmd_do_gripper>` (EPM enabled only)
-
-:ref:`MAV_CMD_DO_GUIDED_LIMITS <mav_cmd_do_guided_limits>`
-(NAV_GUIDED only)
-
-:ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
-
-:ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
+- :ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
+- :ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
+- :ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`
+- :ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`
+- :ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`
+- :ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`
+- :ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`
+- :ref:`MAV_CMD_NAV_SPLINE_WAYPOINT <mav_cmd_nav_spline_waypoint>`
+- :ref:`MAV_CMD_NAV_GUIDED_ENABLE <mav_cmd_nav_guided_enable>` (NAV_GUIDED only)
+- :ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
+- :ref:`MAV_CMD_MISSION_START <mav_cmd_mission_start>`
+- :ref:`MAV_CMD_COMPONENT_ARM_DISARM <mav_cmd_component_arm_disarm>`
+- :ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
+- :ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
+- :ref:`MAV_CMD_CONDITION_YAW <mav_cmd_condition_yaw>`
+- :ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
+- :ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
+- :ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
+- :ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
+- :ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
+- :ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
+- :ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`
+- :ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
+- :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
+- :ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>` (Parachute enabled only)
+- :ref:`MAV_CMD_DO_GRIPPER <mav_cmd_do_gripper>` (EPM enabled only)
+- :ref:`MAV_CMD_DO_GUIDED_LIMITS <mav_cmd_do_guided_limits>` (NAV_GUIDED only)
+- :ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
+- :ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
 
 [/site]
 
@@ -245,80 +208,40 @@ Commands supported by Plane
 This list of commands was inferred from the command handler in
 `/ArduPlane/commands_logic.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33>`__. 
 
-:ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
-
-:ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
-
-:ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`
-
-:ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`
-
-:ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`
-
-:ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`
-
-:ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`
-
-:ref:`MAV_CMD_NAV_ALTITUDE_WAIT <mav_cmd_nav_altitude_wait>`
-
-:ref:`MAV_CMD_NAV_LOITER_TO_ALT <mav_cmd_nav_loiter_to_alt>`
-
-:ref:`MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT <mav_cmd_nav_continue_and_change_alt>`
-
-:ref:`MAV_CMD_NAV_VTOL_TAKEOFF <mav_cmd_nav_vtol_takeoff>`
-
-:ref:`MAV_CMD_NAV_VTOL_LAND <mav_cmd_nav_vtol_land>`
-
-
-
-:ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
-
-:ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
-
-
-:ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
-
-:ref:`MAV_CMD_DO_ENGINE_CONTROL <mav_cmd_do_engine_control>`
-
-:ref:`MAV_CMD_DO_VTOL_TRANSITION <mav_cmd_do_vtol_transition>`
-
-:ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
-
-:ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
-
-:ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
-
-:ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
-
-:ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
-
-:ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera
-enabled only)
-
-:ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled
-only)
-
-:ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
-
-:ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
-
-:ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
-
-:ref:`MAV_CMD_DO_INVERTED_FLIGHT <mav_cmd_do_inverted_flight>`
-
-:ref:`MAV_CMD_DO_LAND_START <mav_cmd_do_land_start>`
-
-:ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
-
-:ref:`MAV_CMD_DO_AUTOTUNE_ENABLE <mav_cmd_do_autotune_enable>`
-
-:ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
+- :ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
+- :ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
+- :ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`
+- :ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`
+- :ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`
+- :ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`
+- :ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`
+- :ref:`MAV_CMD_NAV_ALTITUDE_WAIT <mav_cmd_nav_altitude_wait>`
+- :ref:`MAV_CMD_NAV_LOITER_TO_ALT <mav_cmd_nav_loiter_to_alt>`
+- :ref:`MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT <mav_cmd_nav_continue_and_change_alt>`
+- :ref:`MAV_CMD_NAV_VTOL_TAKEOFF <mav_cmd_nav_vtol_takeoff>`
+- :ref:`MAV_CMD_NAV_VTOL_LAND <mav_cmd_nav_vtol_land>`
+- :ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
+- :ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
+- :ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
+- :ref:`MAV_CMD_DO_ENGINE_CONTROL <mav_cmd_do_engine_control>`
+- :ref:`MAV_CMD_DO_VTOL_TRANSITION <mav_cmd_do_vtol_transition>`
+- :ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
+- :ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
+- :ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
+- :ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
+- :ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
+- :ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
+- :ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
+- :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
+- :ref:`MAV_CMD_DO_INVERTED_FLIGHT <mav_cmd_do_inverted_flight>`
+- :ref:`MAV_CMD_DO_LAND_START <mav_cmd_do_land_start>`
+- :ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
+- :ref:`MAV_CMD_DO_AUTOTUNE_ENABLE <mav_cmd_do_autotune_enable>`
+- :ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
 
 [/site]
 
@@ -333,47 +256,25 @@ Commands supported by Rover
 This list of commands was inferred from the command handler in
 `/Rover/commands_logic.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/commands_logic.cpp#L25>`__. 
 
-:ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
-
-:ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
-
-:ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
-
-:ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
-
-:ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
-
-:ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
-
-:ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
-
-:ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
-
-:ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
-
-:ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
-
-:ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
-
-:ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera
-enabled only)
-
-:ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
-
-:ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>`
-(Camera enabled only)
-
-:ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled
-only)
-
-:ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
-
-:ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
-
-:ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
+- :ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
+- :ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
+- :ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
+- :ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`
+- :ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`
+- :ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`
+- :ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`
+- :ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`
+- :ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`
+- :ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`
+- :ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`
+- :ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
+- :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_MODE <mav_cmd_do_set_mode>`
+- :ref:`MAV_CMD_DO_SET_RESUME_DIST <mav_cmd_do_set_resume_dist>`
+- :ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
 
 [/site]
 
@@ -1012,7 +913,7 @@ for the parameter will be used.
 
 The radius of the circle is controlled by the
 :ref:`CIRCLE_RADIUS <copter:CIRCLE_RADIUS>`
-parameter (i.e. cannot be set as part of the command).
+parameter and can also be set by the command.
 
 This is the command equivalent of the :ref:`Circle flight mode <copter:circle-mode>`.
 
@@ -1037,7 +938,7 @@ This is the command equivalent of the :ref:`Circle flight mode <copter:circle-mo
    <td></td>
    <td>Empty</td>
    </tr>
-   <tr style="color: #c0c0c0">
+   <tr>
    <td><strong>param3</strong></td>
    <td>Radius</td>
    <td>Empty</td>
@@ -1612,7 +1513,7 @@ control the landing are provided in :ref:`LAND flight mode <plane:land-mode>`.
    <tr>
    <td><strong>param1</strong></td>
    <td>Abort Alt</td>
-   <td>Altitude to climb to if landing is aborted (From Plane 3.4)</td>
+   </td>
    </tr>
    <tr style="color: #c0c0c0">
    <td>param2</td>
@@ -1652,7 +1553,7 @@ control the landing are provided in :ref:`LAND flight mode <plane:land-mode>`.
 MAV_CMD_NAV_VTOL_LAND
 ---------------------
 
-Supported by: Plane (not Copter or Rover). Specifically Quadplanes.
+Supported by: Plane (not Copter or Rover). Specifically QuadPlanes.
 
 Land the vehicle at the current or a specified location.
 
@@ -1701,7 +1602,7 @@ The motors will disarm on their own once landed
    <tr>
    <td><strong>param5</strong></td>
    <td>Lat</td>
-   <td>Target latitude. If zero, the Quadplane will land at the current latitude.</td>
+   <td>Target latitude. If zero, the QuadPlane will land at the current latitude.</td>
    </tr>
    <tr>
    <td><strong>param6</strong></td>
@@ -1740,7 +1641,7 @@ Move to the next command when the desired altitude is reached.
 
 .. note::
 
-   In Plane 3.4 (and later) the ``param1`` value sets how close the
+   The ``param1`` value sets how close the
    vehicle altitude must be to target altitude for command
    completion.
 
@@ -1761,7 +1662,7 @@ Move to the next command when the desired altitude is reached.
    <td>Climb or Descend (0 = Neutral, command completes when within 5m of this
    command's altitude, 1 = Climbing, command completes when at or above
    this command's altitude, 2 = Descending, command completes when at or
-   below this command's altitude. Introduced in Plane 3.4.
+   below this command's altitude.
    </td>
    </tr>
    <tr style="color: #c0c0c0">
@@ -2377,8 +2278,6 @@ subtracted from the current heading (note that the vehicle will always
 turn in direction that most quickly gets it to the new target heading
 regardless of the ``param3`` value).
 
-We don't support controlling the yaw rate, so the ``param2`` value (Sec)
-is ignored.
 
 **Command parameters**
 
@@ -2400,7 +2299,6 @@ is ignored.
    If <code>param4=1</code> (relative): The change in heading (in degrees).
    </td>
    </tr>
-   <tr style="color: #c0c0c0">
    <td><strong>param2</strong></td>
    <td>Sec</td>
    <td>Speed during yaw change:[deg per second].</td>
@@ -2721,17 +2619,17 @@ speed-type and throttle settings are ignored.
    <tr style="color: #c0c0c0">
    <td><strong>param1</strong></td>
    <td>speed m/s</td>
-   <td>Speed type (0=Airspeed, 1=Ground Speed).</td>
+   <td>Speed type (0,1=Ground Speed,  2=Climb Speed, 3=Descent Speed).</td>
    </tr>
    <tr>
    <td><strong>param2</strong></td>
-   <td>speed m/s</td>
+   <td>speed in m/s</td>
    <td>Target speed (m/s).</td>
    </tr>
    <tr style="color: #c0c0c0">
    <td>param3</td>
    <td></td>
-   <td>Throttle as a percentage (0-100%). A value of -1 indicates no change.</td>
+   <td>Trim throttle as a percentage (0-100%). A value of -1 indicates no change.</td>
    </tr>
    <tr style="color: #c0c0c0">
    <td>param4</td>
@@ -2834,8 +2732,6 @@ Rover
 
 Change the target horizontal speed and/or the vehicle's throttle.
 
-The value of ``param1`` is ignored from v2.50 (earlier versions should
-set to 0).
 
 **Command parameters**
 
@@ -2850,8 +2746,8 @@ set to 0).
    </tr>
    <tr style="color: #c0c0c0">
    <td><strong>param1</strong></td>
-   <td>Type (0=as 1=gs)</td>
-   <td>Speed type (0=Airspeed, 1=Ground Speed). Set to 0 before v2.50, otherwise ignored.</td>
+   <td></td>
+   <td>Empty</td>
    </tr>
    <tr>
    <td><strong>param2</strong></td>
@@ -2949,17 +2845,17 @@ specified in the command.For SITL work, altitude input here needs to be with ref
    <tr>
    <td><strong>param5</strong></td>
    <td>Lat</td>
-   <td>Target home latitude (if ``param1=2``)</td>
+   <td>Target home latitude (if <code>param1=0</code>)</td>
    </tr>
    <tr>
    <td><strong>param6</strong></td>
    <td>Lon</td>
-   <td>Target home longitude (if ``param1=2``)</td>
+   <td>Target home longitude (if <code>param1=0</code>)</td>
    </tr>
    <tr>
    <td><strong>param7</strong></td>
    <td>Alt</td>
-   <td>Target home altitude (if ``param1=2``)</td>
+   <td>Target home altitude (if <code>param1=0</code>)</td>
    </tr>
    </tbody>
    </table>
@@ -3338,7 +3234,7 @@ If ``RTL_AUTOLAND`` is set to 2, the plane will jump to the nearest
 MAV_CMD_DO_VTOL_TRANSITION
 --------------------------
 
-Supported by: Plane (not Copter or Rover).Specifically Quadplanes.
+Supported by: Plane (not Copter or Rover).Specifically QuadPlanes.
 
 QuadPlane
 ~~~~~~~~~
@@ -3789,10 +3685,6 @@ This command allows you to specify a roll, pitch and yaw angle which
 will be sent to the :ref:`camera gimbal <common-cameras-and-gimbals>`. This
 can be used to point the camera in specific directions at various times
 in the mission.
-
-.. note::
-
-   Supported from AC3.3, Plane 3.4
 
 **Command parameters**
 
@@ -4361,7 +4253,7 @@ Stop or start internal combustion engine (ICE)
 Plane
 ~~~~~
 
-This command can be used to start or stop the ICE before a NAV_VTOL_LAND or after a NAV_VTOL_TAKEOFF command for a Quadplane to avoid potential prop strikes in the wind. It should be placed before either of those commands.
+This command can be used to start or stop the ICE before a NAV_VTOL_LAND or after a NAV_VTOL_TAKEOFF command for a QuadPlane to avoid potential prop strikes in the wind. It should be placed before either of those commands.
 
 **Command parameters**
 

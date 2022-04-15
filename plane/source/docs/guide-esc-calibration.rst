@@ -4,6 +4,8 @@
 ESC Calibration
 ===============
 
+First, make sure that the correct ESC protocol has been setup. Find your ESC(s) type under :ref:`common-escs-and-motors`, and follow its configuration information.
+
 Planes using a traditional PWM controlled ESC (electronic speed controller) for motor output
 will likely need to be calibrated.
 
@@ -80,4 +82,4 @@ Other ESC Protocols
 
 New ESC's using protocols other than PWM often do not require calibration. 
 Some examples include CAN, OneShot, and DShot. The digital signals replace 
-the need for PWM calibration.
+the need for PWM calibration and are usually pre-set to a range of 1000us to 2000us.

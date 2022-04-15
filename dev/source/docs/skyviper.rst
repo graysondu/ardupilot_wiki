@@ -19,7 +19,7 @@ This page provides information for developers working with the SkyRocket SkyVipe
 
 .. note::
 
-   These instructions relate specifically to developing and updating the the Open Source code present on the drone.  For general help and information on the SkyViper, please visit SkyRocket's website: http://sky-viper.com/
+   These instructions relate specifically to developing and updating the Open Source code present on the drone.  For general help and information on the SkyViper, please visit SkyRocket's website: http://sky-viper.com/
 
 .. warning::
 
@@ -149,7 +149,7 @@ Developing the Transmitter Firmware
    make
    ls -l txmain.img
 
-``txmain.img`` can be flashed using the web interface.  Once the image is transfered, the transmitter will need to be power-cycled for the upgrade to continue.  It will take about 15 seconds to flash the new firmware. The LEDs will flash alternately at 1Hz during upgrade.
+``txmain.img`` can be flashed using the web interface.  Once the image is transferred, the transmitter will need to be power-cycled for the upgrade to continue.  It will take about 15 seconds to flash the new firmware. The LEDs will flash alternately at 1Hz during upgrade.
 
 
 MAVLink Access

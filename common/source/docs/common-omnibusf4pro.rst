@@ -50,7 +50,7 @@ Where to Buy
 
 Versions
 ==============
-There have been many versions of this board and many clones. Best results, with no feature/performance impacts will be obtained boards which have solder jumpers for selecting "SBUS" or "PPM" RX input. This should be soldered to the "PPM" selection for ALL reciever types. ArduPilot will automatically detect and accept any supported format (SBUS/PPM/DSM/etc.) on the RX input with this jumper selection. In addition, be sure the board has a barometer, SD Card slot, and Current sense circuit.
+There have been many versions of this board and many clones. Best results, with no feature/performance impacts will be obtained boards which have solder jumpers for selecting "SBUS" or "PPM" RX input. This should be soldered to the "PPM" selection for ALL receiver types. ArduPilot will automatically detect and accept any supported format (SBUS/PPM/DSM/etc.) on the RX input with this jumper selection. In addition, be sure the board has a barometer, SD Card slot, and Current sense circuit.
 
 Board Connections
 ==================
@@ -148,9 +148,9 @@ Install dfu-util
 
   Rename it to `dfu-util.exe`
 
-  Append the path of the `dfu-util.exe` to the system environment variable `Path`: "My Computer" > "Properties" > "Advanced" > "Environment Variables" > "Path". Please note that paths in the variable `Path` are seperated by semicolon `;`. This will allow dfu-util to be executed globally in command prompt.
+  Append the path of the `dfu-util.exe` to the system environment variable `Path`: "My Computer" > "Properties" > "Advanced" > "Environment Variables" > "Path". Please note that paths in the variable `Path` are separated by semicolon `;`. This will allow dfu-util to be executed globally in command prompt.
 
-  Instead of using dfu-util, you could flash bootloader with betaflight. Instructions are detailled here : https://github.com/betaflight/betaflight/wiki/Installing-Betaflight
+  Instead of using dfu-util, you could flash bootloader with betaflight. Instructions are detailed here : https://github.com/betaflight/betaflight/wiki/Installing-Betaflight
   If you board is not recognize as a com port under windows, you have to download and install zadig : http://zadig.akeo.ie/
 
 
@@ -186,7 +186,7 @@ Congratulations! You're now running ArduPilot on your omnibusF4. You can use thi
 
 Compile ArduPilot
 -----------------
-To build your own firmware, see the instructions on setting up a build envrionment and compiling the source code:
+To build your own firmware, see the instructions on setting up a build environment and compiling the source code:
 `Building the Code <https://ardupilot.org/dev/docs/building-the-code.html>`__
 
 
@@ -210,12 +210,13 @@ Then reboot.
 How to trigger a camera with relay pin
 ======================================
 
-All PWM could be use as relay. :ref:`BRD_PWM_COUNT<BRD_PWM_COUNT>` have to be set.
+Any PWM output can be used as a relay pin. See :ref:`common-gpios`
 
-:ref:`BRD_PWM_COUNT<BRD_PWM_COUNT>` = 2
 :ref:`RELAY_PIN<RELAY_PIN>` = 15 # for output PWM 5
 
 if we want to set PWM 6 as relay pin :
 :ref:`RELAY_PIN<RELAY_PIN>` = 41 # for output PWM 6
 
 Hardware definition is available `here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/omnibusf4pro/hwdef.dat>`__.
+
+[copywiki destination="plane,copter,rover,blimp"]

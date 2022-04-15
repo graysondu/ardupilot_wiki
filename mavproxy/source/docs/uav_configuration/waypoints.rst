@@ -10,7 +10,7 @@ entered via the command line or via the menu bar of the GUI console.
 wp list
 =======
 
-View the currently loaded waypoints on the APM.
+View the currently loaded waypoints on the autopilot.
 
 wp load
 =======
@@ -33,7 +33,7 @@ Save the set of current waypoints to file.
 wp clear
 ========
 
-Delete all waypoints from the APM. It is not recommended to do this
+Delete all waypoints from the autopilot. It is not recommended to do this
 during an AUTO mission.
 
 wp update
@@ -61,7 +61,7 @@ to be loaded.
 wp loop
 =======
 
-Closes the loop on a mission, allowing the APM to repeat a mission.
+Closes the loop on a mission, allowing the autopilot to repeat a mission.
 
 wp remove
 =========
@@ -75,8 +75,8 @@ Remove a specific waypoint from the mission.
 wp set
 ======
 
-The the specified waypoint as the current waypoint. The mission will be
-run from this waypoint onwards. If the APM is running in AUTO mode, it
+The specified waypoint as the current waypoint. The mission will be
+run from this waypoint onwards. If the autopilot is running in AUTO mode, it
 will go to this waypoint immediately.
 
 .. code:: bash

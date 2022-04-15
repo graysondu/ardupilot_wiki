@@ -58,7 +58,12 @@ Controlling Servo Throw, Trim and Reversal
 ==========================================
 
 In addition to the function, each servo output also has parameters to
-control the servo throw, the trim and servo reversal.
+control the servo throw, the trim and servo reversal. Normally, no adjustment is needed, but can be modified to match your
+servo's capabilities and range. While these values can be used to adjust throw and trim center of a flying surface, it is best to 
+do so mechanically. :ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>` can be used to fine adjust the TRIM value automatically in flight, instead of manually changing
+the mechanical trim. NEVER try to trim a plane with the transmitter trims as this will destroy the RC Calibration values (See :ref:`common-radio-control-calibration`).
+
+When using reversing ESCs, these values may be needed to be adjusted (See :ref:`reverse-thrust-setup` )
 
 The parameters are:
 
@@ -86,7 +91,7 @@ throw from 1000 to 2000, and a trim of 1504.
 .. note:: The reversed parameter is different from the REV parameters
           in firmware versions 3.7 and earlier. In 3.7 the RC2_REV
           value was 1 for not reversed and -1 for reversed, which
-          means it was a multipler. In 3.8 the REVERSED parameter is a
+          means it was a multiplier. In 3.8 the REVERSED parameter is a
           boolean, where 1 means reversed, and 0 means not reversed.
 
 Multiple Outputs for One Type
@@ -116,7 +121,7 @@ setup your :ref:`RC inputs <rc-throw-trim>`.
     VTail Planes <guide-vtail-plane>
     Orinthopter <ornithopter>
 
-For Quadplanes, including Tailsitters and Tilt-Rotors, see these sections: :ref:`quadplane-support` , :ref:`guide-tailsitter` , :ref:`guide-tilt-rotor` 
+For QuadPlanes, including Tailsitters and Tilt-Rotors, see these sections: :ref:`quadplane-support` , :ref:`guide-tailsitter` , :ref:`guide-tilt-rotor` 
 
 .. note:: You can combine setups for more complex aircraft. So for example, you could setup a vtail tiltrotor quadplane by combining functions from the guides above.
 
@@ -133,3 +138,4 @@ In addition, auxiliary control surfaces, such as flaps, spoilers and airbrakes c
     Flaperons <flaperons-on-plane>
     Automatic Flaps <automatic-flaps>
     Airbrakes <airbrakes-on-plane>
+    Rudder, Yaw, and Yaw Control <yaw-in-plane>

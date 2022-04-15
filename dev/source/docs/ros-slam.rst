@@ -20,7 +20,7 @@ Mounting the RPLidar and Pixhawk
 .. image:: ../images/ros-pixhawk-rplidara2-orientation.png
     :target: ../_images/ros-pixhawk-rplidara2-orientation.png
 
-The RPLidar shoulid be oriented so that its USB cable wire is pointing forward in the same direction as the arrow on the flight controller.
+The RPLidar should be oriented so that its USB cable wire is pointing forward in the same direction as the arrow on the flight controller.
 
 The USB cable should be plugged into a USB port on the companion computer running ROS.
 
@@ -171,7 +171,7 @@ Connect to the flight controller with a ground station (i.e. Mission Planner) an
 -  :ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 0 (the default)
 -  :ref:`GPS_TYPE <copter:GPS_TYPE>` = 0 to disable the GPS
 -  :ref:`EK2_GPS_TYPE <copter:EK2_GPS_TYPE>` = 3 to disable the EKF's use of the GPS
--  MAG_ENABLE = 0, :ref:`COMPASS_USE <copter:COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = 0, :ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0 to disable the EKF's use of the compass and instead rely on the heading from ROS and Hector SLAM
+-  :ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0, :ref:`COMPASS_USE <copter:COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = 0, :ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0 to disable the EKF's use of the compass and instead rely on the heading from ROS and Hector SLAM
 
 After changing any of the values above, reboot the flight controller.
 
@@ -184,7 +184,7 @@ If all is working, vision position estimates should begin flowing in from ROS to
     EKF2 IMU0 initial pos NED = 0.0,0.0,0.0 (m)
     EKF2 IMU0 is using external nav data
 
-Using the Mission Planner (or similar) go to the Flight Data screen and right-mouse-button click on the map and select "Set Home Here" >> "Set EKF Origin".  The vehicle should appear immediatley on the map where you clicked.
+Using the Mission Planner (or similar) go to the Flight Data screen and right-mouse-button click on the map and select "Set Home Here" >> "Set EKF Origin".  The vehicle should appear immediately on the map where you clicked.
 
 Video
 -----

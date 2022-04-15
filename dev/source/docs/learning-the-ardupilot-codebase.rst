@@ -30,12 +30,12 @@ Tutorial steps
     UARTs and the Console <learning-ardupilot-uarts-and-the-console>
     RC Input and Output <learning-ardupilot-rc-input-output>
     Storage and EEPROM management <learning-ardupilot-storage-and-eeprom-management>
+    Filesystems <filesystems>
     EKF <ekf>
     Copter - Vehicle Code introduction <apmcopter-code-overview>
     Copter - Attitude Control <apmcopter-programming-attitude-control-2>
     Copter - Adding Parameters <code-overview-adding-a-new-parameter>
-    Copter - Adding a new flight mode (ver 3.6 and higher) <apmcopter-adding-a-new-flight-mode>
-    Copter - Adding a new flight mode (ver 3.5 and lower) <apmcopter-adding-a-new-flight-mode-35>
+    Copter - Adding a new flight mode <apmcopter-adding-a-new-flight-mode>
     Copter - Scheduling your new code to run intermittently <code-overview-scheduling-your-new-code-to-run-intermittently>
     Copter - Motors Library <code-overview-copter-motors-library>
     Copter - PosControl and Navigation <code-overview-copter-poscontrol-and-navigation>
@@ -49,7 +49,7 @@ Tutorial steps
 
 .. note::
 
-   There are currently 4 vehicles in ArduPilot (Copter, Plane, Rover, Antenna Tracker) and while there are a lot of common elements between different vehicle types, they are each different. For now we only have a detailed description of the code structure for the Copter code.
+   There are currently five vehicles in ArduPilot (Copter, Plane, Rover, Sub, and Antenna Tracker) and while there are a lot of common elements between different vehicle types, they are each different. For now we only have a detailed description of the code structure for the Copter code.
 
 Other Tutorials
 ---------------

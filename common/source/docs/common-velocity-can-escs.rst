@@ -1,12 +1,12 @@
 .. _common-velocity-can-escs:
 
-=================
-Velocity CAN ESCs
-=================
+===========================
+Currawong Velocity CAN ESCs
+===========================
 
 .. image:: ../../../images/velocity-esc.jpg
 
-The `Velocity range of ESCs <https://www.currawongeng.com/servos-escs/esc-velocity/>`__ provide motor control for the aerospace sector, with a high degree of reliability.
+Currawong's `Velocity range of ESCs <https://www.currawongeng.com/servos-escs/velocity/>`__ provide motor control for the aerospace sector, with a high degree of reliability.
 
 Designed for driving extremely large motors for heavy-lift applications, the Velocity range of ESCs is available in power levels above 20kW
 
@@ -16,7 +16,7 @@ Designed for driving extremely large motors for heavy-lift applications, the Vel
 - Fully isolated communication interface
 - Designed and manufactured in Australia
 
-The Velocity ESC provies a CAN communication interface for commands and telemetry. A traditional digital PWM interface is also supported.
+The Velocity ESC provides a CAN communication interface for commands and telemetry. A traditional digital PWM interface is also supported. They can be obtained with either PiccoloCAN or DroneCAN protocol firmware.
 
 Additionally, the Velocity ESC provides an optional hardware interlock for increased operator safety.
 
@@ -30,11 +30,11 @@ Connection and Configuration
 
 .. note::
 
-    The Velocity ESC uses the PiccoloCAN protocol. Originally developed for the Piccolo autopilot, the protocol is now natively supported by Ardupilot 
+    The Velocity ESC uses the PiccoloCAN protocol. Originally developed for the Piccolo autopilot, the protocol is now natively supported by ArduPilot 
 
 To enable communication with the Velocity ESCs using PiccoloCAN, the following parameters must be set.
 
-- Set :ref:`CAN_D1_PROTOCOL <CAN_D1_PROTOCOL>` = 4 (PiccoloCAN)
+- Set :ref:`CAN_D1_PROTOCOL <CAN_D1_PROTOCOL>` = 4 (PiccoloCAN) or = "1" (DroneCAN)
 - Set :ref:`CAN_P1_DRIVER <CAN_P1_DRIVER>` = 1 (First driver) to specify that the ESCs are connected to the CAN1 port
 [site wiki="copter,rover"]
 - Set :ref:`MOT_PWM_MIN <MOT_PWM_MIN>` = 1000 and :ref:`MOT_PWM_MAX <MOT_PWM_MAX>` = 2000 so ArduPilot uses an output range that matches the ESCs input range

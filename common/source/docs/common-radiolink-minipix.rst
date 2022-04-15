@@ -5,7 +5,7 @@ RadioLink MiniPix
 ========================================
 
 
-.. warning:: This autopilot is not recommended because the board is not compatible with the official ArduPilot software despite multiple efforts to work with the manufacturer to make it compatible. The manufacturer is also apparently not abiding by the GPLv3 license which requires releasing the modified source code to its customers. The information provided below is now outdated and current Ardupilot releases will not function on this flight controller.
+.. warning:: This autopilot is not recommended because some versions of the board are not compatible with the official ArduPilot software despite multiple efforts to work with the manufacturer to make them compatible. The manufacturer is also apparently not abiding by the GPLv3 license which requires releasing the modified source code to its customers.  "V1.0" and "V1.2" probably work, "V1.0 II" and "V1.1" definitely do not work.
 
 
 
@@ -36,7 +36,7 @@ Specifications
    -  1 x additional ADC for analog RSSI or analog airspeed
    -  SDIO microSD card slot
    -  micro USB connector
-   -  includes buzzer / saftey-switch, power module, I2C expansion board and TS100 GPS / mag combo depending on kit features 
+   -  includes buzzer / safety-switch, power module, I2C expansion board and TS100 GPS / mag combo depending on kit features 
    -  size 39 x 39 x 12 mm
    -  weight 12 g without wires
 
@@ -73,7 +73,7 @@ In case a bootloader re-installation is required, you can boot your board to DFU
 .. image:: ../../../images/minipix_dfu.jpg
     :target: ../_images/minipix_dfu.jpg
 
-Then follow the instructions on how to :ref:`load firmare onto ChibiOS boards <common-loading-firmware-onto-chibios-only-boards>`.
+Then follow the instructions on how to :ref:`load firmware onto ChibiOS boards <common-loading-firmware-onto-chibios-only-boards>`.
 
 
 .. warning::
@@ -83,3 +83,5 @@ Then follow the instructions on how to :ref:`load firmare onto ChibiOS boards <c
 .. note::
     MiniPix voltage and current sensing pins use Pixhawk standard ( :ref:`BATT_VOLT_PIN<BATT_VOLT_PIN>` = 2, :ref:`BATT_CURR_PIN<BATT_CURR_PIN>` = 3).
     The additional ADC pin can be used for either RSSI or analog airspeed. Set required option to PIN = 11.
+
+[copywiki destination="plane,copter,rover,blimp"]

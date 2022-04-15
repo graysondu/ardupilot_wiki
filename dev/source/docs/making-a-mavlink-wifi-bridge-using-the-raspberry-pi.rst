@@ -73,7 +73,7 @@ in order to achieve this.
 Setting up the Raspberry Pi as an access point
 ==============================================
 
-Now we need to setup the the software that will allow the RPi to act as
+Now we need to setup the software that will allow the RPi to act as
 an access point. For the following steps make sure you have access to
 the internet from Raspberry Pi, this is needed in order to download the
 software packages. The easiest way to achieve this is to connect the RPi
@@ -424,7 +424,7 @@ Update hostapd
 If you are not using the built in WiFi on a Raspberry Pi 3 then the hostapd
 version installed by apt-get does not fully support the WiFi dongle we are using
 so we need to update it to a later version. Lets get the new version of hostapd 
-by typing the follwing command: (only if NOT using the built in Wifi)
+by typing the following command: (only if NOT using the built in Wifi)
 
 ::
 
@@ -618,7 +618,7 @@ server. In order to set it up we will use a script and modify it to work
 with the RPi.
 
 #. Download the `mavgateway file <https://raw.githubusercontent.com/dronekit/dronekit-python/3222b2cdb71b8b4c5b924ee28fc5d3529be00e67/scripts/mavgateway>`__
-   (from Github) and then copy it over to to the RPi.
+   (from Github) and then copy it over to the RPi.
 #. We now have to edit the file and change some aspects of it to make it
    compatible. Lets edit the file:
 

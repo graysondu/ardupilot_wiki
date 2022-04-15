@@ -19,7 +19,7 @@ equipment when you are using 2.4 Ghz onboard video transmitters, or use
 
 **AGL**: Altitude above ground level
 
-**AHRS**: Altitude Heading Reference System. An IMU (see below) plus the
+**AHRS**: Attitude Heading Reference System. An IMU (see below) plus the
 code to interpret the output from its sensors to establish a plane's XYZ
 and heading orientation.
 
@@ -43,7 +43,7 @@ is \ `here <http://www.arduino.cc/en/>`__.
 stabilized flight, position maintenance and automated mission (waypoint)
 path following.
 
-**ATC**: This could be the Atitude Control libray in Copter with params starting with "ATC\_" or it could mean Air Traffic Control. Usually located at an airport control tower but can also be an app or service such as \ `AirMap <http://www.airmap.com>`__ or \ `Altitude Angel <http://www.altitudeangel.com>`__.
+**ATC**: This could be the Atitude Control library in Copter with params starting with "ATC\_" or it could mean Air Traffic Control. Usually located at an airport control tower but can also be an app or service such as \ `AirMap <http://www.airmap.com>`__ or \ `Altitude Angel <http://www.altitudeangel.com>`__.
 
 **Copter**: Rotary-wing autopilot software variant of the ArduPilot
 project.
@@ -171,7 +171,7 @@ more.
 
 **LOS**: Line of Sight. See VLOS below.
 
-**LiPo**: Lithium Polymer battery, aka LiPoly. Varients include Lithium
+**LiPo**: Lithium Polymer battery, aka LiPoly. Variants include Lithium
 Ion (Li-Ion) battery. This battery chemistry offers more power and
 lighter weight than NiMh and NiCad batteries.
 

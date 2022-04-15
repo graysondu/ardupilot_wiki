@@ -18,11 +18,10 @@ new aircraft, as everything else relies on getting this right.
 
    The default values for the
    roll and pitch controllers in Plane are quite deliberately too small for
-   most aircraft. This is because small values will cause APM to not
+   most aircraft. This is because small values will cause ArduPilot to not
    navigate well and be sluggish, but are less likely to cause the aircraft
-   to crash. The defaults also have a zero 'I' gain, as you should not
-   introduce any 'I' (integrator) until you have correctly tuned the 'P'
-   gain.
+   to crash. The pitch defaults also have a large 'I' gain, to try to compensate for poor initial CG location.
+   Once trimmed via :ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>`, this value should be set to 1/5th of the 'P' gain and full tuning done, as instructed below.
 
 Preconditions
 =============
@@ -33,7 +32,7 @@ The following instruction assume that:
 -  You have done your radio calibration
 -  You have calibrated your airspeed sensor
 -  You have leveled the autopilot
--  You have set your APM and transmitter to be able to select :ref:`FBW-A mode <fbwa-mode>`
+-  You have set your autopilot and transmitter to be able to select :ref:`FBW-A mode <fbwa-mode>`
 -  You have checked your pitch roll and yaw angle on the HUD
    and verified that they match the rotation of the model
 
@@ -45,15 +44,15 @@ Ground Checks
    deflect down
 #. Rotate your model nose down - you should see the elevators/elevons
    deflect up
-#. Roll the model to the right - you should see the LH aileron/elevon go
-   up and the RH aileron/elevon go down.
-#. Roll the model to the left - you should see the LH aileron/elevon go
-   down and the RH aileron/elevon go up.
+#. Roll the model to the right - you should see the left aileron/elevon go
+   up and the right aileron/elevon go down.
+#. Roll the model to the left - you should see the left aileron/elevon go
+   down and the right aileron/elevon go up.
 #. Level the model - the control surfaces should be close to neutral.
-   There will be a little bit of offset, but any more than 10% of your
-   maximum throw indicates that the APM has not been leveled or the
+   There will be a little bit of displacement, but any more than 10% of your
+   maximum throw indicates that the autopilot has not been leveled or the
    radio calibration needs to be repeated.
-#. With the model level apply LH and RH roll stick inputs on
+#. With the model level apply left and right roll stick inputs on
    your transmitter - the controls should deflect in the same direction
    that they would in manual mode.
 #. With the model level apply up and down pitch stick inputs on
@@ -114,13 +113,13 @@ advanced users.
    seconds and then release. Do the same in the other direction. You
    want the model to roll quickly and smoothly to the new bank angle
    and back again without overshoot or any wing 'rocking'. If the
-   roll response is too slow, then progressively increase :ref:`RLL2SRV_P<RLL2SRV_P>` in
+   roll response is too slow, then progressively increase ``RLL2SRV_P`` in
    increments of 0.1 until you are happy with the response.
 #. If you get bank angle oscillation or overshoot, then you need to
-   reduce :ref:`RLL2SRV_P<RLL2SRV_P>`. If at this point you still don't have sufficient
+   reduce ``RLL2SRV_P``. If at this point you still don't have sufficient
    response then you need to follow Method 2.
 #. Once you are happy with the roll response you should now slowly
-   increase the :ref:`RLL2SRV_I<RLL2SRV_I>` to give the controller some "I gain" to allow
+   increase the ``RLL2SRV_I`` to give the controller some "I gain" to allow
    it to cope better with wind. A value of 0.05 will work for most
    models. If you see overshoot or oscillation when raising the I value
    then halve it.
@@ -136,15 +135,15 @@ aileron servo(s) if allowed to continue.
    it and release. Do the same in the other direction. You want the
    model to roll quickly and smoothly to the new bank angle and back
    again without overshoot or any wing 'waggle'. If the roll response is
-   too slow, then progressively increase the :ref:`RLL2SRV_P<RLL2SRV_P>` gain in
+   too slow, then progressively increase the ``RLL2SRV_P`` gain in
    increments of 0.1 until you are happy with the response or you start
    to get oscillation in bank angle or overshoot
-#. Increase :ref:`RLL2SRV_D<RLL2SRV_D>` in increments of 0.01 until it it starts
+#. Increase ``RLL2SRV_D`` in increments of 0.01 until it it starts
    to oscillate, then halve it. Do not go above 0.1 for
-   :ref:`RLL2SRV_D<RLL2SRV_D>` without checking the temperature of your servos when you
+   ``RLL2SRV_D`` without checking the temperature of your servos when you
    land as in extreme cases turning up this gain can cause rapid servo
    movement and overheat the servos leading to premature failure.
-#. Now start to increase the integrator gain :ref:`RLL2SRV_I<RLL2SRV_I>` in steps of 0.05
+#. Now start to increase the integrator gain ``RLL2SRV_I`` in steps of 0.05
    from its default value of zero until the bank angle starts to
    overshoot or oscillate, then halve it.
 
@@ -179,11 +178,11 @@ Tuning tips
    value is reduced too far, then the roll controller is unable to keep
    up with demands from the navigation controller which leads to
    overshoot and weaving in the aircraft's trajectory.
--  The time constant parameter ``RLL2SRV_TCONST`` can also be used to
+-  The time constant parameter :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>` can also be used to
    adjust how rapidly the bank angle reaches the demanded value. The
    effect of this parameter will be seen mostly in the response to small
    step changes in demanded roll. For larger roll demands, the roll rate
-   limit ``RLL2SRV_I`` tends to mask its effect. Making this parameter
+   limit :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` tends to mask its effect. Making this parameter
    smaller will cause the aircraft to reach its demanded roll angle in
    less time, but only if the aircraft is capable. A very slow
    responding airframe may require a slightly larger setting for this
@@ -213,10 +212,10 @@ are some additional values that can be set by more advanced users.
    it and release. Do the same in the other direction. You want the
    model to pitch quickly and smoothly to the new pitch angle and back
    again without overshoot or any porpoising. If the pitch response is
-   too slow, then progressively increase :ref:`PTCH2SRV_P<PTCH2SRV_P>` in increments of
+   too slow, then progressively increase ``PTCH2SRV_P`` in increments of
    0.1 until you are happy with the response.
 #. If you get pitch angle oscillation or overshoot, then you need to
-   reduce :ref:`PTCH2SRV_P<PTCH2SRV_P>`. If at this point you still don't have sufficient
+   reduce ``PTCH2SRV_P``. If at this point you still don't have sufficient
    response then you need to check your radio calibration, the minimum
    and maximum pitch angles and potentially follow Method 2.
 #. Now roll the model to maximum bank in each direction. The nose should
@@ -232,7 +231,7 @@ are some additional values that can be set by more advanced users.
    default value of 1.0. If you need to change the
    :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` parameter outside the range from 0.7 to 1.4 then
    something is likely wrong with either the earlier tuning of your
-   pitch loop, your airspeed calibration or you APM's bank angle
+   pitch loop, your airspeed calibration or your autopilot's bank angle
    estimate.
 
 Method 2
@@ -243,12 +242,12 @@ because step 2) can produce a high frequency instability that unless
 reversion back to manual is done quickly, could overstress the plane.
 
 #. Perform the tuning steps from Method 1
-#. Increase :ref:`PTCH2SRV_D<PTCH2SRV_D>` in increments of 0.01 until it it starts
+#. Increase ``PTCH2SRV_D`` in increments of 0.01 until it it starts
    to oscillate, then halve it. Do not go above 0.1 for
-   :ref:`PTCH2SRV_D<PTCH2SRV_D>` without checking the temperature of your servos when you
+   ``PTCH2SRV_D`` without checking the temperature of your servos when you
    land as in extreme cases turning up this gain can cause rapid servo
    movement and overheat the servos leading to premature failure.
-#. Now start to increase the integrator gain :ref:`PTCH2SRV_I<PTCH2SRV_I>` in steps of
+#. Now start to increase the integrator gain ``PTCH2SRV_I`` in steps of
    0.05 from its default value of zero until the pitch angle starts to
    overshoot or oscillate, then halve it.
 
@@ -264,35 +263,37 @@ Tuning tips
    behaviour that isn't so obvious from the ground looking at the model.
 -  Check for any steady offset between nav_pitch-roll and pitch. If you
    have followed the basic method you may see an offset which can be
-   removed by setting \ ``PTCH2SRV_I`` to a small value (say 0.05)
+   removed by setting ``PTCH2SRV_I`` to a small value (say 0.05)
    which will allow the control loop to slowly trim the elevator demand
    to remove the steady error. The value of ``PTCH2SRV_I`` can be
    increased in small increments of 0.05 until you are satisfied with
    the speed at which the control loop 're-trims'.
 -  Although the autopilot will prevent the integrator from increasing if
    the maximum elevator is exceeded, there is additional protection
-   provided by the :ref:`PTCH2SRV_IMAX<PTCH2SRV_IMAX>` parameter. This parameter sets the
+   provided by the ``PTCH2SRV_IMAX`` parameter. This parameter sets the
    maximum amount of elevator(in centi-degrees) that the integrator can
    control. The default value of 1500 allows the integrator to trim up
    to 1/3 of the total elevator travel. This should be enough to allow
    for the trim offset and variation in trim with speed for most models.
 -  WARNING : If ``PTCH2SRV_IMAX`` is set too high, then there is a
-   danger that in FBW-A, if the model has been levelled so that zero
+   danger that in FBW-A, if the model has been leveled so that zero
    pitch is too nose-up to glide at a safe speed, that the integrator
    will continue to keep increasing the elevator to maintain the
-   demanded pitch angle until the model stalls. :ref:`PTCH2SRV_IMAX<PTCH2SRV_IMAX>` should be
+   demanded pitch angle until the model stalls. ``PTCH2SRV_IMAX`` should be
    set to a value that is big enough to allow from trim changes, but
-   small enough so that it cannot stall the plane.
+   small enough so that it cannot stall the plane. The default for Plane is 2/3 of total throw, which could
+   produce this problem. Be sure that :ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` is setup to add 
+   negative pitch at low throttle in stablized modes.
 -  The rate of pitch (and therefore the reduce the number of g's) used
    to correct pitch angle errors can be limited setting the pitch rate
-   limit ``PTCH2SRV_RMAX_DN`` and ``PTCH2SRV_RMAX_UP`` parameters to
-   non-zero values. Setting these values to 560 divided by the airspeed
+   limit :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` 
+   parameters to non-zero values. Setting these values to 560 divided by the airspeed
    (in metres/second) gives a limit equivalent to approximately +- 1g.
--  The time constant parameter ``PTCH2SRV_TCONST`` can also be used to
+-  The time constant parameter :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` can also be used to
    adjust how rapidly the pitch angle reaches the demanded value. The
    effect of this parameter will be seen mostly in the response to small
    step changes in demanded pitch. For larger pitch demands, the
-   pitch rate limits ``PTCH2SRV_RMAX_DN`` and \ ``PTCH2SRV_RMAX_UP``
+   pitch rate limits :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>`
    tend to mask its effect. Making this parameter smaller will cause the
    aircraft to reach its demanded pitch angle in less time, but only if
    the aircraft is capable. A very slow responding airframe may require
@@ -300,12 +301,13 @@ Tuning tips
 -  Plot the pitch_speed in the tuning window. This shows the rate of
    pitch in radians/second. A value of 1 radian/second is approximately
    equal to 60 degrees/second (57 to be more precise), so if for example
-   you had \ ``PTCH2SRV_RMAX_DN``/UP set to 30, the maximum pitch_speed
+   you had \ :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP set to 30, the maximum pitch_speed
    when responding to a large pitch angle demand (eg full pitch one way
    to full pitch the other way) should be just above 0.5. A value of
    greater than 0.6 would indicate that ``PTCH2SRV_P`` is too high and
    should be reduced, whereas a value of less than 0.5 would indicate
-   that :ref:`RLL2SRV_P<RLL2SRV_P>` should be increased.
+   that ``RLL2SRV_P`` should be increased.
+   
 
 Yaw Controller Tuning
 =====================
@@ -316,7 +318,7 @@ and side-slip controller. Because control of side-slip uses measured
 lateral acceleration, it will only work for those models that have
 enough fuselage side area to produce a measurable lateral acceleration
 when they side-slip (an extreme example of this is an aerobatic model
-flying a knife-edge manoeuver where all of the lift is produced by the
+flying a knife-edge maneuver where all of the lift is produced by the
 fuselage). Gliders with slender fuselages and flying wings cannot use
 this feature, but can still benefit from the yaw damper provided they
 have a yaw control (rudder, differential airbrakes, etc)
@@ -324,16 +326,16 @@ have a yaw control (rudder, differential airbrakes, etc)
 Tuning the yaw damper
 =====================
 
-#. Verify that the ``YAW2SRV_SLIP`` and ``YAW2SRV_INT`` gain terms are
+#. Verify that the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` and :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain terms are
    set to zero, the ``YAW2SRV_RLL`` gain term is set to 1.0 and the
-   ``YAW2SRV_DAMP`` gain term is set to zero
+   :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` gain term is set to zero
 #. Now rapidly roll the model from maximum bank angle in one direction
    to maximum bank angle in the opposite direction. Do this several
    times going in each direction and observe the yawing motion of the
    model. If as the wings pass through level the nose is yawed in the
    opposite direction to the roll (for example when rolling from left to
    right bank, the nose points left) then increase the value of
-   ``KFF_RDDRMIX`` gain until the yaw goes away. Do not use a value
+   :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` gain until the yaw goes away. Do not use a value
    larger than 1.
 #. Increase :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` in small increments of 0.05 until the yaw
    angle starts to oscillate. When this happens, the tail will appear to
@@ -359,11 +361,11 @@ Tuning the sideslip controller
    the lateral acceleration ay. If the lateral acceleration sits around
    zero and doesn't change when you roll into or out of turns then no
    side-slip control is necessary. You can finish at this point.
-#. Set the ``YAW2SRV_INT`` gain term to 1.0. If this causes the yaw
+#. Set the :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain term to 1.0. If this causes the yaw
    angle to oscillate then halve the gain from the smallest value that
    causes oscillation.
 #. If you see that the y acceleration is offset or spikes up during
-   turns, then progressively increase the ``YAW2SRV_SLIP`` gain in steps
+   turns, then progressively increase the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` gain in steps
    of 0.5 until the error goes away or the yaw angle starts to
    oscillate. If yaw oscillation occurs, then halve the gain from the
    value at which caused the oscillation.

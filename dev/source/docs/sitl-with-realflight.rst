@@ -45,10 +45,12 @@ From within RealFlight, Reduce graphics options to improve performance:
   - Simulation, Settings, Graphics
   - Under "Quality" set all values to "No" or "Low" (i.e. set "Clouds" to "No", "Water Quality" to "Low", etc)
   - Under "Hardware" set "Resolution" to "800 x 600 Medium(16 bit) and select "Full Screen" mode
-  - Under physics settings, change the option for "Pause Sim When in Background" to No, and "Automatic Reset Delay(sec)" to 2.0
+  - Under "Physics" settings, change the option for "Pause Sim When in Background" to No, and "Automatic Reset Delay(sec)" to 2.0, and be sure RealFlight Link Enable is "Yes".
    
   .. image:: ../images/realflight-settings-graphics.png
     :target: ../_images/realflight-settings-graphics.png
+    
+ .. note:: Under RealFlight's Simulation menu, Physics submenu, be sure its set at "Realistic" for best physics modeling and refresh rates.
    
 Connecting to Mission Planner's SITL
 ------------------------------------
@@ -58,7 +60,9 @@ Connecting to Mission Planner's SITL
 - On Config/Tuning, Planner set the Layout drop-down to "Advanced"
 - On the top menu bar, select Simulation
 - From the "Model" drop-down, select "flightaxis" and push the Multirotor icon
-- on the Full Parameter List or Tree screens, on the right-side select realflight-quad and press load parameters
+- You will be asked if you want to simulate with the current developers branch code or with the current Stable code release. Select one.
+
+.. note:: it is possible to simulate with your own custom code branch of ArduPilot. See :ref:`Mission Planner SITL with Custom Code<mp-sitl-custom-code>`.
 
   .. image:: ../images/realflight-mp-sitl.jpg
     :target: ../_images/realflight-mp-sitl.jpg
@@ -74,7 +78,26 @@ If the vehicle's position is not reset, from within RealFlight:
   - press OK
   - after the vehicles position is reset, press the transmitter's "Reset" button or PC spacebar again
 
-At this point, load the parameter file for this "QuadCopterX-flightaxis" model via Mission Planner. You are now ready to arm and fly.
+At this point, load the parameter file you downloaded for this "QuadCopterX-flightaxis" model via Mission Planner. Use the Full Parameter List or Tree screens, and on the right-side, select ``Load from file`` and select the parameter file. You are now ready to arm and fly.
+
+.. note:: as with a real vehicle, sometimes loading parameters "enables" other groups of parameters which will not be set during the first load. If you get a message when loading parameters that you have enabled others, reload the parameter file to change those newly revealed parameter groups.
+
+.. _mp-sitl-custom-code:
+
+Using Your Code Branch with Mission Planner SITL and RealFlight
+---------------------------------------------------------------
+
+Instead of using the Stable or Master code branch for simulation, you can use and test your own branch, if desired. The steps are:
+
+- Start RealFlight with the desired Realflight vehicle that has been modified for use with flightaxis.
+- In your GITHUB repository (not local) push your branch to it
+- Under ACTIONS in your web GITHUB repo, select Cygwin Build, and the select branch you pushed that you want the sim to use
+- Download and unzip its build aritfacts and select the ARduXXX.elf.exe file for the vehicle type and rename it, eliminating the .elf portion to a plain .exe file and place in your Documents/Mission Planner/sitl folder in place of the existing file, if present.
+- Start the Mission Planner vehicle sim for the appropriate vehicle with the "do not download" checkbox ticked and flightaxis selected as above.
+
+The simulation will begin using your code branch. Be sure to have the parameters set/updated for the RealFlight vehicle.
+
+.. youtube:: VOnqlC-dbco
 
 Connecting to SITL running on a separate (or Virtual) machine:
 --------------------------------------------------------------
@@ -95,7 +118,7 @@ This technique spreads the processing requirements between two PCs: one Windows 
      - sim_vehicle.py -f flightaxis:192.168.x.x - -map - -console
 - back on RealFlight push the red "RESET" button on the transmitter, or spacebar on PC
 - after about a minute, the vehicle should be visible on the SITL map
-- from within SITL type ``param load <filename>``  to load the parameter found in the same directory as the model. You may have to load them again, after typing ``param fetch``, in order to load parameters that require enabling before presenting their parameter set.  And, in some cases, you may even need to restart SITL in order for some new parameters to take effect.
+- from within SITL type ``param load <filename>``  to load the parameter found in the same directory as the model. You may have to load them again, after typing ``param fetch``, in order to load parameters that require enabling before presenting their parameter set.  And, in some cases, you may even need to restart SITL in order for some new parameters, such as output function changes, to take effect. This can be avoided if you add the parameter file during the start of SITL with the "--add-param-file=*pathtofile* "....ie: sim_vehicle.py -f flightaxis:192.168.x.x - -map - -console --add-param-file=*pathtofile* -w. This adds the param file as a default and then wipes any previous param changes that may exist in the simulation directory. 
 - the performance of the connection can be checked by opening the "ArduCopter" window (on the machine running SITL), the "FPS" (Frames Per Second) count needs to be over 150 for the vehicle to fly well (the average can be lower)
 
 .. note:: the above was for a Copter. Change the directory to ArduPlane or ArduRover for those types of vehicles before beginning sim_vehicle.py or add the -v <vehicletype> directive when starting it.
@@ -140,7 +163,7 @@ InterLink DX/Elite controller emulation: This closely mimics these Interlink  co
 To setup a six position mode switch, you would do so just as explained :ref:`here<common-rc-transmitter-flight-mode-configuration>` for an OpenTX transmitter, but first calibrate the RealFlight  controller using a dual position switch on the mode channel. Then change the transmitter back to provide the six PWM levels. This required since RealFlight auto-scales from the calibration values, so if your six PWM levels are centered in the recognition ranges , then the channel's PWM extremes will not be used for calibration and the PWM levels will be altered by RealFlight before passing on to the SITL. 
 
 .. toctree::
-    :hidden:
+    :maxdepth: 1
 
     Interlink Emulation <interlink-emulation>
     Understanding SITL using RealFlight <flightaxis>

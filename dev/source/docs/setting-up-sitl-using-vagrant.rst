@@ -50,9 +50,8 @@ Preconditions
 
 .. warning::
 
-   You must use the newer
-         version for the git submodule init step. After that setp you can
-         use an older version.
+   -  You must use the newer version for the git submodule(git 1.8.x or later) for initial step. 
+      After that step you can use an older version.
 
    -  Ensure that *git* is set to leave line endings untouched. Click on
       your new “Git Shell (or Bash)” Icon (the terminal was installed
@@ -102,6 +101,14 @@ Set up the Vagrant and the virtual machine
        The first time you run the vagrant up command it will take some
        time complete. The command needs to fetch a Vagrant base VM and
        configure it with the development environment.
+
+    .. note::
+
+       On older Ubuntu versions the CA cetificate store shipped with Vagrant may be out of date.  You may need to set an environment variable before running vagrant:
+
+       ::
+
+	  export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 #. Initialise git submodules
 

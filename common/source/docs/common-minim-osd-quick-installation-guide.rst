@@ -6,32 +6,25 @@ Minim OSD Quick Installation Guide
 
 `MinimOSD <https://code.google.com/archive/p/arducam-osd/wikis/minimosd.wiki>`__
 "On-Screen Display" is a small circuit board that pulls telemetry data
-from your APM or Pixhawk autopilot and over-lays it on your
-:ref:`First Person View <common-fpv-first-person-view>` monitor.
+from your autopilot and over-lays it on your :ref:`First Person View <common-fpv-first-person-view>` monitor.  The Minim OSD was designed and programmed by Sandro Benigno and Jani Hirvinen
 
 This article provides brief instructions for how to connect the board.
 For more detailed instructions please refer to the `MinimOSD Project wiki <https://code.google.com/archive/p/arducam-osd/wikis/minimosd.wiki>`__.
 
-.. note::
-
-   The Minim OSD was designed and programmed by Sandro Benigno and
-   Jani Hirvinen. It is `available from jDrones here <http://store.jdrones.com/jD_MiniOSD_V12_p/jdminiosd12.htm>`__.
-
 Overview
 ========
 
-To connect to Pixhawk, use this `DF13 6-pin cable <https://www.unmannedtechshop.co.uk/df13-6-position-connector-30cm-pack-of-5/>`__
-to connect to the TELEM2 port. To connect to APM 2.5 and 2.6, use a
-5-pin splitter cable that allows the telemetry port to be connected to
-both a :ref:`SiK Radio <common-sik-telemetry-radio>` and the MinimOSD.
+Connect the MinimOSD to the any of the autopilot's serial ports as shown below.  Note that the MinimOSD only "listens" so it is possible (but not recommended) to connect it in parallel with a telemetry radio (e.g. :ref:`SiK Radio <common-sik-telemetry-radio>` or similar).
 
 .. image:: ../../../images/MinimOSD_Pixhawk.jpg
     :target: ../_images/MinimOSD_Pixhawk.jpg
 
+Set :ref:`SERIALx_PROTOCOL <SERIAL2_PROTOCOL>` = 1 (MAVLink1) because MinimOSD does not understand MAVLink2
+
 Basic wiring Diagram
 ====================
 
-The orignal MinimOSD's power setup provides two stages to avoid noises
+The original MinimOSD's power setup provides two stages to avoid noises
 coming from servos attached to your ArduPilot boards. Those noises could
 introduce some glitches on video signal. The independent analog powering
 from a dedicated battery will heat the board considerably, but the video
@@ -54,10 +47,10 @@ Optional setup for critical cooling conditions
 (Hardware V0.1 and 1.0 only)
 
 The second stage regulator from the MinimOSD boards earlier than V1.1
-gets too hot on 12V video setups. If your frame has not a good air flow
+gets too hot on 12V video setups. If your frame does not have good air flow
 for cooling the OSD board you may want to feed the OSD entirely from
-APM. Probably it will add some noises from servos, but you'll be more
-safe by this way:
+the autopilot. Probably it will add some noises from servos, but you'll be more
+safe this way:
 
 .. image:: ../../../images/DiagramaMinimOSD_OP.jpg
     :target: ../_images/DiagramaMinimOSD_OP.jpg
@@ -92,7 +85,7 @@ MWOSD continues to be actively developed and supported.
 
 * Modern GUI configurator with ability to flash hardware directly from within GUI
 * Drag / drop easy configurable screen layouts
-* Autoconfigures MAVLink for highe rperformance
+* Autoconfigures MAVLink for higher performance
 * OSD also fully supports many different FC types other than ArduPilot
 * MAX7456 renew doing in VSYNC to get rid of "snow" on screen but on interrupt instead of SPI polling
 * 3 screens instead of 2
@@ -107,9 +100,9 @@ MWOSD continues to be actively developed and supported.
 * Choose to display pilot icon or callsigns
 
 The following links contain a quick start overview and an ardupilot specific installation guide 
-https://github.com/ShikOfTheRa/scarab-osd/wiki/Quick-start-guide
-https://github.com/ShikOfTheRa/scarab-osd/wiki/MAVLINK-installation
 
+- https://github.com/ShikOfTheRa/scarab-osd/wiki/Quick-start-guide
+- https://github.com/ShikOfTheRa/scarab-osd/wiki/MAVLINK-installation
 
 MinimOSD-extra NG
 ===============================
@@ -154,7 +147,7 @@ To compile on Windows:
 #. If using git clone, also do a git submodule init and git submodule update. 
    If downloading the zip from Github, you also need SingleSerial because 
    Github does not include submodules into the download zip, so you will need to: https://github.com/night-ghost/SingleSerial
-#. Copy all the libraries from MiniumOSD to the Arduino libraries folder 
+#. Copy all the libraries from MinimOSD to the Arduino libraries folder 
    (+ SingleSerial if you downloaded the zip for it)
 #. If not using UAVTalk or MultiWii disable them in **Config.h**:
    

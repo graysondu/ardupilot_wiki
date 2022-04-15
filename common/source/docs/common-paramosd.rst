@@ -6,7 +6,7 @@ OSD based parameter menu
 
 This allows to set and adjust parameters using the ArduPilot onboard OSD and an RC transmitter's stick input. 
 There's two additional OSD screens available (OSD5 and OSD6), with 9 "slots" each to hold parameters. The screens 
-display a default set of paramaters to start with. Additionally, it is possible to change the parameter used in a 
+display a default set of parameters to start with. Additionally, it is possible to change the parameter used in a 
 respective slot directly (on-screen) using stick inputs, or using MAVProxy's osd-module command-line setup. 
 
 
@@ -49,6 +49,7 @@ When one of the parameter screens is selected, adjustments can be made in disarm
 selected inflight, the screen allows display only. This allows live monitoring of automatic parameter adjustments, 
 i.e. when performing autotune procedures or automatic servo trims.
 
+.. note:: For systems not using an actual OSD, as when using CRSF with no OSD or DJI OSD, and running OpenTX transmitters with CRSF configuration script, setting :ref:`OSD_TYPE<OSD_TYPE>` =3 (MSP), will allow the OpenTX CRSF script on the transmitter to change these parameters.
 
 Menu navigation
 ===============
@@ -67,12 +68,12 @@ Parameter slot scroll-selection
 ===============================
 
 Holding roll right for > 3 seconds on a parameter's value will highlight both the selected parameter and its value (blink). This allows 
-you to scroll through the full list of parameters and place another paramater into that respective slot using pitch up and down stick input. 
+you to scroll through the full list of parameters and place another parameter into that respective slot using pitch up and down stick input. 
 Move left to exit parameter selection and get back into standard screen navigation.
 
 .. note::
 
-   OSD based parameter adjustment is designed to allow basic adjustments without any aditional data link or GCS setup required. However, 
+   OSD based parameter adjustment is designed to allow basic adjustments without any additional data link or GCS setup required. However, 
    some parameters with exceptionally wide value ranges, as well as complex bitmap-type parameters might not be ideal for adjustment using parameter OSD.
 
 
@@ -112,9 +113,9 @@ Connect your flight controller, connect tp MAVProxy and load the OSD module by t
 
 Use the following syntax to set and show a parameter, its type, minimum, maximum and increments:
 
-:code:`param-set <screen> <index> <name> (<type> | <min> <max> <increment>)` 
+:code:` osd param-set <screen> <index> <name> (<type> | <min> <max> <increment>)` 
 
-:code:`param-show <screen> <index>` 
+:code:`osd param-show <screen> <index>` 
 
 where 
 

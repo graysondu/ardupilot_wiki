@@ -79,7 +79,7 @@ Configure the Wifi
 
 If desired, the Raspberry Pi's Wifi can be configured to create a 
 Wifi access point. This will allow other clients to connect to
-the RPi and stream telemetry. See the `official RPi documention
+the RPi and stream telemetry. See the `official RPi documentation
 <https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md>`__
 for details.
 
@@ -113,7 +113,7 @@ The APSync image will have the serial port (UART) already enabled.
 MAVProxy
 --------
 
-MAVProxy can be used to to send commands to the flight controller from the Pi. 
+MAVProxy can be used to send commands to the flight controller from the Pi. 
 It can also be used to route telemetry to other network endpoints.
 
 This assumes you have a SSH connection to the Pi. If not, see see the 

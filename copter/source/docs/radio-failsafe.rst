@@ -71,7 +71,7 @@ The :ref:`FS_THR_ENABLE<FS_THR_ENABLE>` parameter can be set in the Mission Plan
 
 -  **Disabled** (Value 0) will disable the radio failsafe entirely.
 -  **Enabled Always RTL** (Value 1) will switch the copter to RTL Mode.  If the GPS position is not usable, the copter will change to Land Mode instead.
--  **Enabled Continue with Mission in Auto Mode ((this value has no effect in 4.0 and later with :ref:`FS_OPTIONS<FS_OPTIONS>` parameter replacing function, see below ))** (Value 2) will ignore the failsafe in an Auto Mode mission. Otherwise, it will behave the same as *Enabled Always RTL*. This option no longer exists in ArduCopter 4.0. Instead, see the :ref:`FS_OPTIONS<FS_OPTIONS>` parameter for this function. Setting this value in Copter 4.0 and later version will automatically be converted and set to (Value 1) and the :ref:`FS_OPTIONS<FS_OPTIONS>` will be modified to include bit (0) in the bitmask for "Continue if in auto mode on Radio Failsafe".
+-  **Enabled Continue with Mission in Auto Mode** (this value has no effect in 4.0 and later with :ref:`FS_OPTIONS<FS_OPTIONS>` parameter replacing function, see below) (Value 2) will ignore the failsafe in an Auto Mode mission. Otherwise, it will behave the same as *Enabled Always RTL*. This option no longer exists in ArduCopter 4.0. Instead, see the :ref:`FS_OPTIONS<FS_OPTIONS>` parameter for this function. Setting this value in Copter 4.0 and later version will automatically be converted and set to (Value 1) and the :ref:`FS_OPTIONS<FS_OPTIONS>` will be modified to include bit (0) in the bitmask for "Continue if in auto mode on Radio Failsafe".
 -  **Enabled Always Land** (Value 3) will switch the copter to Land Mode.
 -  **Enabled SmartRTL or RTL** (Value 4) will switch the copter to SmartRTL mode. If SmartRTL is not available, the copter will switch to RTL Mode instead.  If the GPS position is not usable, the copter will change to Land Mode instead.
 -  **Enabled SmartRTL or Land** (Value 5) will switch the copter to SmartRTL mode. If SmartRTL is not available, the copter will switch to Land Mode instead.
@@ -102,7 +102,7 @@ Testing
 =======
 
 You can check your failsafe by performing the following tests with the
-Pixhawk/APM connected to the Mission Planner either via a USB cable or
+autopilot connected to the Mission Planner either via a USB cable or
 telemetry link. You can complete these tests without plugging in your
 LiPo battery but if you do connect a battery you should first remove the
 propellers.
@@ -159,7 +159,7 @@ Test #5 (optional) : removing power from the receiver
 .. warning:: Unplug the autopilot so that it is powered down before reattaching
    the receiver's power
 
-Using the receiver to set the flight mode (not recommended)
+Using the receiver to set the flight mode (**DO NOT USE!**)
 ===========================================================
 
 Instead of setting up the receiver and autopilot as described
@@ -170,7 +170,5 @@ pwm value to 1700us which is "Flight Mode 5" which could then be set to
 RTL on the Mission Planner's Initial Setup >> Mandatory Hardware >>
 Flight Modes screen.
 
-Although this mostly works it is not recommended because it will not
-trigger if the receiver loses power or if the wires between the receiver
-and autopilot are broken.
+Although this appears to work it is strongly not recommended because it can result in situations that can lead to a crash. Since the autopilot has no way of knowing that an RC failsafe has occurred, undesired behavior can occur such as overriding other failsafes like low battery or GCS failsafes with mode changes.
 

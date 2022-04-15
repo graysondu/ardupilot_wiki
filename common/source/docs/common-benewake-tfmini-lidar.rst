@@ -17,8 +17,8 @@ More details on both these lidar can be found in the `benewake.com's downloads a
 Where to Buy
 ------------
 
-- `Benewake.com Agents <http://en.benewake.com/agent>`__
-- `Benewake's store on Alibaba.com <https://benewake.en.alibaba.com/?spm=a2700.icbuShop.88.19.66976e38pCbzVV>`__
+- `Benewake.com Agents <http://en.benewake.com/news/detail/602f56204d839408076b62a3.html>`__
+- `Benewake's store on Alibaba.com <https://beixingguangzi.en.alibaba.com/>`__
 
 Connecting to the Autopilot
 -----------------------------------
@@ -27,13 +27,13 @@ For a serial connection you can use any spare Serial/UART port.  The diagram bel
 
 .. image:: ../../../images/benewake-tfmini-pixhawk.png
 
-If the SERIAL4/5 port on a Pixhawk is being used then the following parameters should be set for the first rangefinder:
+If the SERIAL4 port on an autopilot is being used then the following parameters should be set for the first rangefinder:
 
 -  :ref:`SERIAL4_PROTOCOL <SERIAL4_PROTOCOL>` = 9 (Lidar)
 -  :ref:`SERIAL4_BAUD <SERIAL4_BAUD>` = 115 (115200 baud)
 -  :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 20 (Benewake-Serial)
 
-.. note:: :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 20 works for TFminiPlus or TFmini, via its UART connection. If TFminiPlus is connected via I2C to the autopilot, use :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 25 (Benewake TFminiPlus-I2C) and also set :ref:`RNGFND1_ADDR<RNGFND1_ADDR>` = 16 (I2C Address of lidar in decimal). *The sensor’s default I2C address is 0x10 hexademical which is 16 in decimal.* 
+.. note:: :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 20 works for TFminiPlus or TFmini, via its UART connection. If TFminiPlus is connected via I2C to the autopilot, use :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 25 (Benewake TFminiPlus-I2C) and also set :ref:`RNGFND1_ADDR<RNGFND1_ADDR>` = 16 (I2C Address of lidar in decimal). *The sensor’s default I2C address is 0x10 hexadecimal which is 16 in decimal.* 
 
 -  :ref:`RNGFND1_MIN_CM <RNGFND1_MIN_CM>` = 30 for TFmini, =10 for TFminiPlus
 -  :ref:`RNGFND1_MAX_CM <RNGFND1_MAX_CM>` = **1000** for indoor use OR **600** for outdoors.  *This is the distance in centimeters that the rangefinder can reliably read.*

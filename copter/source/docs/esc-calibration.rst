@@ -24,10 +24,9 @@ specific information (such as tones).  "All at once" calibration works
 well for most ESCs, so it is good idea to attempt it first and if that
 fails try the "Manual ESC-by-ESC" method.
 
--  If using BLHeli and/or DShot ESC's, please refer to :ref:`DShot and BLHeli ESC Support <common-dshot>` for setup.
--  Some ESCs like the DJI Opto ESCs do not require and do not support calibration, so skip this page completely
--  Some brands of ESC do not allow calibration and will not arm unless you adjust your radio's throttle end-points so that the minimum throttle is around 1000 PWM and maximum is around 2000.  Note that if you change the end-points on your TX you must re-do the :ref:`Radio Calibration <common-radio-control-calibration>`.  Alternatively with Copter-3.4 (and higher) you may manually set the :ref:`MOT_PWM_MIN <MOT_PWM_MIN>` to 1000 and :ref:`MOT_PWM_MAX <MOT_PWM_MAX>` to 2000.
--  If using OneShot ESCs set the :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` to 1 (for regular OneShot) or 2 (for OneShot125).  Note only supported in Copter-3.4 (and higher).
+-  Refer to :ref:`common-brushless-escs` for setup of the ESC protocol (:ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>`) according to your type of ESC.
+-  Some ESCs like the DJI Opto ESCs do not require and do not support calibration, so skip this page completely.
+-  Some brands of ESC do not allow calibration and will not arm unless you adjust your radio's throttle end-points so that the minimum throttle is around 1000 PWM and maximum is around 2000.  Note that if you change the end-points on your TX you must re-do the :ref:`Radio Calibration <common-radio-control-calibration>`.  Alternatively, you may manually set the :ref:`MOT_PWM_MIN <MOT_PWM_MIN>` to 1000 and :ref:`MOT_PWM_MAX <MOT_PWM_MAX>` to 2000.
 -  Begin this procedure only after you have completed the :ref:`radio control calibration <common-radio-control-calibration>` and :ref:`Connect ESCs and motors <connect-escs-and-motors>` part of the :ref:`Autopilot System Assembly Instructions <autopilot-assembly-instructions>`.  Next follow these steps:
 
 .. warning::
@@ -35,7 +34,7 @@ fails try the "Manual ESC-by-ESC" method.
    **Safety Check!**
 
    Before calibrating ESCs, please ensure that your copter has NO PROPS on
-   it and that the APM is NOT CONNECTED to your computer via USB and the
+   it and that the autopilot is NOT CONNECTED to your computer via USB and the
    Lipo battery is disconnected.
 
    .. image:: ../images/copter_disconnect_props_banner.png
@@ -153,9 +152,9 @@ your LiPo.  Remember: no propellers!
 Notes / Troubleshooting
 =======================
 
-The All-at-once ESC calibration mode simply causes the APM to pass
+The All-at-once ESC calibration mode simply causes the autopilot to pass
 through the pilot's throttle directly through to the ESCs. If you power
-up the APM while in this mode you’ll send the same PWM signal to all the
+up the autopilot while in this mode you’ll send the same PWM signal to all the
 ESCs. That's all it does.  Many ESCs use full throttle at startup to
 enter programming mode, full throttle postition is then saved as the
 upper end point and when you pull the throttle down to zero, that

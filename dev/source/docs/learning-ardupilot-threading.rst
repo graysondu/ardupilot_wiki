@@ -79,8 +79,8 @@ what threads are created and what the realtime priority of each thread
 is.
 
 If you have a Pixhawk then you should also now setup a debug console
-cable and attach to the nsh console (the serial5 port). Connect at
-57600. When you have connected, try the "ps" command ad you will get
+cable and attach it to the nsh console (the serial5 port). Connect at
+57600. When you have connected, try the "ps" command and you will get
 something like this:
 
 ::
@@ -190,10 +190,10 @@ not started by the AP_HAL_PX4 Scheduler code. Specifically they are:
 -  px4io - handle the communication with the PX4IO co-processor
 -  hpwork - handle thread based PX4 drivers (mainly I2C drivers)
 -  lpwork - handle thread based low priority work (eg. IO)
--  fmuservo - handle talking to the auxillary PWM outputs on the FMU
+-  fmuservo - handle talking to the auxiliary PWM outputs on the FMU
 -  uavcan - handle the uavcan CANBUS protocol
 
-The startup of all of these tasks is controled by the PX4 specific
+The startup of all of these tasks is controlled by the PX4 specific
 `rc.APM script <https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM>`__.
 That script is run when the PX4 boots, and is responsible for detecting
 what sort of PX4 board we are using then loading the right tasks and
@@ -306,7 +306,7 @@ is called every 50 times (ie. once a second) and the
 five_second_call() is called every 250 times (ie. once every 5
 seconds).
 
-The third number is the maximum time that the function is expected to
+The second number is the maximum time that the function is expected to
 take. This is used to avoid making the call unless there is enough time
 left in this scheduling run to run the function. When scheduler.run() is
 called it is passed the amount of time (in microseconds) available for
@@ -408,4 +408,4 @@ Two other common mechanisms for communicating with PX4 drivers are:
 -  /dev/xxx read/write calls (see \_timer_tick in
    AP_HAL_PX4/RCOutput.cpp)
 
-Please talk to the ardupilot development team on the `ArduPilot Gitter General Chat <https://gitter.im/ArduPilot/GeneralChat>`__ if you are not sure which mechanism to use for new code.
+Please talk to the ardupilot development team on the `ArduPilot Developers Discord <https://ardupilot.org/discord>`__ if you are not sure which mechanism to use for new code.

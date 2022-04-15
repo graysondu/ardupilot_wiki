@@ -203,8 +203,7 @@ planes.
 Flap
 ++++
 
-When a channel is set as a flap its value comes from the ``FLAP_IN_CHANNEL`` . The reason you
-may want to use this instead of a RCPassThru is that you can setup
+When a channel is set as a flap its value comes from the flap rc input channel selected by assigning ``RCx_FUNCTION`` = 208 to it and/or from the :ref:`Automatic Flaps<automatic-flaps>` feature. The reason you may want to use this instead of a RCPassThru is that you can setup
 multiple flap channels with different trims and ranges, and you may want
 to take advantage of the :ref:`FLAP_SLEWRATE<FLAP_SLEWRATE>` to limit the speed of flap
 movement.
@@ -217,8 +216,8 @@ can also accept automatic flap output control from the :ref:`TKOFF_FLAP_PCNT<TKO
 :ref:`LAND_FLAP_PERCNT<LAND_FLAP_PERCNT>` parameters, as well as the :ref:`FLAP_1_SPEED <FLAP_1_SPEED>`,
 :ref:`FLAP_1_PERCNT<FLAP_1_PERCNT>`, :ref:`FLAP_2_SPEED<FLAP_2_SPEED>` and :ref:`FLAP_2_PERCNT<FLAP_2_PERCNT>` parameters. in addition to manual control.
 
-If you have both a ``FLAP_IN_CHANNEL`` set and the Automatic Flaps
-function set then the amount of flap applied is the higher of the two.
+If you have both an RC flap input channel set (``RCx_OPTION`` = 208) and the Automatic Flaps
+function set, then the amount of flap applied is the higher of the two.
 
 Flaperons
 +++++++++
@@ -260,7 +259,7 @@ See the separate page on :ref:`setting up ground steering <tuning-ground-steerin
 Boost Engine Throttle
 +++++++++++++++++++++
 
-This output is for throttle control of an auxiliary :ref:`booster-motor` to add an additional vertical thrust source in Multi-Copter and Quadplane applications.
+This output is for throttle control of an auxiliary :ref:`booster-motor` to add an additional vertical thrust source in Multi-Copter and QuadPlane applications.
 
 
 Motor Enable Switch
@@ -313,6 +312,12 @@ COPTER / QUADPLANE FUNCTIONS
 +--------------------------------+----+-----------------------------------------------------------------+
 |      Tilt Motor Right          | 76 |    Copter, QuadPlane                                            |
 +--------------------------------+----+-----------------------------------------------------------------+
+|      Tilt Motor Rear           | 45 |    QuadPlane                                                    |
++--------------------------------+----+-----------------------------------------------------------------+
+|      Tilt Motor Rear Left      | 46 |    QuadPlane                                                    |
++--------------------------------+----+-----------------------------------------------------------------+
+|      Tilt Motor Rear Right     | 47 |    QuadPlane                                                    |
++--------------------------------+----+-----------------------------------------------------------------+
 |      Boost Engine Throttle     | 81 |    Copter, QuadPlane                                            |
 +--------------------------------+----+-----------------------------------------------------------------+
 |      Motor Enable Switch       | 30 |    Copter, QuadPlane                                            |
@@ -333,7 +338,7 @@ Motors 1 - 12
 
 
 
-These are the Copter and Quadplane VTOL motor outputs. For Multi-Copters, see :ref:`Motor Order Diagrams<connect-escs-and-motors>` . Or see :ref:`Tradtional Helicopter <traditional-helicopter-connecting-apm>`, or :ref:`singlecopter-and-coaxcopter`, or :ref:`heliquads`.
+These are the Copter and QuadPlane VTOL motor outputs. For Multi-Copters, see :ref:`Motor Order Diagrams<connect-escs-and-motors>` . Or see :ref:`Traditional Helicopter <traditional-helicopter-connecting-apm>`, or :ref:`singlecopter-and-coaxcopter`, or :ref:`heliquads`.
 
 [site wiki="copter"]
 .. note::
@@ -342,7 +347,7 @@ These are the Copter and Quadplane VTOL motor outputs. For Multi-Copters, see :r
    Copter-3.5 (and earlier) do not support assigning the same function to multiple output channels but this feature will be present in Copter-3.6 (and higher).
 [/site]
 
-For Quadplanes, see :ref:`quadplane-frame-setup` for motor output configuration.
+For QuadPlanes, see :ref:`quadplane-frame-setup` for motor output configuration.
 
 Throttle Left/ Right
 ++++++++++++++++++++
@@ -350,15 +355,15 @@ Throttle Left/ Right
 In Plane, these outputs are for differential thrust in twin engine aircraft and the amount of yaw affecting the base throttle value is determined by :ref:`RUDD_DT_GAIN<RUDD_DT_GAIN>`. Also, in Plane's vectored Tailsitters, these are the motor outputs. In Rover, these outputs are for control of the steering motors in :ref:`Skid-Steering Rovers <rover-motor-and-servo-configuration-skid>`. In Copter, theses outputs are used for the Bicopter motors.
 
 
-Motor Tilt/ Tilt Motor Left/ Tilt Motor Right
-+++++++++++++++++++++++++++++++++++++++++++++
+Tilt Motor/ Tilt Motor Left/ Tilt Motor Right/ Tilt Motor Rear/ Tilt Motor Rear Left/ Tilt Motor Rear Right
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 These outputs control the tilt servos for :ref:`guide-tilt-rotor` in Plane and Bicopters in Copter.
 
 Boost Engine Throttle
 +++++++++++++++++++++
 
-This output is for throttle control of an auxiliary :ref:`booster-motor` to add an additional vertical thrust source in Multi-Copter and Quadplane applications.
+This output is for throttle control of an auxiliary :ref:`booster-motor` to add an additional vertical thrust source in Multi-Copter and QuadPlane applications.
 
 Motor Enable Switch
 +++++++++++++++++++
@@ -368,7 +373,7 @@ This provides an output that reflects the ARM/DISARM state of the vehicle to con
 Parachute Release
 +++++++++++++++++
 
-See :ref:`Parachute<copter:parachute>` section.
+See :ref:`Parachute<common-parachute>` section.
 
 Landing Gear
 ++++++++++++
@@ -511,8 +516,13 @@ For control of an internal combustion engine's spark plug/igniter, starter motor
 NEOPIXEL LED STRINGS
 --------------------
 
-Neopixel LEDs/Strings can be controlled using ``Function IDs 120-124``, thereby supporting up to four strings independtly controlled. These may be used for ArduPilot notifications and warnings (See :ref:`common-ntf-devices` ) or controlled via LUA scripting (See :ref:`common-lua-scripts`.
+:ref:`Neopixel LEDs/Strings<common-serial-led-neopixel>` can be controlled using ``Function IDs 120-124``, thereby supporting up to four strings independently controlled. These may be used for ArduPilot notifications and warnings (See :ref:`common-ntf-devices` ) or controlled via LUA scripting (See :ref:`common-lua-scripts`.
 This is available in all vehicles.
+
+ProfiLEDs
+---------
+
+:ref:`ProfiLEDs<common-serial-led-ProfiLED>` can be controlled using ``Function IDs 129-132``, thereby supporting up to three strings independently controlled with a common clock. These may be used for ArduPilot notifications and warnings (See :ref:`common-ntf-devices` ) or controlled via LUA scripting (See :ref:`common-lua-scripts`. This is available in all vehicles. See :ref:
 
 
 MISCELLANEOUS FUNCTIONS
@@ -529,16 +539,27 @@ MISCELLANEOUS FUNCTIONS
 +--------------------------------+----+---------------------------------------+
 |      Sprayer Mixer             | 23 |     Copter                            |
 +--------------------------------+----+---------------------------------------+
+| Output SERVOn_MIN PWM value    |134 |    Plane, Copter, Rover               |
++--------------------------------+----+---------------------------------------+
+| Output SERVOn_TRIM PWM value   |135 |    Plane, Copter, Rover               |
++--------------------------------+----+---------------------------------------+
+| Output SERVOn_MAX PWM value    |136 |    Plane, Copter, Rover               |
++--------------------------------+----+---------------------------------------+
 
 Gripper
 +++++++
 
-This is an output for controlling a servo or electormagnetic gripper for holding items for delivery applications. See :ref:`common-gripper-landingpage` for more information.
+This is an output for controlling a servo or electromagnetic gripper for holding items for delivery applications. See :ref:`common-gripper-landingpage` for more information.
 
 Sprayer Pump/Mixer
 ++++++++++++++++++
 
 These outputs are controlling a :ref:`sprayer` .
+
+Output SERVOn MAX/MIN/TRIM
+++++++++++++++++++++++++++
+
+Continuously outputs the parameter value set for that output. Used in button detection. See  :ref:`common-buttons`
 
 GENERAL PURPOSE LUA SCRIPTING OUTPUTS
 -------------------------------------
@@ -574,7 +595,7 @@ Either upon loading the firmware or selecting the frame type, certain default va
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
 | Tricopter                          |33 |34 |0  |36 |0  |0  |39 |0  |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
-| SingleCopter/ CoAxialCopter        |33 |34 |35 |36 |37 |38 |0  |0  |0  |0   |0   |0   |
+| SingleCopter / CoAxialCopter       |33 |34 |35 |36 |37 |38 |0  |0  |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
 | Traditional Helicopter             |33 |34 |35 |36 |0  |0  |0  |31 |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
@@ -582,11 +603,11 @@ Either upon loading the firmware or selecting the frame type, certain default va
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
 | HeliQuad                           |33 |34 |35 |36 |0  |0  |0  |31 |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
-| Fixed Wing Plan/ Tailsitter        |4  |19 |21 |70 |0  |0  |0  |0  |0  |0   |0   |0   |
+| Fixed Wing Plane / Tailsitter      |4  |19 |21 |70 |0  |0  |0  |0  |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
-| Quadplane                          |4  |19 |21 |70 |33 |34 |35 |36 |0  |0   |0   |0   |
+| QuadPlane                          |4  |19 |21 |70 |33 |34 |35 |36 |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
-| Quadplane  Tricopter               |4  |19 |21 |70 |33 |34 |0  |36 |0  |0   |39  |0   |
+| QuadPlane Tricopter                |4  |19 |21 |70 |33 |34 |0  |36 |0  |0   |39  |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+
 | Rover                              |26 |0  |70 |0  |0  |0  |0  |0  |0  |0   |0   |0   |
 +------------------------------------+---+---+---+---+---+---+---+---+---+----+----+----+

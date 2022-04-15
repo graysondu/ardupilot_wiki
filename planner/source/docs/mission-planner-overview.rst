@@ -44,11 +44,9 @@ History
 Mission Planner is a free, open-source, community-supported application
 developed by Michael Oborne for the open-source APM autopilot project.
 If you would like to donate to the ongoing development of Mission
-Planner, please select the Donate button on the Mission Planner
-interface.
+Planner, please refer to the following link.
 
-.. image:: ../images/mp_donate_button.jpg
-    :target: ../_images/mp_donate_button.jpg
+:ref:`Donate <common-donation>`
 
 .. _mission-planner-overview_support:
 
@@ -70,7 +68,7 @@ The "Check for BETA Updates" button will install the current development version
 At the bottom of the HELP screen is the check box "Show Console Window (restart)" , which enables the console window during Mission Planner operation.  That window shows Mission Planner
 activity and is primarily for diagnostic purposes.  It sometimes shows
 some interesting information. A restart of Mission Planner is required
-for the option to take effect.  (TBD need a link to console page TBD)
+for the option to take effect.  
 
 **Getting Help:**
 
@@ -80,24 +78,21 @@ time. If you have questions, first look through the table of contents
 (upper left of every page) for a topic that may address your question.
 Next, try a search of the website.  If you still need help, then the
 community forums are the place to go. There you will find may friendly
-users, developers and often, even Michael will chime in.  There are two
-primary forums. The diydrones.com forum
-`here <https://diydrones.com/forum>`__ and the Arduilot forum
-`here <https://discuss.ardupilot.org/>`__. The diydrones forum has existed
-for years and has a very large community and numerous general topics.
-The ArduPilot forum is newer and is more specific to ArduPilot and
-its vehicles.
+users, developers and often, even Michael will chime in. 
+
+The ArduPilot forum `here <https://discuss.ardupilot.org/>`__ has existed
+for years and has a very large community and numerous general and vehicle specific topics.
+
 
 **Reporting Issues:**
 
-Usually, you can either resolve a question on a forum. Sometimes you
-will discover a bug and can confirm the problem on a forum. If you have
-discovered a bug, use the forums to request it be logged as an official
+You can often resolve a question on a forum. Sometimes you will discover 
+a bug and use the forums to request it be logged as an official
 issue. One of the developers will normally be glad to do so.
 
 If you see a need to change or enhance the documentation, please let us
 know - again using the forums.  We welcome your suggestions and there
-are dozens of qualified editors who can implement your suggestions.
+are qualified editors who can implement your suggestions.
 
 Navigating the Documentation
 ============================

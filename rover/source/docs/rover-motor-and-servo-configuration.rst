@@ -50,7 +50,7 @@ Motor Driver Types
 At least three different Motor Driver (aka ESC) types are supported which allows using ArduPilot with most motor drivers.  The :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` parameter should be used to ensure the output from the autopilot board matches the input required by the motor driver.
 
 - "Normal" is the most common and involves sending PWM values normally between 1000 and 2000 (1ms ~ 2ms)
-- "Brushed With Relay" is for brushed motor drivers that use a :ref:`relay pin <common-relay>` to indicate whether it should rotate forwards or backwards.
+- ":ref:`Brushed With Relay <common-brushed-motors>`" is for brushed motor drivers that use a :ref:`relay pin <common-relay>` to indicate whether it should rotate forwards or backwards.
 - "Brushed BiPolar" is for brushed motor drivers that, a bit like "Normal" pwm interpret a low PWM values for reverse, a high PWM value for forward
 
 ESC Configuration
@@ -80,7 +80,7 @@ The Mission Planner (and perhaps other GCSs) can be used to test the direction o
 - increase the "Throttle %" to 20
 - push the "Test motor" buttons to test the steering and motors.
 
-  - for rovers with separate steering and throttle, pushing the the "Test motor A" button should cause the wheels to turn forward, "Test motor B" should cause steering to turn right.
+  - for rovers with separate steering and throttle, pushing the "Test motor A" button should cause the wheels to turn forward, "Test motor B" should cause steering to turn right.
   - for rovers with skid steering, "Test motor C" should cause the left wheel to turn forward.  "Test motor D" should cause the right wheel to turn forward.
 - If the motors or steering do not move in the correct direction change the appropriate ``SERVOx_REVERSED`` value and try again.
 - if a "command rejected" message appears or the motors or steering do not respond to the test, the cause may be written in the Mission Planner's Flight Data >> Messages tab (see bottom left of window).  Common causes included the radio calibration has not been performed or the ``SERVOx_FUNCTION`` parameters have not been set correctly.

@@ -19,7 +19,7 @@ Building / Compiling
 --------------------
 
 ArduPilot currently supports two build systems, `waf <https://waf.io/>`__ and **make** with waf being the recommended option because it allows building for all boards.
-In most cases the build dependencies described for **waf** and **make** are the same, the only part of the instructions that changes is the build commmand. 
+In most cases the build dependencies described for **waf** and **make** are the same, the only part of the instructions that changes is the build command. 
 
 **Linux / MacOSX users:**
 
@@ -29,11 +29,7 @@ In most cases the build dependencies described for **waf** and **make** are the 
 
 **Windows users:**
 
-Windows users have 3 or 4 options for setting up the build environment. All of the below options will allow building of native (SITL) and Pixhawk-based boards.
-
-- :ref:`Setup the waf Build Environment on Windows using Cygwin <building-setup-windows-cygwin>`
-- :ref:`Setup the waf Build Environment on Windows10 using WSL <building-setup-windows10>`
-- :ref:`Setup Eclipse on Windows for building with waf <building-setup-windows-eclipse>`
+- Windows users should fellow the directions described on :ref:`Setup Build Environment on Windows <building-setup-windows>`.
 
 **Board specific instructions:**
 

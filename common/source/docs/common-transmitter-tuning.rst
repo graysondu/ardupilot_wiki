@@ -148,12 +148,12 @@ You can tune multiple parameters in one flight by setting :ref:`TUNE_PARAM<TUNE_
 one of the "tuning set" parameters. For example, if you set :ref:`TUNE_PARAM<TUNE_PARAM>`
 to 101 then you will have 4 different stages to your tune:
 
-- ``RATE_RLL_D``
-- ``RATE_RLL_PI``
-- ``RATE_PITCH_D``
-- ``RATE_PITCH_PI``
+- ``Roll: Rate D``
+- ``Roll: Rate P and Rate I``
+- ``Pitch: Rate D``
+- ``Pitch: Rate P and Rate I``
 
-notice that ``RATE_RLL_PI`` is actually two parameters in one, controlling
+notice that ``Roll: Rate P and Rate I`` is actually two parameters in one, controlling
 both the P gain and the I gain for roll. This follows the normal
 advice for MultiCopters that you should keep the P and I values equal
 when doing a manual tune.
@@ -179,12 +179,12 @@ set.
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
 +:ref:`TUNE_PARAM<TUNE_PARAM>`+  Set Name         +       Params Tuned                                                                                                  +
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    101                      + Set_RateRollPitch +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>`/:ref:`Q_A_RAT_RLL_PI<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>`/ +
-+                             +                   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>`/:ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_PIT_I>`   +
++    101                      + Set_RateRollPitch +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>`/:ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>`/  +
++                             +                   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>`/:ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>`   +
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    102                      + Set_RateRoll      +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_PI<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>`+
++    102                      + Set_RateRoll      +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>` +
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    103                      + Set_RatePitch     +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_PIT_I>` +
++    103                      + Set_RatePitch     +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>` +
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
 +    104                      + Set_RateYaw       +     :ref:`Q_A_RAT_YAW_P<Q_A_RAT_YAW_P>` / :ref:`Q_A_RAT_YAW_I<Q_A_RAT_YAW_I>` / :ref:`Q_A_RAT_YAW_D<Q_A_RAT_YAW_D>` +
 +-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
@@ -284,7 +284,7 @@ With transmitter based tuning you can tune a single or multiple parameters in fl
 
 The :ref:`TUNE<TUNE>` parameter determines which parameter is being tuned.
 
-The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the parameter when the channel is at :ref:`RC6_MAX<RC6_MAX>`, while the :ref:`TUNE_MIN<TUNE_MIN>` parameter determines the value when RC channle 6 is at :ref:`RC6_MIN<RC6_MIN>`.
+The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the parameter when the channel is at :ref:`RC6_MAX<RC6_MAX>`, while the :ref:`TUNE_MIN<TUNE_MIN>` parameter determines the value when RC channel 6 is at :ref:`RC6_MIN<RC6_MIN>`.
 
 :ref:`TUNE<TUNE>` Values
 ========================
@@ -346,8 +346,6 @@ The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the para
 +--------+-------------------------+----------------------------------------------------------------------+
 |39      |Circle Rate              | :ref:`CIRCLE_RATE<CIRCLE_RATE>`                                      |
 +--------+-------------------------+----------------------------------------------------------------------+
-|41      |RangeFinder Gain         |  :ref:`RNGFND_GAIN<RNGFND_GAIN>`                                     |
-+--------+-------------------------+----------------------------------------------------------------------+
 |46      |Rate Pitch kP            | :ref:`ATC_RAT_PIT_P<ATC_RAT_PIT_P__AC_AttitudeControl_Multi>`        |
 +--------+-------------------------+----------------------------------------------------------------------+
 |47      |Rate Pitch kI            | :ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`        |
@@ -360,17 +358,18 @@ The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the para
 +--------+-------------------------+----------------------------------------------------------------------+
 |51      |Rate Roll kD             | :ref:`ATC_RAT_RLL_D<ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`        |
 +--------+-------------------------+----------------------------------------------------------------------+
-|52      |Rate Pitch FF            | :ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF>` (heli only)                    |
+|52      |Rate Pitch FF            | :ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` **    |
 +--------+-------------------------+----------------------------------------------------------------------+
-|53      |Rate Roll FF             | :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF>` (heli only)                    |
+|53      |Rate Roll FF             | :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` **    |
 +--------+-------------------------+----------------------------------------------------------------------+
-|54      |Rate Yaw FF              | :ref:`ATC_RAT_YAW_FF<ATC_RAT_YAW_FF>` (heli only)                    |
+|54      |Rate Yaw FF              | :ref:`ATC_RAT_YAW_FF<ATC_RAT_YAW_FF__AC_AttitudeControl_Heli>` **    |
 +--------+-------------------------+----------------------------------------------------------------------+
 |57      |Winch                    | :ref:`WINCH_RATE_MAX<WINCH_RATE_MAX>`                                |
 +--------+-------------------------+----------------------------------------------------------------------+
 |58      |SysID Magnitude          | :ref:`SIDS_MAGNITUDE<SID_MAGNITUDE>`                                 |
 +--------+-------------------------+----------------------------------------------------------------------+
 
+** Traditional Heli Only
 
 These values can be either set manually or using Mission Planner
 

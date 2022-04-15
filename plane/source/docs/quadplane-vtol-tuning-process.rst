@@ -148,7 +148,7 @@ There are several things that the pilot can do to minimize the risk during the e
 7. Do tuning flights in low-wind condition and normal weather (no rain and between 15°C/59°F and 25°C/77°F).
 8. Practice QSTABILIZE flight in simulator or on a low-end drone first. You should be confident to be able to takeoff and land with your untuned aircraft.
 
-Tuning Processs
+Tuning Process
 ===============
 
 Step 5: First Flight
@@ -372,6 +372,7 @@ There a number of problems that can prevent QAUTOTUNE from providing a good tune
 - Non-linear ESC response.
 - Very low setting for :ref:`Q_M_SPIN_MIN <Q_M_SPIN_MIN>`.
 - Overloaded propellers or motors.
+- Autotuning a Tailsitter's pitch or yaw axis, since they require feed-forward.
 
 If QAUTOTUNE has failed you will need to do a manual tune.
 
@@ -437,5 +438,4 @@ The full list of input shaping parameters are:
 - :ref:`Q_LOIT_BRK_DELAY <Q_LOIT_BRK_DELAY>`
 - :ref:`Q_LOIT_BRK_JERK <Q_LOIT_BRK_JERK>`
 - :ref:`Q_LOIT_SPEED <Q_LOIT_SPEED>`
-
 

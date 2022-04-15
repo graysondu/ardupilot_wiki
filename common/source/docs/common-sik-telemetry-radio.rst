@@ -1,5 +1,5 @@
 .. _common-sik-telemetry-radio:
-
+[copywiki destination="plane,copter,rover,blimp"]
 ===================
 SiK Telemetry Radio
 ===================
@@ -37,9 +37,9 @@ model which is :ref:`appropriate for your country/region <common-telemetry-radio
 As the platform is open source, implementation can be purchased from
 many different sources, including ArduPilot Partners:
 
--  `jD-SiK Telemetry Set <http://store.jdrones.com/jD_SiK_Radio_Telemetry_radio_p/rfsik20set900.htm>`__ (jDrones)
--  `mRo SiK Telemetry Radio <https://store.mrobotics.io/ProductDetails.asp?ProductCode=mRo-sikv2>`__ (mRobotics)
--  `VirtualRobotix Telemetry Set <http://www.virtualrobotix.it/index.php/en/shop/telemetria>`__ (VirtualRobotix)
+-  Search EBay for `SiK Telemetry Radio <https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=SiK+telemetry+radio&_sacat=0&LH_TitleDesc=0&_osacat=0&_odkw=3dr+telemetry+radio>`__ (be aware, many "clones" have incorrect analog modules and will interoperate fine with themselves, although with reduced range, but not with the original "3DR" design. OEM versions below do not have this issue)
+-  `mRo SiK Telemetry Radio <https://store.mrobotics.io/product-p/mro-sikv2airgnd-mr.htm>`__ (mRobotics)
+-  `Holybro SiK Telemetry Radio <https://shop.holybro.com/transceiver-telemetry-radio-v3_p1103.html>`__ (Holybro)
 
 .. tip::
 
@@ -115,16 +115,6 @@ default recommendation is "Telem1").
 .. image:: ../../../images/Telemetry_3DR_Radio_Pixhawk.jpg
     :target: ../_images/Telemetry_3DR_Radio_Pixhawk.jpg
 
-Connecting to APM2.x
---------------------
-
-Use the 6-to-5 pin DF13 connector to connect the radio to your APM2's Telem port
-Because of the limited number of serial ports on the APM2.x, the telemetry radio cannot
-be used while the board is also plugged in with the micro USB port.
-
-.. image:: ../../../images/Telemetry_3DR_Radio_APM2.jpg
-    :target: ../_images/Telemetry_3DR_Radio_APM2.jpg
-
 Connecting to a PC
 ------------------
 
@@ -169,6 +159,11 @@ will need to specify different radio channels (Net ID).
 
 Mission Planner supports configuring your radios using a simple GUI
 interface. For more information see :ref:`Configuring a Telemetry Radio using Mission Planner <common-configuring-a-telemetry-radio-using-mission-planner>`.
+
+Updating the Firmware
+=====================
+
+You can check the firmware version (latest version is `here <https://firmware.ardupilot.org/SiK/stable/>`__ ) using the GUI tool mentioned in the previous section and update if necessary with  :ref:`these instructions<sik-firmware-update>`
 
 Expected range
 ==============

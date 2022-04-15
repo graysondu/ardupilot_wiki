@@ -22,9 +22,15 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 [site wiki="plane"]
     Airspeed Sensor <airspeed>
 [/site]
-    Battery Monitors (aka Power Modules) <common-powermodule-landingpage>
+[site wiki="rover, copter"]
+    Airspeed Sensor <common-airspeed-sensor>
+[/site]
+[site wiki="rover"]
+    AIS for Boats <common-ais>
+[/site]
     Barometer (external) <common-baro-external>
 [site wiki="copter,plane,rover"]
+    Button Inputs <common-buttons>
     Buzzer <common-buzzer>
 [/site]
     Cameras & Gimbals <common-cameras-and-gimbals>
@@ -37,10 +43,11 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
     Display (Onboard) <common-display-onboard>
     ESCs and Motors <common-escs-and-motors>
 [site wiki="plane"]
-     Drive Calculator Motor/Propeller Analyzer <drivecalculator-guide>
+    Drive Calculator Motor/Propeller Analyzer <drivecalculator-guide>
 [/site]
     First Person View Video <common-fpv-first-person-view>
     Fuel Flow and Level Sensors <common-fuel-sensors>
+    Generators <common-generators>
     GPS/Compass <common-positioning-landing-page>
     Grippers <common-gripper-landingpage>
     Joystick or Gamepad <common-joystick>
@@ -48,7 +55,6 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
     Landing Gear/ Retractable Camera Mount <common-landing-gear>
 [/site]
     LEDs (external) <common-external-leds>
-    Multiple Radio Control Receivers <common-multiple-rx>
 [site wiki="copter,rover"]
 	Non-GPS navigation <common-non-gps-navigation-landing-page>
 [/site]
@@ -56,31 +62,30 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 [site wiki="copter,plane"]
     Optical Flow Sensor <common-optical-flow-sensors-landingpage>
 [/site]
-[site wiki="copter"]
-    Parachute <parachute>
+[site wiki="copter, plane"]
+    Parachute <common-parachute>
 [/site]
+    Power Modules <common-powermodule-landingpage>
     Power Tether <common-power-tether>
     PPM Encoder <common-ppm-encoder>
 [site wiki="copter"]
     Precision Landing and Loiter (IRLock) <precision-landing-with-irlock>
 [/site]
     Radio Control Systems <common-rc-systems>
-    Rangefinders (Sonar, Lidar) <common-rangefinder-landingpage>
-[site wiki="copter,rover"]
-    Realsense Depth Camera <common-realsense-depth-camera>
-[/site]
+    Rangefinders (Sonar, Lidar, Depth Cameras) <common-rangefinder-landingpage>
     Received Signal Strength Indication (RSSI) <common-rssi-received-signal-strength-indication>
     Relay Switch <common-relay>
     RPM Sensor <common-rpm>
     Safety Switch <common-safety-switch-pixhawk>
     Servos <common-servo-landingpage>
+    Smart Batteries <common-smart-battery-landingpage>
 [site wiki="rover"]
     Start/Stop Switch <startstop-switch>
 [/site]
     Telemetry Radio <common-telemetry-landingpage>
-    UAVCAN Adapter Node <common-uavcan-adapter-node>
-    UAVCAN Peripherals <common-uavcan-peripherals>
-    Video (High Defintion) <common-video-landingpage>
+    DroneCAN Adapter Node <common-uavcan-adapter-node>
+    DroneCAN Peripherals <common-uavcan-peripherals>
+    Video (High Definition) <common-video-landingpage>
 [site wiki="copter"]
     Winch <common-daiwa-winch>
 [/site]

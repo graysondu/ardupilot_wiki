@@ -38,6 +38,8 @@ intersphinx_mapping = {'copter': (intersphinx_base_url % 'copter',
                                   None),
                        'mavproxy': (intersphinx_base_url % 'mavproxy',
                                   None),
+                       'blimp': (intersphinx_base_url % 'blimp',
+                                  None),
                                   }
 
 ############ PATCH REMOVE NON-LOCAL IMAGE WARNINGS
@@ -60,4 +62,4 @@ if disable_non_local_image_warnings:
 ############ ENDPATH
 
 def setup(app):
-   app.add_stylesheet("common_theme_override.css")
+   app.add_css_file("common_theme_override.css")

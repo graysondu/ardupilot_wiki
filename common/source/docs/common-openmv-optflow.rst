@@ -11,10 +11,6 @@ The `OpenMV camera <https://openmv.io/>`__ is a programmable camera which includ
 ..  youtube:: BmixVDBiIbA
     :width: 100%
 
-.. warning::
-
-   Support for this sensor will be included in Copter-4.0 (and higher)
-
 Where to Buy
 ------------
 
@@ -32,8 +28,6 @@ Connection to Autopilot
 - Set :ref:`FLOW_TYPE <FLOW_TYPE>` = 5 (MAVLink)
 - Set :ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 1 (MAVLink) if using Serial2/Telem2, if connected to another serial port use the corresponding SERIALx_PROTOCOL parameter
 - Set :ref:`SERIAL2_BAUD <SERIAL2_BAUD>` = 115
-- Set :ref:`EK2_FLOW_DELAY <EK2_FLOW_DELAY>` = 80
-- Optionally set :ref:`EK2_GPS_TYPE <EK2_GPS_TYPE>` = 3 to force the EKF to only use the optical flow sensor and not use the GPS
 
 .. note::
 
@@ -62,8 +56,10 @@ Additional Notes
 - As with the :ref:`PX4Flow sensor <common-px4flow-overview>` a range finder is required to use the sensor for autonomous modes including :ref:`Loiter <loiter-mode>` and :ref:`RTL <rtl-mode>`
 - :ref:`FlowHold <flowhold-mode>` does not require the use of a rangefinder
 - The sensor has been successfully tested to altitudes of about 10m
+- Performance can be improved by setting the :ref:`sensors position parameters <common-sensor-offset-compensation>`.  For example if the sensor is mounted 2cm forward and 5cm below the frame's center of rotation set :ref:`FLOW_POS_X <FLOW_POS_X>` to 0.02 and :ref:`FLOW_POS_Z <FLOW_POS_Z>` to 0.05.
 
 Testing and Setup
 -----------------
 
-See :ref:`common-optical-flow-sensor-setup`
+- See :ref:`common-optical-flow-sensor-setup` for setup guides.
+- Note that recommended value for :ref:`EK2_FLOW_DELAY <EK2_FLOW_DELAY>` or :ref:`EK3_FLOW_DELAY <EK3_FLOW_DELAY>` for this sensor is 80.

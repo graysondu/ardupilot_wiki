@@ -1,7 +1,5 @@
 .. _common-safety-switch-pixhawk:
 
-[copywiki destination="copter,plane,rover"]
-
 =============
 Safety Switch
 =============
@@ -27,6 +25,8 @@ Configuring the Safety Switch
 .. image:: ../../../images/safetyswitch-bitmask.png
     :target: ../_images/safetyswitch-bitmask.png
 
+- :ref:`BRD_SAFETYOPTION<BRD_SAFETYOPTION>` This bitmask controls the operational limits of the safety button. It allows you to control if the safety button can be used for safety enable and/or disable, and whether the button is active if armed. Also, if the safety state is forced on upon disarming.
+
 Using the Safety Switch to force I/O board firmware update
 ==========================================================
 
@@ -39,3 +39,5 @@ This is normally not required but in some rare cases is required after a firmwar
    A Pixhawk has two CPUs, the main CPU (aka FMU) is where ArduPilot runs.  
    There is a separate I/O CPU which is responsible for some I/O including PWM outputs to the MAIN OUT channels.  
    Pixracers only have the main CPU.
+
+[copywiki destination="plane,copter,rover,blimp"]

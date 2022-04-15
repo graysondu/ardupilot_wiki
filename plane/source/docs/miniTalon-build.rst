@@ -19,7 +19,7 @@ Among hobbyists, the X-UAV MiniTalon has become one of the most popular FPV Plan
 
 It is capable a relatively high load capacity, allowing it to carry HD video cameras, on fully stabilized gimbles for long duration flights. And configured as a basic FPV plane it is also very manuerable and sporty.
 
-This guide illustrates some general building tips, as well as a basic Arduplane configuration for an FPV plane.
+This guide illustrates some general building tips, as well as a basic ArduPlane configuration for an FPV plane.
 
 Many of the photos and descriptions are borrowed from Mark QVale's `website <https://itsqv.com>`_. which shows many other configurations, tips, and 3D printed parts, including many gimbles, for the MiniTalon. An `RCG thread <https://www.rcgroups.com/forums/showthread.php?2043439-Talon-MINI-FPV-plane-official-thread>`_ also has extensive information on variations.
 
@@ -184,7 +184,7 @@ Options
 Airspeed Sensor
 ---------------
 
-With the additional of a digital airspeed sensor, precision airspeed control can be obtained during cruise portions of flight, and can be attached to the MatekF405-Wing autopilot's CL1/DA1 or CL2/DA2 pins. However, this is optional and ArduPlane flies extremely well without this addtion. See the :ref:`Airspeed sensor <airspeed>` section for more information.
+With the addition of a digital airspeed sensor, precision airspeed control can be obtained during cruise portions of flight, and can be attached to the MatekF405-Wing autopilot's CL1/DA1 or CL2/DA2 pins. However, this is optional and ArduPlane flies extremely well without this addition. See the :ref:`Airspeed sensor <airspeed>` section for more information.
 
 .. image:: ../images/MT-arspd1.jpg
     :target: ../_images/MT-arspd1.jpg

@@ -16,6 +16,8 @@ a full set of features see the :doc:`full parameter list <parameters>` and the `
     Automatic Landing <automatic-landing>
     Inverted Flight <inverted-flight>
     Stall Prevention <stall-prevention>
-    Geo-Fencing in Plane <geofencing>
+    Geo-Fencing in Plane <common-geofencing-landing-page>
     Terrain Following <common-terrain-following>
-    Soaring <soaring>
+    Soaring <soaring-4_1>
+    Automated Aerobatics <common-scripting-aerobatics>
+    Moving Vehicle/Ship Takeoff/Landing <common-ship-landing>

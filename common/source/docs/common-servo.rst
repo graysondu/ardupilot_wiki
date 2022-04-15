@@ -27,10 +27,12 @@ Connecting the servo to a Pixhawk
    MAIN OUT or AUX OUT 1 ~ 4 may be used.
 -  AUX OUT 5 and 6 cannot be used by default because they are setup as
    :ref:`Relays <common-relay>`.  These pins can changed to Servo
-   outputs by setting the :ref:`BRD_PWM_COUNT<BRD_PWM_COUNT>` parameter to 6 and setting
+   outputs by setting the ``BRD_PWM_COUNT`` parameter to 6 and setting
    :ref:`RELAY_PIN<RELAY_PIN>` and :ref:`RELAY_PIN2<RELAY_PIN2>` to -1.
 -  The Pixhawk autopilot cannot provide power to the servos so
    an external BEC or ESC that can provide 5V should be used.
+
+.. note:: in firmware versions 4.2 and later, the method for setting a PWM/SERVO/MOTOR outputs to be a GPIO function is changed. Instead of ``BRD_PWM_COUNT`` being used, the individual ``SERVOx_FUNCTION`` parameter is merely set to "-1". If set to "0", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being "mirrored" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device.
 
 Controlling the servo as a camera shutter
 =========================================

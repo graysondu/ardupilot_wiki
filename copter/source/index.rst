@@ -4,6 +4,13 @@
 Copter Home
 ===========
 
+..  raw:: html
+
+    <h1 style="text-align:center;">ArduPilot</h1>
+    
+    <p style="text-align:center;color:red;"><strong>
+    Success with ArduPilot requires that the 'First Time Setup' and 'First Flight/Drive and Tuning' sections of this documentation be read and followed!</strong>
+    
 .. tip::
 
     Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <https://ardupilot.org/>`__
@@ -175,13 +182,14 @@ Getting more info
    Introducing Copter <docs/introduction>
    AutoPilot Hardware Options <docs/common-autopilots>
    First Time Setup <docs/initial-setup>
-   First Flight <docs/flying-arducopter>
+   First Flight and Tuning <docs/flying-arducopter>
    If A Problem Arises <docs/common-when-problems-arise>
    Flight Features <docs/copter-flight-features>
    Advanced Configuration <docs/common-advanced-configuration>
    Mission Planning <docs/common-mission-planning>
    Logs <docs/common-logs>
    Peripheral Hardware <docs/common-optional-hardware>
+   OEM Customization <docs/common-oem-customizations>
    Traditional Helicopters <docs/traditional-helicopters>
    Tricopter <docs/tricopter>
    SingleCopter and CoaxCopter <docs/singlecopter-and-coaxcopter>

@@ -4,8 +4,7 @@
 PosHold Mode
 ============
 
-The PosHold flight mode (previously known as "Hybrid") is a new mode for
-AC3.2.  It is similar to Loiter in that the vehicle maintains a constant
+The PosHold flight mode is similar to Loiter in that the vehicle maintains a constant
 location, heading, and altitude but is generally more popular because
 the pilot stick inputs directly control the vehicle's lean angle
 providing a more "natural" feel.
@@ -27,7 +26,7 @@ Controls
 The pilot can control the copter's location horizontally and vertically
 with the control sticks.
 
--  Horizontal location can be adjusted with the the Roll and Pitch
+-  Horizontal location can be adjusted with the Roll and Pitch
    control sticks with the default maximum lean angle being 45 degrees
    (angle can be adjusted with the :ref:`ANGLE_MAX<ANGLE_MAX>` parameter). When the pilot
    releases the sticks the copter will lean back to bring the vehicle to
@@ -38,8 +37,7 @@ with the control sticks.
 -  You may arm in PosHold mode but only once the GPS has 3D lock and the
    HDOP has dropped to 2.0 or lower.
 
-On an APM2 the board's blue light will become solid when 3D lock is
-attained. On a Pixhawk the LED will become green (:ref:`more details on LED patterns here <common-apm-board-leds>`).
+On a Pixhawk the LED will become green (:ref:`more details on LED patterns here <common-apm-board-leds>`).
 
 The HDOP value can be made clearly visible through the mission planner's
 Quick screen by double clicking and then selecting "gpshdop" from the

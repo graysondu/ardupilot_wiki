@@ -12,10 +12,10 @@ There are several methods to setup a local build environment:
 
 #. Use the `Vagrantfile <https://github.com/ArduPilot/ardupilot_wiki/blob/master/Vagrantfile>`__ in the root of the repo to create a Linux virtual machine with all the necessary packages installed.  This is the preferred and supported method.
 #. Use the `Dockerfile <https://github.com/ArduPilot/ardupilot_wiki/blob/master/Dockerfile>`__ in the root of the repo to create a Linux container with all the necessary packages installed.
-#. Or simply install `Sphinx <http://www.sphinx-doc.org/en/stable/install.html>`__ on your local Linux machine, or under WSL in Windows (Win8 may need to add `this component <https://docs.microsoft.com/en-us/windows/wsl/install-manual>`_ ). 
+#. Or simply install the required libraries on your local Linux or Windows machine, using the instructions below. 
 
-Fork and Clone the Wiki
------------------------
+Fork, Clone, and Update Your Copy of the Wiki
+---------------------------------------------
 
 First, the wiki should be forked and cloned much like :ref:`developers do for the flight code <dev:where-to-get-the-code>`.
 
@@ -30,15 +30,41 @@ First, the wiki should be forked and cloned much like :ref:`developers do for th
    .. code-block:: bash
 
        git clone https://github.com/YOURID/ardupilot_wiki.git
-       
-Setup in Linux or Windows WSL
------------------------------
 
-Run the following command from the ardupilo_wiki directory you cloned:
+Be sure to keep your fork of the repository updated, both locally, and on GitHub both as you install and as you develop new contributions. Be sure to create a working branch locally when you start to make changes, pushing that branch up to your GitHub repo, and then making a PR (pull-request from there to the Wiki repo), in a manner similar to making :ref:`code PRs <submitting-patches-back-to-master>`.
+   
+   .. code-block:: bash
+
+       git remote add upstream https://github.com/ArduPilot/ardupilot_wiki.git
+       git checkout master
+       git fetch upstream
+       git rebase upstream/master
+       git push -f origin master
+       
+Setup in Linux
+--------------
+
+Run the following command from the ardupilot_wiki directory you cloned:
 
    .. code-block:: bash
 
-       sudo ./Sphinxsetup.sh
+      ./Sphinxsetup.sh
+
+Then jump down to "Build the wiki".
+
+Setup in Windows
+----------------
+
+Running in WSL or Cygwin is not required. The ArduPilot wiki can be built directly on Windows.
+
+Ensure that the latest version of `Python <https://www.python.org/downloads/>`__ is installed and the "Add Python 3.x to PATH"
+option is selected during installation.
+
+Run the following command from the ardupilot_wiki directory you cloned, ensuring that it is run as administrator (right click -> Run as Administrator):
+
+   .. code-block:: bash
+
+      ./Sphinxsetup.bat
 
 Then jump down to "Build the wiki".
 
@@ -77,7 +103,7 @@ The main steps for building the docs are:
 Build the Wiki
 --------------
 
-As shown in the last step of the vagrant instructions above, use update.py to build some or all of the wiki. You may need to prefix the python commands below with "sudo", especially when rebuilding.
+As shown in the last step of the vagrant instructions above, use update.py to build some or all of the wiki.
 
    .. code-block:: bash
 
@@ -88,6 +114,8 @@ As shown in the last step of the vagrant instructions above, use update.py to bu
        python update.py --site dev     (to build just this developer wiki)
 
 The update.py script will copy the common files into each wiki subdirectory and then build each wiki.
+
+After the build, the wiki files will be copied to ``--destdir``. By default, in Linux this is ``/var/sites/wiki/web`` and in Windows it is ``..\wiki``.
 
 .. note::
 
@@ -123,9 +151,9 @@ This will build a docker image with all package setup to build the wiki and name
 
    .. code-block:: bash
 
-       docker run --rm -it -v "${PWD}:/ardupilot_wiki" -u "$(id -u):$(id -g)" ardupilot_wiki python update.py
+       docker run --rm -it -v "${PWD}:/ardupilot_wiki" -u "$(id -u):$(id -g)" ardupilot_wiki python3 update.py
 
-That will build the wiki with the ``update.py`` similary as in `Build the Wiki`_. The `-v` is used to share the content of the current directory, that hold all the documentation, to the container. The `-u` is used to make docker use the same permission as your current user. With those two command the resulting build is accessible as in `Check the Results`_
+That will build the wiki with the ``update.py`` similarly as in `Build the Wiki`_. The `-v` is used to share the content of the current directory, that hold all the documentation, to the container. The `-u` is used to make docker use the same permission as your current user. With those two command the resulting build is accessible as in `Check the Results`_
 
 RST editing/previewing
 ======================

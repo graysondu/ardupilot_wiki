@@ -19,13 +19,11 @@ ArduPilot autopilots are compatible with the following receiver output protocols
     #. SBus receivers 
     #. IBUS receivers
     #. :ref:`common-FPort-receivers`
-    #. :ref:`Spektrum DSM, DSM2, and DSM-X Satellite receivers<common-spektrum-rc>`
-    #. :ref:`SRXL version 1 and version 2 receivers<common-srxl-receivers>`
+    #. :ref:`Spektrum SRXL2,DSM, DSM2, and DSM-X Satellite receivers<common-spektrum-rc>`
+    #. :ref:`Multiplex SRXL version 1 and version 2 receivers<common-srxl-receivers>`
+    #. :ref:`CRSF receivers <common-tbs-rc>`
     #. :ref:`Graupner SUM-D<common-graupner-rc>`
     #. Parallel PWM outputs encoded to PPM-Sum using an external encoder (see below)
-    #. Crossfire (CRSF) (coming in a future firmware release)
-    #. SRXL2 (coming in a future firmware release)
-
 
 Connecting the Receiver
 =======================
@@ -37,7 +35,9 @@ PPM-Sum/SBus/IBus
 
 These receivers are usually connected to the RCin or SBUS input pin on the autopilot.
 
-To connect a PPM-Sum/SBus/IBus receiver to a Pixhawk, for example, plug the ground (black), power (red) and signal (usually white - orange in the diagram below) wires to the RCin pin on the Pixhawk. 
+Some protocols, most noticeably SRXL2, require a bi-directional, half-duplex UART connection. In addition protocols that provide telemetry also generally require a bi-directional half-duplex connection. For these protocols the TX output of the UART should be connected to the serial input of the receiver. It is also possible on F7 and H7 boards to connect to the UART RX input with some additional configuration.
+
+To connect a PPM-Sum receiver or an SBus receiver to a Pixhawk, for example, plug the ground (black), power (red) and signal (usually white - orange in the diagram below) wires to the RC pins on the Pixhawk.
 
 .. image:: ../../../images/RCIN_connection.jpg
     :target: ../_images/RCIN_connection.jpg
@@ -48,7 +48,7 @@ To connect a PPM-Sum/SBus/IBus receiver to a Pixhawk, for example, plug the grou
    :ref:`BRD_SBUS_OUT<BRD_SBUS_OUT>` . This is only to pass SBus externally to other devices, like servos. Not to connect a receiver to RCin or SBus In.
 
 
-DSM/DSM2/DSM-X/SRXL1/SUM-D
+DSM/DSM2/DSM-X/SRXL/SUM-D
 --------------------------
 
 For autopilots that do not provide a separate ``DSM`` input, these can be connected as above. However, for performance reasons on autopilots that use an IOMCU (The Pixhawk/Cube family), the autopilot's ``DSM`` input connection is highly recommended.
@@ -56,8 +56,8 @@ For autopilots that do not provide a separate ``DSM`` input, these can be connec
 .. image:: ../../../images/pixhawk_spektrum_connection.jpg
 
 
-FPort
------
+FPort/FPort2
+------------
 
 FPort is a bi-directional protocol, using SBus RC in one direction, and serial telemetry in the other. The RC portion can be decoded when attached to an autopilot as if it were SBus, but the embedded telemetry would be lost. See the :ref:`FPort setup documentation<common-FPort-receivers>` for details on connection to one of the autopilots Serial Ports.
 
@@ -65,16 +65,13 @@ FPort is a bi-directional protocol, using SBus RC in one direction, and serial t
 SRXL2/CRSF
 -----------
 
-(future feature)
-
 These bi-directional protocols require the use of a Serial Port. See links below for setup and connections.
 
-(add TOC entries here for CRSF page and SRXL2 page)
 
 RC input to Serial Port
 -----------------------
 
-.. note:: ArduPilot firmware releases 4.0 and later, any UART RX input will auto-detect all the protocols, if the serial port protocol to 23 (for example :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` for the TELEM2 UART is used)
+.. note:: ArduPilot firmware releases 4.0 and later, any UART RX input will auto-detect all the protocols (except PPM), if the serial port protocol is set to 23 (for example :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` for the TELEM2 UART is used).
 
 Radio System Selection
 ======================
@@ -119,11 +116,11 @@ Below is a table with some commonly  available systems showing these elements. N
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |Graupner               |Short |    Yes   |    Medium  |   yes     |  SUM-D       |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
-|Multiplex              |Short |     No   |      -     |    -      | SRXL1        |        |
+|Multiplex              |Short |     No   |      -     |    -      |   SRXL       |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |Spektrum               |Short |    No    |     -      |   -       |  DSM/DSM2    |        |
 |                       |      |          |            |           |  DSM-X/      |        |
-|                       |      |          |            |           |  SRXL1       |        |
+|                       |      |          |            |           |  SRXL        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 
 Note 1: DragonLink provides a 56Kbaud transparent link for telemetry, allowing full MAVLink telemetry to/from the vehicle from the transmitter module. Dragonlink is an add-on module to the transmitter, such as an FRSky Taranis or RadioMaster T16. See :ref:`common-dragonlink-rc`
@@ -151,7 +148,9 @@ With integrated telemetry:
     DragonLink <common-dragonlink-rc>
     FRSky <common-frsky-rc>
     Graupner (HOTT) <common-graupner-rc>
-    Multiplex (no support in Ardupilot for M-Link telemetry yet) <common-multiplex-rc>
+    Multiplex (no support in ArduPilot for M-Link telemetry yet) <common-multiplex-rc>
+    Spektrum SRXL2 <common-spektrum-rc>
+    TBS CRSF <common-tbs-rc>
 
 Multi-Protocol:
 
@@ -162,7 +161,7 @@ Multi-Protocol:
 
 Recommendations:
 ----------------
-Its difficult to make a recommendations since there is such a wide spectrum of capabilites, features, and costs.
+Its difficult to make a recommendations since there is such a wide spectrum of capabilities, features, and costs.
 
 In Europe, Multiplex and Graupner are well established systems and comply with EU radiation recommendations (as do many other brands as an option).
 
@@ -207,4 +206,9 @@ There is addition information :ref:`about connecting and configuring the encoder
    to hook up your flight battery to the autopilot because the USB port
    alone can't supply enough power.
 
+.. toctree::
+   :hidden:
 
+   common-FPort-receivers
+
+[copywiki destination="plane,copter,rover,blimp"]

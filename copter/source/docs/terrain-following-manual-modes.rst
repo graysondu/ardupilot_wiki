@@ -17,12 +17,11 @@ Setup and Configuration
 -----------------------
 
 - Connect a downward facing :ref:`lidar or sonar <common-rangefinder-landingpage>` to the vehicle
-- If necessary adjust the :ref:`RNGFND_GAIN <RNGFND_GAIN>` parameter to increase or decrease the response to changes in reported altitude from the range finder
 - An :ref:`auxiliary switch <common-auxiliary-functions>` (Copter 4.0 and later), or  :ref:`channel-7-and-8-options`, can be configured to turn on/off use of the rangefinder.
 
 .. warning::
 
-    Do not set the :ref:`EK2_ALT_SOURCE <EK2_ALT_SOURCE>` or :ref:`EK3_ALT_SOURCE <EK3_ALT_SOURCE>` parameters.  These parameters should be left at "0" (barometer).
+    Do not set the :ref:`EK2_ALT_SOURCE <EK2_ALT_SOURCE>` or ``EK3_ALT_SOURCE`` parameters.  These parameters should be left at "0" (barometer).
 
     Do not set the :ref:`EK2_RNG_USE_HGT <EK2_RNG_USE_HGT>`  or :ref:`EK3_RNG_USE_HGT <EK3_RNG_USE_HGT>` parameters.  These parameters should be left at "-1".
 

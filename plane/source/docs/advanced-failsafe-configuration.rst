@@ -81,7 +81,7 @@ failsafe code is still active, for example if you have a geofence
 enabled then the aircraft will fly back to the geofence return point.
 
 When enabled, the AFS termination system also sets up the secondary IO
-micro-controller on the Pixhawk autopilot to terminate the aircraft if
+micro-controller on the autopilot to terminate the aircraft if
 communication is interrupted between the main FMU micro-controller and
 the IO micro-controller, for example if the flight firmware crashes.
 
@@ -301,7 +301,7 @@ Additional tips for AFS failsafe users
 
 You need to ensure that your geofence is enabled before takeoff. This
 can either be done as part of your preflight checklist, or you could set
-a :ref:`FENCE_CHANNEL<FENCE_CHANNEL>` and enable it from within your transmitter.  This ensures
+a `FENCE_CHANNEL`` and enable it from within your transmitter.  This ensures
 that if your transmitter is out of range that the fence remains enabled.
 
 Settings for Outback Challenge 2014

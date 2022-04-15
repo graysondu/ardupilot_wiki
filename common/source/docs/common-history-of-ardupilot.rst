@@ -86,7 +86,7 @@ Dec 2010 - First successful fork of ArduPilot code as `MegaPirates group extends
 April 2011 – First fully autonomous Copter mission flown by Jason at
 `Sparkfun AVC <https://diydrones.com/profiles/blogs/acm-at-the-avc>`__
 
-April 2011 - Laser Navigation made the first piece of 32 bit hardware capable of running the Arducopter software
+April 2011 - Laser Navigation made the first piece of 32 bit hardware capable of running the ArduCopter software
 
 2011 - APM2 released by 3D Robotics
 
@@ -227,7 +227,7 @@ Feb 2019 - Rover-3.5.0 released including Sailboat support, Follow and Simple mo
 
 Aug 2019 - ArduPilot flies over the `North Pole <https://discuss.ardupilot.org/t/ardupilot-flew-on-the-north-pole/47418>`__, `Video <https://www.youtube.com/watch?v=Ar-kL-wY0qg>`__
 
-Sep 2019 - Plane 4.0.0 released with many UAVCAN enhancements and AP_Periph firmware system
+Sep 2019 - Plane 4.0.0 released with many DroneCAN enhancements and AP_Periph firmware system
 
 Nov 2019 - Rover 4.0.0 released with Boat and Sailboat improvements, OSD support, new Object Avoidance modes
 

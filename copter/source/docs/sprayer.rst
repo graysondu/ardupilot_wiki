@@ -13,13 +13,15 @@ Slightly out-of-date video showing a copter using the Sprayer feature (jump to 2
 
 .. note:: Many boards with only 1MB of flash do not have this feature. See :ref:`Firmware Limitations <common-limited_firmware>` for a list of boards without this capability.
 
+See also :ref:`Zig-Zag Mode <zigzag-mode>`
+
 Required Hardware
 =================
 
    .. image:: ../images/sprayer_EnRoute_AC940D.jpg
-       :target: https://enroute.co.jp/products/ac940d/
+       :target: https://www.nttedt.co.jp/product?pgid=knya72d0-00609f8a-0b97-4818-be16-4d03a6ebf88a
 
-A multicopter such as the `EnRoute AC 940-D <https://enroute.co.jp/products/ac940d/>`_ with a PWM controlled pump and optionally a PWM controlled spinning mechanism (EnRoute vehicle does not require this secondary spinner control).
+A multicopter such as the `EnRoute AC 940-D <https://www.nttedt.co.jp/product?pgid=knya72d0-00609f8a-0b97-4818-be16-4d03a6ebf88a>`_ with a PWM controlled pump and optionally a PWM controlled spinning mechanism (EnRoute vehicle does not require this secondary spinner control).
 
 The pump controls the rate of flow of the fertilizer.
 
@@ -30,13 +32,9 @@ Enabling the Sprayer
 
 -  Connect your autopilot to the ground station (i.e. Mission Planner)
 -  Set the :ref:`SPRAY_ENABLE <SPRAY_ENABLE>` parameter to 1 and refresh parameters (the sprayer is not a commonly used feature so its other parameters are initially hidden)
--  Connect the pump to one of the autopilot's auxiliary PWM outputs (like Pixhawk AUX1) and set the appropriate SERVO*_FUNCTION  or RC*_FUNCTION to 22 (where "*" is the RC output number, i.e. if the pump is connected to a Pixhawk's AUX1, set :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` to 22).
--  Connect the optional spinner to another auxiliary output port and set SERVO*_FUNCTION or RC*_FUNCTION to 23 (i.e. if using a Pixhawk's AUX2, set :ref:`SERVO10_FUNCTION <SERVO10_FUNCTION>` to 23)
--  To allow the pilot to turn on/off the sprayer set an auxiliary switch (i.e. CH7_OPT in versions prior to Copter-4.0 or an ``RCx_OPTIONS`` in Copter-4.0 or higher) to "15"
-
-.. note::
-
-   in Copter 3.5 (and higher) the RCx_FUNCTION parameters were renamed to SERVOx_FUNCTION to better separate their meaning from the RC input.
+-  Connect the pump to one of the autopilot's PWM outputs (like Pixhawk AUX1) and set the appropriate SERVO*_FUNCTION  or RC*_FUNCTION to 22 (where "*" is the RC output number, i.e. if the pump is connected to a Pixhawk's AUX1, set :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` to 22).
+-  Connect the optional spinner to another output port and set SERVO*_FUNCTION or RC*_FUNCTION to 23 (i.e. if using a Pixhawk's AUX2, set :ref:`SERVO10_FUNCTION <SERVO10_FUNCTION>` to 23)
+-  To allow the pilot to turn on/off the sprayer set an auxiliary switch on an rc channel(``RCx_OPTIONS``) to "15"
 
 Configuring the pump
 ====================

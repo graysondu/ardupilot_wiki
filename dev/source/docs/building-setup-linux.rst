@@ -52,7 +52,7 @@ Reload the path (log-out and log-in to make permanent):
 
 Now you should be able to build with waf as described in `BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__.
 
-.. note:: At this point you have already installed the MAVProxy Ground Control Station (MAVProxy GCS) and are also ready to do Software In the Loop (SITL) simulations of the vehicle code. See :ref:`sitl-simulator-software-in-the-loop`  and :ref:`setting-up-sitl-on-linux` . You are ready to not only build the code, but run your build in the Ardupilot SITL simulator.
+.. note:: At this point you have already installed the MAVProxy Ground Control Station (MAVProxy GCS) and are also ready to do Software In the Loop (SITL) simulations of the vehicle code. See :ref:`sitl-simulator-software-in-the-loop`  and :ref:`setting-up-sitl-on-linux` . You are ready to not only build the code, but run your build in the ArduPilot SITL simulator.
 
 
 .. youtube:: 4B8BVskH0vc
@@ -124,12 +124,16 @@ You need the specific gcc-arm cross-compiler linked above. You need to unpack it
 ::
 
     cd TARGET_DIR
-    tar -xjvf gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+    tar -xjvf gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2
 
 and then add the bin directory from the tarball to your $PATH by editing
-the $HOME/.bashrc file and adding a line like this to the end. TARGET_DIR is the location choose previouly where you unpack the toolchain:
+the $HOME/.bashrc file and adding a line like this to the end. TARGET_DIR is the location chosen previously where you unpacked the toolchain:
 
-``export PATH=$PATH:TARGET_DIR/gcc-arm-none-eabi-6-2017-q2/bin``
+``export PATH=$PATH:TARGET_DIR/gcc-arm-none-eabi-10-2020-q4-major/bin``
+
+.. note::
+
+    Versions of ArduPilot before 4.1 must use the following compiler, gcc-arm-none-eabi-6-2017-q2, which can be found `here <https://firmware.ardupilot.org/Tools/STM32-tools/>`__.
 
 Permissions
 -----------

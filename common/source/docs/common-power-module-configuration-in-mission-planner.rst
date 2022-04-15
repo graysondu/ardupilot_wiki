@@ -4,6 +4,9 @@
 Power Monitor/Module Configuration in Mission Planner
 =====================================================
 
+
+.. note:: Up to 10 battery monitors may be used in ArduPilot, with parameter groups named BATT\_ through BATT9\_. For this article all parameter name references will be shown for the first monitor, BATT\_
+
 A power monitor can be used to measure the battery voltage and current for use in the battery failsafe and a power module can also provide a stable power supply to the autopilot.
 
 ArduPilot is :ref:`compatible with a number of power modules/monitors <common-powermodule-landingpage>`.
@@ -14,7 +17,7 @@ Mission Planner Setup
 =====================
 
 Battery measurement is primarily set up in the *Mission Planner*'s
-**INITIAL SETUP \| Optional Hardware \| Battery Monitor** screen. Note that currently Mission Planner only supports the first two Battery Monitors in the system (a total of 10 are available in firmware versions 4.0 and later). More would need to be configured directly by directly setting their parameters in the **CONFIG/TUNNING\|Full Parameter List** screen.
+**INITIAL SETUP \| Optional Hardware \| Battery Monitor** screen. Note that currently Mission Planner only supports the first two Battery Monitors in the system (a total of 10 are available in firmware versions 4.0 and later). More would need to be configured directly by directly setting their parameters in the **CONFIG/TUNING\|Full Parameter List** screen.
 
 .. figure:: ../../../images/MissionPlanner_BatteryMonitorConfiguration.png
    :target: ../_images/MissionPlanner_BatteryMonitorConfiguration.png
@@ -32,19 +35,70 @@ type of autopilot, and the battery capacity:
 -  **APM ver:** Autopilot (e.g. Pixhawk )
 -  **Battery Capacity:** Battery capacity in mAh
 
-The **Sensor** selection list offers a number of Power Modules
+The **Sensor** selection list offers a number of analog Power Modules
 (including popular models from 3DR and AttoPilot) which you can select
 to automatically configure your module. If your PM is not on the list
 then you can select **Other**, enter its recommended values, or 
 :ref:`perform a manual calibration <common-power-module-configuration-in-mission-planner_calibration>` as described below.
 
+Other Types of Power Modules/Smart Batteries
+--------------------------------------------
+
+In addition to normal analog voltage and current sensing modules, ArduPilot supports a wide range of SMBus, DroneCAN/CAN power modules and Smart Batteries. (In the following, the first monitor's parameters are shown. Each of the other monitors have their own parameters.)
+
+These are selected via the ``BATTx_MONITOR`` parameter for each battery monitor. These can be set directly via the CONFIG/Parameter Tree tab for each battery monitor. Here are the monitor types supported:
+
+=================================     =============================
+:Ref:`BATT_MONITOR<BATT_MONITOR>`       TYPE
+=================================     =============================
+0 	                                    Disabled
+3 	                                    Analog Voltage Only
+4 	                                    Analog Voltage and Current
+5 	                                    Solo
+6 	                                    Bebop
+7 	                                    :ref:`SMBus-Generic<common-smart-battery-landingpage>`
+8 	                                    DroneCAN-BatteryInfo
+9 	                                    :ref:`ESC<blheli32-esc-telemetry>`
+10 	                                    Sum Of Selected Monitors, see BATTx_SUM_MASK parameter
+11 	                                    :ref:`FuelFlow <common-fuel-sensors>`
+12 	                                    :ref:`FuelLevelPWM <common-fuel-sensors>`
+13 	                                    :ref:`SMBUS-SUI3<common-smart-battery-landingpage>`
+14 	                                    :ref:`SMBUS-SUI6<common-smart-battery-landingpage>`
+15              	                    NeoDesign
+16              	                    SMBus-Maxell
+17 	                                    :ref:`Generator-Elec<common-ie650-fuelcell>`
+18 	                                    :ref:`Generator-Fuel<common-ie650-fuelcell>`
+19 	                                    :ref:`Rotoye<common-smart-battery-rotoye>`
+20 	                                    MPPT
+21 	                                    INA2XX
+22 	                                    LTC2946
+23 	                                    Torqeedo Motor Controller
+=================================     =============================
+
+
+.. note:: Once a specific monitor type is selected, parameters associated with that type of monitor will be revealed once parameters are refreshed. Scales and offsets, bus addresses, etc. will be displayed, as appropriate, for that monitor.
+
+Other Parameters
+----------------
+
+- :ref:`BATT_OPTIONS<BATT_OPTIONS>` bit 0, if set, will ignore the State Of Charge field in DroneCAN monitors, since some do not populate this field with meaningful data. Also various options for MPPT type monitors are provided.
+- :ref:`BATT_SUM_MASK<BATT_SUM_MASK>` is used if the monitor is type "10" (Sum Of Selected Monitors) to select which monitors' reported voltages will be averaged, and current values will be summed, and reported for this monitor. Selecting this monitor's own instance number has no effect. If no bits are set, it will average all lower numbered instance's reports.
+- :ref:`BATT_ARM_VOLT<BATT_ARM_VOLT>` is the minimum voltage reported from this monitor that will allow arming to occur.
+- :ref:`BATT_ARM_MAH<BATT_ARM_MAH>` is the minimum capacity remaining reported from this monitor that will allow arming to occur.
+- :ref:`BATT_CURR_MULT<BATT_CURR_MULT>` allows adjusting the current scale for DroneCAN(UAVCAN) monitors which do not have a CAN parameter exposed for adjustment.
+
+
+Failsafe
+--------
+
+Failsafes can be implemented for low battery/fuel conditions. For Plane see :ref:`plane:apms-failsafe-function`, for Copter see :ref:`copter:failsafe-battery`, or for Rover see :ref:`rover:rover-failsafes`
 
 .. _common-power-module-configuration-in-mission-planner_calibration:
 
-Calibration
------------
+Analog Monitor Calibration
+--------------------------
 
-The bottom section of the the *Battery Monitor* screen allows you to
+The bottom section of the *Battery Monitor* screen allows you to
 calibrate the voltage/current measurement in order to verify that the
 measured voltage of the battery is correct. You can also set the
 **Sensor** selection list to **Other** and use the calibration process

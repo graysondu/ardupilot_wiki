@@ -184,7 +184,7 @@ PPM PASS-THROUGH MODE (signal pin 2&3 shorted):
 * – PPM output will not be enabled unless a input signal has been detected
 * – Active signal on input channel 1 has been detected:
 * + Any input level changes will be passed directly to the PPM output (PPM pass-trough)
-* + If no input level changes are detected withing 250ms:
+* + If no input level changes are detected within 250ms:
 * + PPM output is enabled and default fail-safe values for all eight channels transmitted
 * + Input level change detected again, PPM fail-safe output is terminated and normal PPM pass-through operation is restored
 
@@ -244,7 +244,7 @@ DATE POSTED	April 29, 2013
     Do not use with APM 2.x
     
 This version is dedicated to ArduPlane (or ArduRover / Arduboat) (CH8 radio passthrough mode).
-For Arducopter it is better to use the dedicated version so that CH8 can be fully used without risk to trig radio passthrough mode.
+For ArduCopter it is better to use the dedicated version so that CH8 can be fully used without risk to trig radio passthrough mode.
 
 Changes:
 ++++++++
@@ -323,7 +323,7 @@ PPM PASS-THROUGH MODE (signal pin 2&3 shorted):
 * – PPM output will not be enabled unless a input signal has been detected
 * – Active signal on input channel 1 has been detected:
 * + Any input level changes will be passed directly to the PPM output (PPM pass-trough)
-* + If no input level changes are detected withing 250ms:
+* + If no input level changes are detected within 250ms:
 * + PPM output is enabled and default fail-safe values for all eight channels transmitted
 * + Input level change detected again, PPM fail-safe output is terminated and normal PPM pass-through operation is restored
 

@@ -10,7 +10,7 @@ for Copter.
 Overview
 ========
 
-Copter has 23 flight built-in flight modes, 10 of which are regularly
+Copter has 25 flight built-in flight modes, 10 of which are regularly
 used. There are modes to support different levels/types of flight
 stabilization, a sophisticated autopilot, a follow-me system etc.
 
@@ -18,16 +18,18 @@ Flight modes are controlled through the radio (via a :ref:`transmitter switch <c
 via mission commands, or using commands from a ground station (GCS) or
 companion computer.
 
+The table below shows for each flight mode whether it provides altitude or position control, and whether it requires valid position information from a sensor (typically a GPS) in order to arm or switch into this mode.
+
 .. raw:: html
 
    <table border="1" class="docutils">
-   <tr><th>Mode</th><th>Alt Ctrl</th><th>Pos Ctrl</th><th>GPS</th><th>Summary</th></tr>
+   <tr><th>Mode</th><th>Alt Ctrl</th><th>Pos Ctrl</th><th>Pos Sensor</th><th>Summary</th></tr>
    <tr><td>Acro</td><td>-</td><td>-</td><td></td><td>Holds attitude, no self-level</td></tr>
    <tr><td>Airmode</td><td>-</td><td>-/+</td><td></td><td>Actually not a mode, but a feature,see below</td></tr>
    <tr><td>Alt Hold</td><td>s</td><td>+</td><td></td><td>Holds altitude and self-levels the roll & pitch</td></tr>
    <tr><td>Auto</td><td>A</td><td>A</td><td>Y</td><td>Executes pre-defined mission</td></tr>
    <tr><td>AutoTune</td><td>s</td><td>A</td><td>Y</td><td>Automated pitch and bank procedure to improve control loops</td></tr>
-   <tr><td>Brake</td><td>s</td><td>A</td><td>Y</td><td>Brings copter to an immediate stop</td></tr>
+   <tr><td>Brake</td><td>A</td><td>A</td><td>Y</td><td>Brings copter to an immediate stop</td></tr>
    <tr><td>Circle</td><td>s</td><td>A</td><td>Y</td><td>Automatically circles a point in front of the vehicle</td></tr>
    <tr><td>Drift</td><td>-</td><td>+</td><td>Y</td><td>Like stabilize, but coordinates yaw with roll like a plane</td></tr>
    <tr><td>Flip</td><td>A</td><td>A</td><td></td><td>Rises and completes an automated flip</td></tr>
@@ -38,13 +40,14 @@ companion computer.
    <tr><td>Land</td><td>A</td><td>s</td><td>(Y)</td><td>Reduces altitude to ground level, attempts to go straight down</td></tr>
    <tr><td>Loiter</td><td>s</td><td>s</td><td>Y</td><td>Holds altitude and position, uses GPS for movements</td></tr>
    <tr><td>PosHold</td><td>s</td><td>+</td><td>Y</td><td>Like loiter, but manual roll and pitch when sticks not centered</td></tr>
-   <tr><td>RTL</td><td>A</td><td>A</td><td>Y</td><td>Retruns above takeoff location, may aslo include landing</td></tr>
+   <tr><td>RTL</td><td>A</td><td>A</td><td>Y</td><td>Returns above takeoff location, may also include landing</td></tr>
    <tr><td>Simple/Super Simple</td><td></td><td></td><td>Y</td><td>An add-on to flight modes to use pilot's view instead of yaw orientation</td></tr>
    <tr><td>SmartRTL</td><td>A</td><td>A</td><td>Y</td><td>RTL, but traces path to get home</td></tr>
    <tr><td>Sport</td><td>s</td><td>s</td><td></td><td>Alt-hold, but holds pitch & roll when sticks centered</td></tr>
    <tr><td>Stabilize</td><td>-</td><td>+</td><td></td><td>Self-levels the roll and pitch axis</td></tr>
    <tr><td>SysID</td><td>-</td><td>+</td><td></td><td>Special diagnostic/modeling mode</td></tr>
    <tr><td>Throw</td><td>A</td><td>A</td><td>Y</td><td>Holds position after a throwing takeoff</td></tr>
+   <tr><td>Turtle</td><td>-</td><td>-</td><td></td><td>Allows reversing and spinning up adjacent pairs of motors in order to flip a crashed, inverted vehicle back upright</td></tr>
    <tr><td>ZigZag</td><td>A</td><td>A</td><td>Y</td><td>Useful for crop spraying</td></tr>
    </table>
 
@@ -94,7 +97,8 @@ Additional flight modes:
 -  :ref:`Follow Me <ac2_followme>`
 -  :ref:`Simple and Super Simple <simpleandsuper-simple-modes>`
 -  :ref:`Smart RTL (Return-to-Launch) <smartrtl-mode>`
--  :ref:`SysID (System Identificaton) <systemid-mode>`
+-  :ref:`SysID (System Identification) <systemid-mode>`
+-  :ref:`Turtle <turtle-mode>`
 -  :ref:`ZigZag <zigzag-mode>`
 -  :ref:`Avoid_ADSB <common-ads-b-receiver>` for ADS-B based avoidance of manned aircraft.  Should not be set-up as a pilot selectable flight mode.
 
@@ -104,13 +108,14 @@ instructions :ref:`here for setting up a 6-position flight mode switch <common-r
 GPS Dependency
 ==============
 
-Flight modes that use GPS-positioning data require an active GPS lock
-prior to takeoff. To see if your autopilot has acquired GPS lock,
+Flight modes that use positioning data require valid position identification prior to takeoff. When using GPS, to verify if your autopilot has acquired GPS lock,
 connect to a ground station or consult your autopilot's hardware
-overview page to see the LED indication for GPS lock. Below is a summary
-of GPS dependency for Copter flight modes.
+overview page to see the LED indication for GPS lock.
 
-Requires GPS lock prior to takeoff:
+Below is a summary of position identification dependency for Copter flight modes. Most often this position information is obtained via a GPS, but other
+position sensors, such as 3D cameras or beacons, may be used and would need to provide a valid location, for those modes requiring it, prior to arming.
+
+Requires valid position prior to takeoff:
 
 -  :ref:`Auto <auto-mode>`
 -  :ref:`Heli_Autorotate <traditional-helicopter-autorotation-mode>`
@@ -126,7 +131,7 @@ Requires GPS lock prior to takeoff:
 -  :ref:`Throw <throw-mode>`
 -  :ref:`ZigZag <zigzag-mode>`
 
-Do not require GPS lock:
+Do not require position information:
 
 -  :ref:`Acro <acro-mode>`
 -  :ref:`AirMode<airmode>`
@@ -134,6 +139,7 @@ Do not require GPS lock:
 -  :ref:`Stabilize <stabilize-mode>`
 -  :ref:`Sport <sport-mode>`
 -  :ref:`SysID <systemid-mode>`
+-  :ref:`Turtle <turtle-mode>`
 -  :ref:`Land <land-mode>`
 
 Full list of flight modes
@@ -158,7 +164,6 @@ Full list of flight modes
     Land <land-mode>
     Loiter <loiter-mode>
     PosHold <poshold-mode>
-    Position <ac2_positionmode>
     RTL <rtl-mode>
     Simple and Super Simple <simpleandsuper-simple-modes>
     Smart RTL (Return-to-Launch) <smartrtl-mode>
@@ -166,4 +171,5 @@ Full list of flight modes
     Stabilize <stabilize-mode>
     System Identification <systemid-mode>
     Throw <throw-mode>
+    Turtle <turtle-mode>
     ZigZag <zigzag-mode>

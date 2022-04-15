@@ -20,7 +20,7 @@ Cube Yellow Features
 ====================
 
 -  Faster F7 SOC with 512KB ram
--  Upgraded tripple redundant IMU sensors for extra redundancy
+-  Upgraded triple redundant IMU sensors for extra redundancy
 -  2 sets of IMU are vibration-isolated mechanically, reducing the effect of frame vibration to state estimation
 -  IMUs are temperature-controlled by onboard heating resistors, allowing optimum working temperature of IMUs
 -  The entire flight management unit(FMU) and inertial management unit(IMU) are housed in a reatively small form factor (a cube). 
@@ -100,3 +100,4 @@ Where to Buy
 
 Official retailers are listed `here  <http://www.proficnc.com/stores>`__.
 
+[copywiki destination="plane,copter,rover,blimp"]

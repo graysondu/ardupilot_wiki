@@ -66,7 +66,7 @@ Default UART order
 - SERIAL1 = Telemetry1 = USART1 (only available on original V6 version)
 - SERIAL2 = Telemetry2 = USART4 (RX only for ESC telemetry)
 - SERIAL3 = GPS1 = USART6
-- SERIAL4 = USART3 available in :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 1
+- SERIAL4 = USART3 available in :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 1 (firmware 4.1 or later)
 - SERIAL5 = not assigned
 - SERIAL6 = not assigned
 
@@ -96,7 +96,7 @@ Original V6 version
     :target: ../_images/nanov6.jpg
     :width: 450px
     
-Typical Arduplane system
+Typical ArduPlane system
 
 GPS is attached to UART6
 
@@ -113,7 +113,7 @@ V6.x revision
 
 .. note::
 
-   This board revision has the fixed inverter moved to USART1 RX pin, so only TX1 pin can be used (output only). 2 full UARTS + I2C is available in :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 1, using RX3 / TX3 pins as SERIAL4. In default :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 0, RX3 and TX3 pins will default to I2C SDA and SCL respectively. RCInput is on WSL2812 pad. I2C and SERIAL3 for GPS / mag combo is on PPM (=SCL), PB9 (=SDA), RX6 and TX6 pads. Make sure to leave solder jumpers for inverter setup diconnected.
+   This board revision has the fixed inverter moved to USART1 RX pin, so only TX1 pin can be used (output only). 2 full UARTS + I2C is available in :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 1, using RX3 / TX3 pins as SERIAL4. In default :ref:`BRD_ALT_CONFIG <BRD_ALT_CONFIG>` = 0, RX3 and TX3 pins will default to I2C SDA and SCL respectively. RCInput is on WSL2812 pad. I2C and SERIAL3 for GPS / mag combo is on PPM (=SCL), PB9 (=SDA), RX6 and TX6 pads. Make sure to leave solder jumpers for inverter setup disconnected.
 
 
 .. image:: ../../../images/OmnibusF4NanoV62_pinout.jpg
@@ -137,7 +137,7 @@ Default pin values:
 
 :ref:`BATT_VOLT_MULT <BATT_VOLT_MULT>` = 11
 
-Optionally add voltage and / or current monitoring using BLHeli_32-capable ESCs. See instructions :ref:`here <common-dshot>` for setting up BLHeli_32 ESC telemetry.
+Optionally add voltage and / or current monitoring using ESC telemetry capable ESCs. See instructions :ref:`here <blheli32-esc-telemetry>`.
 
 
 V6.x revision
@@ -182,5 +182,7 @@ Follow the instructions `here <https://ardupilot.org/plane/docs/common-loading-f
 Compile ArduPilot
 -----------------
 
-To build your own firmware, see the instructions on setting up a build envrionment and compiling the source code:
+To build your own firmware, see the instructions on setting up a build environment and compiling the source code:
 `Building the Code <https://ardupilot.org/dev/docs/building-the-code.html>`__
+
+[copywiki destination="plane,copter,rover,blimp"]

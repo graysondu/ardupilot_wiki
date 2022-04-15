@@ -69,7 +69,7 @@ MAVlink usually uses port 14550 for IP-based packet forwarding, though
 other ports can be used if needed.
 
 If a serial port is given (for example a radio device connecting an
-airbourne MAVProxy instance with the GCS), a link-specific baud rate can
+airborne MAVProxy instance with the GCS), a link-specific baud rate can
 be given after the device, delimited by a comma. This overrides the
 global default baudrate specified by ``--baudrate``.
 
@@ -92,7 +92,7 @@ the first client in the 192.168.2.0 to 192.168.2.254 range on port 14550.
 -\\-sitl
 ========
 
-Input from APM Software in the loop (SITL) simulator. Usually ``--sitl=127.0.0.1:5501``
+Host and port to send simulated RC input for the Software in the loop (SITL) simulator. Usually ``--sitl=127.0.0.1:5501``
 
 -\\-streamrate
 ==============
@@ -247,7 +247,7 @@ MAVProxy and its modules.
 ===================
 
 A comma separated list of the modules to load on startup by default. The default 
-value of this parameter is ``log,signing,wp,rally,fence,param,relay,tuneopt,arm,mode,calibration,rc,auxopt,misc,cmdlong,battery,terrain,output,adsb``
+value of this parameter is ``log,signing,wp,rally,fence,param,relay,tuneopt,arm,mode,calibration,rc,auxopt,misc,cmdlong,`` ``battery,terrain,output,adsb``
 
 -\\-non-interactive
 ===================

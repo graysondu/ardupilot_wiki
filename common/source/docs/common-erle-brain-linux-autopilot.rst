@@ -34,7 +34,7 @@ Some *Erle-Brain 2* features include:
 -  WiFi-enabled
 -  ROS focus (Indigo available)
 -  `ROS packages <https://github.com/erlerobot?utf8=%E2%9C%93&query=ros>`__
-   for sensors and peripherials
+   for sensors and peripherals
 -  `DroneKit-Python <http://python.dronekit.io/>`__ support
 -  Snappy Ubuntu app store supported
 -  MAVProxy can automatically bridge MAVLink packets to your WiFi
@@ -357,3 +357,5 @@ More information about Erle-Brain is available in `its official documentation <h
 
 .. |Captura de pantalla 2015-04-03 a las 11.39.07| image:: ../../../images/Captura-de-pantalla-2015-04-03-a-las-11.39.07.jpg
     :target: ../_images/Captura-de-pantalla-2015-04-03-a-las-11.39.07.jpg
+
+[copywiki destination="plane,copter,rover,blimp"]

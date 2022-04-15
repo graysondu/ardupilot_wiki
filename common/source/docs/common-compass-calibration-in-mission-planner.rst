@@ -8,7 +8,7 @@ This article explains how to perform basic compass calibration. It assumes that 
 
 .. tip::
 
-   It is not necessary to recalibrate the compass when the vehicle is flown at a new location because ArduPilot includes a "world magnetic model" which allows converting the location's magnetic North to true North without recalibrating .  In addition the location's "inclination" is calibrated at startup and then again soon after takeoff.
+   It is not necessary to recalibrate the compass when the vehicle is flown at a new location because ArduPilot includes a "world magnetic model" which allows converting the location's magnetic North to true North without recalibrating .  In addition the location's "inclination" is calibrated at startup and then again soon after takeoff. It is important that when compass calibration is done, the vehicle have a good 3D gps lock, in order to assure the best setup. If necessary, move outdoors in order to get a good 3D gps lock before doing the compass calibration.
    
 .. note::
 
@@ -63,6 +63,9 @@ If calibration fails:
 
 Onboard Calibration using Stick Gestures (no GCS)
 =================================================
+
+.. note:: This feature has  been removed in firmware versions after 4.1.
+
 ArduPilot supports "Onboard Calibration using RC Controller stick gestures" meaning that the calibration routine runs on the autopilot with no GCS.  This method is more accurate than the older "Offboard Calibration" (aka "Live Calibration") which runs on the ground station because in addition to offsets, scaling is also calculated.
 
 - requires RC calibration first
@@ -110,4 +113,4 @@ Video demonstrations of compass calibration.
 ..  youtube:: DmsueBS0J3E
     :width: 100%
 
-[copywiki destination="copter,plane,rover,planner"]
+[copywiki destination="copter,plane,rover,blimp,planner"]

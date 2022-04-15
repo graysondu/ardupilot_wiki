@@ -23,7 +23,7 @@ The messages `SET_GPS_GLOBAL_ORIGIN <https://mavlink.io/en/messages/common.html#
 
 - with the script `set_origin.py <https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__. 
 
-The Flight Controller and the Raspberry Pi 3 on the quadcopter are connected via serial port whereas the Rapsberry Pi 3 and the desktop PC are connected via WiFi. The desktop PC is used only for configuration and visualization purposes. `RViz <http://wiki.ros.org/rviz>`__ is used for visualization on PC in ROS.
+The Flight Controller and the Raspberry Pi 3 on the quadcopter are connected via serial port whereas the Raspberry Pi 3 and the desktop PC are connected via WiFi. The desktop PC is used only for configuration and visualization purposes. `RViz <http://wiki.ros.org/rviz>`__ is used for visualization on PC in ROS.
 
 Components of the system
 ========================
@@ -184,7 +184,7 @@ Some Useful links
 
 - Original `blog post <https://discuss.ardupilot.org/t/indoor-non-gps-flight-using-apriltags-ros-based/42878>`__.
 
-- Indoor autonomous flight with Arducopter, ROS and Aruco Boards - :ref:`wiki page <ros-aruco-detection>` and `blog post <https://ardupilot.org/dev/docs/ros-aruco-detection.html>`__.
+- Indoor autonomous flight with ArduCopter, ROS and Aruco Boards - :ref:`wiki page <ros-aruco-detection>` and `blog post <https://ardupilot.org/dev/docs/ros-aruco-detection.html>`__.
 
 - Indoor Autonomous Flight with Cube, ROS and Aruco Board - `blog post <https://discuss.cubepilot.org/t/indoor-autonomous-flight-with-cube-ros-and-aruco-board-ongoing/351>`__.
 

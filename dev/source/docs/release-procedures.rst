@@ -36,13 +36,13 @@ Open a Git Bash terminal in the ardupilot repository.
 
 If this release involves a major or minor version increase (i.e. 3.5 to 3.6) create a new branch in your local ardupilot repository:
 
-- ``git checkout -b Copter-3.6`` ("Copter-3.6" should be replaced with the corrrect major and minor version numbers)
+- ``git checkout -b Copter-3.6`` ("Copter-3.6" should be replaced with the correct major and minor version numbers)
 - ``git push`` to create the new directory in the shared repo
 - click the `"New Project" button <https://github.com/ArduPilot/ardupilot/projects>`__ on the GitHub projects page to create the corresponding "Copter 3.x Backports" project.  This is used to track features to be included in future releases
 
 Alternatively if this release is built on an earlier release branch checkout the branch:
 
-- ``git checkout Copter-3.6`` to switch to the existing release branch ("Copter-3.6" should be replaced with the corrrect major and minor version numbers)
+- ``git checkout Copter-3.6`` to switch to the existing release branch ("Copter-3.6" should be replaced with the correct major and minor version numbers)
 
 Pull in changes from master
 ---------------------------
@@ -73,7 +73,7 @@ Steps 4 to 8 above should be repeated for the ``ArduCopter-beta-heli`` tag to re
 Check the versions are available in Mission Planner
 ---------------------------------------------------
 
-Wait 4hrs to 8hrs for the binaries to be built (check the `autotest-output.txt <https://autotest.ardupilot.org/autotest-output.txt>`__ file for status) and then open the Mission Planner's Initial Setup > Install Firmware page and click the "Beta firmwares" link and ensure that the version displayed below each multicopter icon has updated.
+Wait 4hrs to 11hrs for the binaries to be built (check the `Build list <https://firmware.ardupilot.org/Tools/BuildSizes/builds.html>`__ and/or `autotest-output.txt <https://autotest.ardupilot.org/autotest-output.txt>`__ file for status) and then open the Mission Planner's Initial Setup > Install Firmware page and click the "Beta firmwares" link and ensure that the version displayed below each multicopter icon has updated.
 
 .. image:: ../images/ReleaseProcedures_MPBetaFirmwares.jpg
     :target: ../_images/ReleaseProcedures_MPBetaFirmwares.jpg
@@ -81,8 +81,10 @@ Wait 4hrs to 8hrs for the binaries to be built (check the `autotest-output.txt <
 Announce the release to the beta testers
 ----------------------------------------
 
-Let Beta testers know the new version is available by creating a post in `Discourse's Copter category <https://discuss.ardupilot.org/c/arducopter>`__ (create a new category if required)
-and by posting on the `ArduPilot facebook group <https://www.facebook.com/groups/ArduPilot.org>`__.  Include the contents of the ReleaseNotes.txt so people know what has changed and a video if possible.
+Let Beta testers know the new version is available by posting on these sites:
+
+- `Discourse's Copter category <https://discuss.ardupilot.org/c/arducopter>`__ (create a new category if required)
+- `ArduPilot facebook group <https://www.facebook.com/groups/ArduPilot.org>`__.  Include the contents of the ReleaseNotes.txt so people know what has changed and a video if possible
 
 Issue Tracking
 --------------
@@ -105,7 +107,14 @@ An additional tag is created including the patch release number:
 - ``git tag Copter-3.6.0``
 - ``git push origin Copter-3.6.0``
 
-Announcements are done in much the same way as beta releases, namely an announcement is made on ArduPilot's discuss forums and on ArduPilot's facebook page.  Mission Planner will also show a pop-up informing users that a new version is available.
+Announcements are done in much the same way as beta releases by posting on these sites:
+
+- `Discourse's Copter category <https://discuss.ardupilot.org/c/arducopter>`__ (create a new category if required)
+- `ArduPilot facebook group <https://www.facebook.com/groups/ArduPilot.org>`__.  Include the contents of the ReleaseNotes.txt so people know what has changed and a video if possible
+- `LinkedIn <https://www.linkedin.com>`__
+- Back on Github, `Draft a new release <https://github.com/ArduPilot/ardupilot/releases>`__ and add the Discourse link from above
+
+Mission Planner will also show a pop-up informing users that a new version is available.
 
 Didn't find what you are looking for?
 =====================================
@@ -113,4 +122,4 @@ Didn't find what you are looking for?
 If you think of something that should be added to this site, please
 `open an issue <https://github.com/ArduPilot/ardupilot/issues>`__ or
 post a comment on the
-`ArduPilot Gitter General Chat <https://gitter.im/ArduPilot/GeneralChat>`__.
+`ArduPilot Discord Chat <https://ardupilot.org/discord>`__.

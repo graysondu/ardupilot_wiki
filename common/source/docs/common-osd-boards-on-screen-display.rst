@@ -5,8 +5,9 @@ OSD Boards (On-Screen Display)
 ==============================
 
 On-Screen Display (OSD) Boards overlay telemetry data from an autopilot
-over a First Person View monitor. This landing page groups OSD boards
-from different suppliers.
+over a First Person View monitor. This landing page shows various OSD boards and techniques.
+
+Some autopilot board have an OSD integrated, OSD can be via an external MAVLink connected board, or via MSP telemetry to screens and goggles.
 
 
 .. toctree::
@@ -14,3 +15,7 @@ from different suppliers.
 
     Onboard OSD for FPV and simulation <common-osd-overview>
     Minim OSD <common-minim-osd-quick-installation-guide>
+    MSP OSD (version 4.1) <common-msp-osd-overview>
+    MultiWii/DJI OSD (version 4.2) <common-msp-osd-overview-4.2>
+    MSP Telemetry Addition of Canvass Mode <common-msp-overview-4.2>
+    OSD Parameter Editor <common-paramosd>

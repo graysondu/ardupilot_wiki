@@ -14,10 +14,12 @@ parameters. The following topics shown you how.
     :maxdepth: 1
 
     Tuning Process Instructions <tuning-process-instructions>
-    AutoTune <autotune>
-    Manual Roll and Pitch Tuning <ac_rollpitchtuning>
-    Basic Tuning <basic-tuning>
-    Advanced Tuning <tuning>
+    Setting up for Tuning <setting-up-for-tuning>
+    Initial Tuning Flight <initial-tuning-flight>
+    Evaluating the Tune <evaluating-the-aircraft-tune>
+    Manual Tuning <ac_rollpitchtuning>
+    AUTOTUNE <autotune>
+    Input Shaping <input-shaping>
     Transmitter Based Tuning <common-transmitter-tuning>
     Configuring Notch Filtering <common-imu-notch-filtering>
     Configuring In-Flight FFT <common-imu-fft>
@@ -25,7 +27,8 @@ parameters. The following topics shown you how.
 -----
 
 .. image:: ../../../images/banner-freespace.png
-   :target: https://freespace.solutions/
+   :target: https://freespacesolutions.com.au/
+
 
 [/site]
 
@@ -35,7 +38,8 @@ parameters. The following topics shown you how.
 
     Tuning QuickStart <tuning-quickstart>
     Automatic Tuning with AUTOTUNE <automatic-tuning-with-autotune>
-    Roll, Pitch and Yaw Controller Tuning <roll-pitch-controller-tuning>
+    Manual Roll, Pitch and Yaw Controller Tuning(firmware 4.1 and after) <new-roll-and-pitch-tuning>
+    Manual Roll, Pitch and Yaw Controller Tuning(firmware before 4.1) <roll-pitch-controller-tuning>
     Navigation Tuning <navigation-tuning>
     Cruise Speed Tuning <tuning-cruise>
     TECS (Total Energy Control System) for Speed & Height – Tuning Guide <tecs-total-energy-control-system-for-speed-height-tuning-guide>
@@ -45,3 +49,8 @@ parameters. The following topics shown you how.
 
 
 [copywiki destination="copter,plane"]
+
+
+
+
+
