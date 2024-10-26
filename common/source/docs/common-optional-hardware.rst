@@ -25,10 +25,9 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 [site wiki="rover, copter"]
     Airspeed Sensor <common-airspeed-sensor>
 [/site]
-[site wiki="rover"]
-    AIS for Boats <common-ais>
-[/site]
+    AIS (Automatic Identification System) <common-ais>
     Barometer (external) <common-baro-external>
+    BlackBox Logger using an AutoPilot <common-blackboxlogger>
 [site wiki="copter,plane,rover"]
     Button Inputs <common-buttons>
     Buzzer <common-buzzer>
@@ -42,9 +41,13 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 [/site]
     Display (Onboard) <common-display-onboard>
     ESCs and Motors <common-escs-and-motors>
+    External AHRS Systems <common-external-ahrs>
 [site wiki="plane"]
     Drive Calculator Motor/Propeller Analyzer <drivecalculator-guide>
 [/site]
+    DroneCAN Adapter Node <common-uavcan-adapter-node>
+    DroneCAN Peripherals <common-uavcan-peripherals>
+    Ethernet Adapters <common-ethernet-adapters>
     First Person View Video <common-fpv-first-person-view>
     Fuel Flow and Level Sensors <common-fuel-sensors>
     Generators <common-generators>
@@ -59,7 +62,7 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 	Non-GPS navigation <common-non-gps-navigation-landing-page>
 [/site]
     On-Screen Display (OSD) <common-osd-boards-on-screen-display>
-[site wiki="copter,plane"]
+[site wiki="copter,plane,rover"]
     Optical Flow Sensor <common-optical-flow-sensors-landingpage>
 [/site]
 [site wiki="copter, plane"]
@@ -67,14 +70,15 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
 [/site]
     Power Modules <common-powermodule-landingpage>
     Power Tether <common-power-tether>
-    PPM Encoder <common-ppm-encoder>
+    PPM Encoder <common-ppm-encoders-new>
 [site wiki="copter"]
-    Precision Landing and Loiter (IRLock) <precision-landing-with-irlock>
+    Precision Landing and Loiter using IRLock <precision-landing-with-irlock>
 [/site]
     Radio Control Systems <common-rc-systems>
     Rangefinders (Sonar, Lidar, Depth Cameras) <common-rangefinder-landingpage>
     Received Signal Strength Indication (RSSI) <common-rssi-received-signal-strength-indication>
     Relay Switch <common-relay>
+    Remote Id (aka Drone Id) <common-remoteid>
     RPM Sensor <common-rpm>
     Safety Switch <common-safety-switch-pixhawk>
     Servos <common-servo-landingpage>
@@ -83,12 +87,9 @@ information related to Autopilot selection see :ref:`Autopilot Hardware Options 
     Start/Stop Switch <startstop-switch>
 [/site]
     Telemetry Radio <common-telemetry-landingpage>
-    DroneCAN Adapter Node <common-uavcan-adapter-node>
-    DroneCAN Peripherals <common-uavcan-peripherals>
+    Temperature Sensors <common-temperature-sensor>
     Video (High Definition) <common-video-landingpage>
-[site wiki="copter"]
     Winch <common-daiwa-winch>
-[/site]
 [site wiki="rover"]
     Wind Vane <wind-vane>
     Wheel Encoders <wheel-encoder>

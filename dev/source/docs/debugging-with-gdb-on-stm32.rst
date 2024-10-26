@@ -62,6 +62,10 @@ using the JTAG breakout cable. Connect the
 SWDIO and SWCLK (see `Debug port pinout <https://ardupilot.org/copter/docs/common-pixracer-overview.html#debug-port-jst-sm06b-connector>`__
 for reference) to the corresponding SWDIO and SWCLK pins on the ST-Link debugger.
 
+Ensure :ref:`BRD_OPTIONS<BRD_OPTIONS>` sets the "Enable Debug Pins" bit if bit 3 is present in the vehicle software being used.
+It is also advised to disable the watchdog by ensuring bit 0 is not set.
+
+
 Installing GDB
 ==============
 
@@ -121,6 +125,9 @@ Some useful commands:
 ``b function-name`` -- i.e. b setup -- sets a breakpoint at the start of
 the "setup" function. Note a class name can be prepended such as
 ``b AC_AttitudeControl::init``
+
+.. note::
+   If you are debugging a board using external flash and you receive "Failed to read memory at 0x.....", try "set mem inaccessible-by-default off"
 
 ``Ctrl-C`` -- stops the code from executing so you can set breakpoints,
 etc

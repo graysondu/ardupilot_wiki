@@ -12,17 +12,13 @@ Scripts are stored on the SD card and run in parallel with the flight code.
 
 This page describes how to setup scripts on your autopilot, the scripting API, scripting applets,and some examples to help get started.
 
-While scripting normally requires at least some LUA programming and editing, there are some **Applets** available which require no user editing and are ready to use. See links below.
-
-.. note::
-
-    Lua scripting support was released with Copter-4.0, Rover-4.0, and Plane-3.9.11.
+While scripting normally requires at least some LUA programming and editing, there are some `Applets <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`__  available which require no user editing and are ready to use. See links below.
 
 
 Getting Started
 ===============
 
-- Ensure your autopilot has at least 2 MB of flash and 70 kB of memory.  High powered autopilots like the CubePilot Cube Orange and HolyBro Durandal will certainly work well but check the specifications of your :ref:`autopilot <common-autopilots>`.
+- Ensure your autopilot has at least 2 MB of flash and 80 kB of memory.  High powered autopilots like the CubePilot Cube Orange and HolyBro Durandal will certainly work well but check the specifications of your :ref:`autopilot <common-autopilots>`. Scripting is not available in F4 based autopilots. Autopilots must have an SD card to store the script unless the user builds his own firmware and embeds it directly in the firmware (see :ref:`common-oem-customizations`).
 - Set :ref:`SCR_ENABLE <SCR_ENABLE>` to 1 to enable scripting (refresh or reboot to see all ``SCR_`` parameters).
 - Upload scripts (files with extension .lua) to the autopilot's SD card's ``APM/scripts`` folder.
 
@@ -34,14 +30,27 @@ Getting Started
       :target: ../_images/scripting-MP-mavftp.png
       :width: 450px
 
-- **Sample Scripts** can be found `here for stable Plane <https://github.com/ArduPilot/ardupilot/tree/ArduPlane-stable/libraries/AP_Scripting/examples>`__, `Copter <https://github.com/ArduPilot/ardupilot/tree/ArduCopter-stable/libraries/AP_Scripting/examples>`__ and `Rover <https://github.com/ArduPilot/ardupilot/tree/APMrover2-stable/libraries/AP_Scripting/examples>`__.  The latest development scripts can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__.
+- **Sample/Example Scripts** can be found `here for stable Plane <https://github.com/ArduPilot/ardupilot/tree/ArduPlane-stable/libraries/AP_Scripting/examples>`__, `Copter <https://github.com/ArduPilot/ardupilot/tree/ArduCopter-stable/libraries/AP_Scripting/examples>`__ and `Rover <https://github.com/ArduPilot/ardupilot/tree/APMrover2-stable/libraries/AP_Scripting/examples>`__.  The latest development scripts can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__.
 
-- **Applets** which are scripts that require no user editing before use, can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`_ . Each of these has a .md file of the same name detailing its capabilities, use, and setup. For example, there is a script to allow a user to change a SmartAudio capable video transmitter's output power level from a transmitter channel and set its power-up value via parameter.
+- **Applets** which are scripts that require no user editing before use, can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`_ for the "latest" firmware branch, and may require code extensions included in that branch to function properly. Each of these has a .md file of the same name detailing its capabilities, use, and setup. For example, there is a script to allow a user to change a SmartAudio capable video transmitter's output power level from a transmitter channel and set its power-up value via parameter. See :ref:`common-scripting-applets`.
 
-- Up to 8 RC channels can be assigned as scripting inputs/controls using the``RCX_OPTION`` = "300-307" options. In addition, four dedicated script parameters are available: :ref:`SCR_USER1<SCR_USER1>` thru :ref:`SCR_USER4<SCR_USER4>` and are accessed with the same method as any other parameter, but these are reserved for script use.
-- When the autopilot is powered on it will load and start all scripts.
+- **Drivers** Lua scripts can actually provide hardware drivers for new peripheral hardware that is not directly supported in the ArduPilot firmware, such a new EFIs or Gimbals. Examples of these can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/drivers>`__ for the "latest" firmware branch, and may require code extensions included in that branch to function properly.
+
+.. note:: To download from the github locations, first click the script name, then select "raw" in upper right corner, then right mouse click to "Save Page as" a text file with the ".lua" file extension
+
+- Up to 8 RC channels can be assigned as scripting inputs/controls using the``RCX_OPTION`` = "300-307" options to be used by scripts. In addition, four dedicated script parameters are available: :ref:`SCR_USER1<SCR_USER1>` thru :ref:`SCR_USER4<SCR_USER4>` and are accessed with the same method as any other parameter, but these are reserved for script use. Scripts can also generate their own parameters (see :ref:`common-scripting-parameters`)to be used within the scripts.
+- When the autopilot is powered on it will load and start all scripts. By default it will look in the ROMFS file system for scripts included in the firmware image by a manufacturer, and the APM/scripts directory on the SD Card (or if a SITL simulation, the base directory where the simulation was started.) This can be modified by used the :ref:`SCR_DIR_DISABLE<SCR_DIR_DISABLE>` parameter.
 - Messages and errors are sent to the ground station and, if using Mission Planner, can be viewed in the Data screen's "Messages" tab.
-- :ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` can be adjusted to increase or decrease the amount of memory available for scripts. The default of 43 kB is sufficient for small scripts and fits onto most autopilots. The autopilot's free memory depends highly upon which features and peripherals are enabled. If this parameter is set too low, scripts may fail to run. If set too high other autopilot features such as Terrain Following or even the EKF may fail to initialize. On autopilots with a STM32F4 microcontroller, Smart RTL (Rover, Copter) and Terrain Following (Plane, Copter) need to be nearly always disabled. These features are usually enabled by default, set :ref:`SRTL_POINTS <SRTL_POINTS>` = 0, :ref:`TERRAIN_ENABLE <TERRAIN_ENABLE>` = 0).
+- :ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` can be adjusted to increase or decrease the amount of memory available for scripts. The default , which varies from 43K to 204.8K depending on cpu being used, is sufficient at its smallest (43K) for small scripts, but many will require more (some applets now need 300K). The autopilot's free memory depends highly upon which features and peripherals are enabled. If this parameter is set too low, scripts may fail to run and give an out of memory pre-arm error. If set too high other autopilot features such as Terrain Following or even the EKF may fail to initialize. On autopilots with a STM32F4 microcontroller, Smart RTL (Rover, Copter) and Terrain Following (Plane, Copter) need to be nearly always disabled. These features are usually enabled by default, set :ref:`SRTL_POINTS <SRTL_POINTS>` = 0, :ref:`TERRAIN_ENABLE <TERRAIN_ENABLE>` = 0). See also :ref:`RAM Limitations<ram_limitations>` section.
+
+Step by Step Setup and Use Examples
+===================================
+
+.. toctree::
+   :maxdepth: 1
+
+   common-scripting-step-by-step
+
 
 What Scripts Can Do
 ===================
@@ -94,8 +103,14 @@ The last line of the script is also used to schedule the function to be run for 
 
 Script Crashes and Errors
 =========================
-If scripts run out of memory (or panic for any reason) all currently running scripts are terminated, and the scripting engine will restart, and reload all scripts from the disk.
-This is allowed to happen at all flight stages, even while the vehicle is armed and flying.
+If scripts run out of memory (or panic for any reason) all currently running scripts are terminated. If an indivdual script has an errror, it will terminate. If either occurs before arming, a pre-arm failure will be generated. A scripting restart command or reboot would be needed to restart the script or scripting as a whole.
+
+In order to prevent arming if a script is missing (ie. SD card ejected or file corrupted) or if a script that is supposed to run once before arming and then terminate, but does not, then either, or both, of two checksum pre-arm checks can be enabled:
+
+- :ref:`SCR_LD_CHECKSUM<SCR_LD_CHECKSUM>` which checks that the checksum of all loaded scripts matches this value
+- :ref:`SCR_RUN_CHECKSUM<SCR_RUN_CHECKSUM>` which checks that the checksum of all running scripts matches this value
+
+These can be set automatically when the scripts have been loaded and the desired ones running before arming, by setting the :ref:`SCR_DEBUG_OPTS<SCR_DEBUG_OPTS>` bit 5 which will compute and set these parameter's values, and then reset bit 5 automatically.
 
 Scripting and Parameters
 ========================
@@ -110,7 +125,11 @@ API Documentation
 
 The API documentation described here is not a complete list, but rather some examples.  For a **full list of the methods** currently available, the LUA auto-generated document file is a complete list, It can be found `here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__ and lists all the available bindings and their parameters.
 
-.. note:: If you use VScode for your editor, by installing `this <https://marketplace.visualstudio.com/items?itemName=sumneko.lua>`__ lua extension (version 2.4.1 only as of now), you can get this information integrated as suggestions and autocomplete in the editor. 
+.. note::
+  If you use VScode for your editor, by installing `this <https://marketplace.visualstudio.com/items?itemName=sumneko.lua>`__ lua extension (version 2.4.1 only as of now), you can get this information integrated as suggestions and autocomplete in the editor.
+
+  | If you are still getting "Undefined global" errors and no completions, you may need to set path in your local copy of ``ardupilot`` repository in the `settings <https://code.visualstudio.com/docs/getstarted/settings>`_, for example:
+  | ``"Lua.workspace.library": [ "~/repos/ardupilot/libraries/AP_Scripting/docs" ]``
 
 For complete information on how a binding works the source can be found in the `binding generator descriptions <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`_ .
 
@@ -409,7 +428,8 @@ The terrain library provides access to checking heights against a terrain databa
 
 - :code:`height_amsl( Location )` - Returns the height (in meters) above mean sea level at the provided Location userdata, or returns nil if that is not available.
 
-- :code:`height_terrain_difference_home( Location )` - Returns the difference in height (in meters) between the provided location and home, or returns nil if that is not available.
+- :code:`height_terrain_difference_home( difference, extrapolate)` -  find the difference between home terrain height and the terrain
+       height at the current location in meters. Returns false if not available. If extrapolate is true, will return based on last valid terrain data.
 
 - :code:`height_above_terrain()` - Returns the height (in meters) that the vehicle is currently above the terrain, or returns nil if that is not available.
 
@@ -417,13 +437,13 @@ The terrain library provides access to checking heights against a terrain databa
 Relay (relay:)
 ~~~~~~~~~~~~~~
 
-The relay library proivdes access to controlling relay outputs.
+The relay library provides access to controlling relay outputs.
 
 - :code:`on(relay_num)` - Turns the requested relay on.
 
 - :code:`off(relay_num)` - Turns the requested relay off.
 
-- :code:`enabled(relay_num)` - Returns true if the requested relay is currently turned on.
+- :code:`enabled(relay_num)` - Returns true if the requested relay is enabled.
 
 - :code:`toggle(relay_num)` - Toggles the requested relay on or off.
 
@@ -446,7 +466,7 @@ RC Channels (rc:)
 Serial/UART (serial:)
 ~~~~~~~~~~~~~~~~~~~~~
 
-- :code:`find_serial(protocol)` - Returns the first UART instance that allows the given protocol, or nil if not found.
+- :code:`find_serial(instance)` - Returns the UART instance that allows connections from scripts (those with :code:`SERIALx_PROTOCOL = 28`). For :code:`instance = 0`, returns first such UART, second for :code:`instance = 1`, and so on. If such an instance is not found, returns :code:`nil`.
 
 	- :code:`UART:begin(baud)` - Start serial connection at given baud rate.
 	- :code:`UART:read()` - Returns a sequence of bytes from UART instance.
@@ -512,6 +532,7 @@ To give Lua scripts access to more features of ArduPilot the API can be extended
 
 - Find the method or function you would like to expose to Lua. For example if you wanted to expose an additional feature of AHRS you would first find the method within `libraries/AP_AHRS/AP_AHRS.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_AHRS/AP_AHRS.h>`__. This can be an already existing method (function) or a method (function) newly added to the code.
 - Edit the `libraries/AP_Scripting/generator/description/bindings.desc <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`__ and add a new line in the appropriate section for the method, or add a new section if a new class shall be added by following the examples of the other sections.
+- Add the method or function to `libraries/AP_Scripting/docs/docs.lua <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__.
 - For releases before Copter/Rover/Plane 4.1: Open a command line prompt and cd to the `/libraries/AP_Scripting/generator <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/generator>`__ directory and type "make run". 
 - For 4.1 onwards, clean the distribution (./waf distclean) and restart compilation from there as usual.
 
@@ -527,7 +548,8 @@ Further Information
     :hidden: 
 
     Bindings <common-lua-binding-syntax>
-    
+    common-scripting-applets
+
 For more background on technical decisions made before this point you can reference the presentation from the 2019 ArduPilot Unconference.
 
 ..  youtube:: ZUNOZMxOwsI

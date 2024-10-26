@@ -41,10 +41,12 @@ because we use the acceleration in our altitude hold controllers this could stil
 
 Although individual position offsets can be set for each IMU, the difference between the placement of IMUs on most autopilot boards is so small that the same values can be used for all IMUs
 
+.. note:: if the IMU offset is specified, then all the following offsets are relative to **Center of Gravity** rather than the IMU.
+
 **GPS:**
 
-- :ref:`GPS_POS1_X <GPS_POS1_X>`, :ref:`GPS_POS1_Y <GPS_POS1_Y>`, :ref:`GPS_POS1_Z <GPS_POS1_Z>` the first GPS's position from the vehicle's IMU or center-of-gravity
-- :ref:`GPS_POS2_X <GPS_POS2_X>`, :ref:`GPS_POS2_Y <GPS_POS2_Y>`, :ref:`GPS_POS2_Z <GPS_POS2_Z>` the second GPS's position from the vehicle's IMU or center-of-gravity
+- :ref:`GPS1_POS_X <GPS1_POS_X>`, :ref:`GPS1_POS_Y <GPS1_POS_Y>`, :ref:`GPS1_POS_Z <GPS1_POS_Z>` the first GPS's position from the vehicle's IMU or center-of-gravity
+- :ref:`GPS2_POS_X <GPS2_POS_X>`, :ref:`GPS2_POS_Y <GPS2_POS_Y>`, :ref:`GPS2_POS_Z <GPS2_POS_Z>` the second GPS's position from the vehicle's IMU or center-of-gravity
 
 **Range Finder (Sonar or Lidar):**
 
@@ -55,3 +57,6 @@ Although individual position offsets can be set for each IMU, the difference bet
 
 - :ref:`FLOW_POS_X <FLOW_POS_X>`, :ref:`FLOW_POS_Y <FLOW_POS_Y>`, :ref:`FLOW_POS_Z <FLOW_POS_Z>` distance from the IMU or center of gravity
 
+**Visual Odometry:**
+
+- :ref:`VISO_POS_X <VISO_POS_X>`, :ref:`VISO_POS_Y <VISO_POS_Y>`, :ref:`VISO_POS_Z <VISO_POS_Z>` distance from the IMU or center of gravity

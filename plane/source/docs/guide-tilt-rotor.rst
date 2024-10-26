@@ -48,7 +48,7 @@ Setting Up A Tilt-Rotor
 The first thing you need to do is enable QuadPlane support by setting
 :ref:`Q_ENABLE<Q_ENABLE>` to 1 and Tilt Rotor support by setting :ref:`Q_TILT_ENABLE<Q_TILT_ENABLE>` = "1", and then choose the right quadplane frame class and frame type.
 
-The quadplane frame class is in :ref:`Q_FRAME_CLASS<Q_FRAME_CLASS>` . The frame class is
+The quadplane frame class is in :ref:`Q_FRAME_CLASS<Q_FRAME_CLASS>`. The frame class is
 chosen based on your vehicles rotor configuration while
 hovering. Currently supported tilt-rotor frame classes are:
 
@@ -62,6 +62,7 @@ hovering. Currently supported tilt-rotor frame classes are:
    <tr><td>Octaquad</td><td>4</td></tr>
    <tr><td>Y6</td><td>5</td></tr>
    <tr><td>Tricopter</td><td>7</td></tr>
+   <tr><td>Bicopter</td><td>10</td></tr>
    </table>
 
 .. note: the BiCopter tilt-rotor QuadPlane is a special case. It requires that :ref:`Q_FRAME_CLASS<Q_FRAME_CLASS>` be set to 10 which is reserved for Tailsitter configurations only, normally. See :ref:`BiCopter <bicopter>`  below.
@@ -214,7 +215,7 @@ In order to setup the ranges of the servo movement, see :ref:`tilt-rotor-setup`.
 Vectored Yaw
 ============
 
-Vectored yaw aircraft tilt the left and right rotors separately to
+Vectored yaw aircraft tilt the left and right rotors (front and/or rear, if used) separately to
 control yaw in hover. This reduces mechanical complexity in
 tilt-tricopters as it avoids the need for a tilt servo for the rear
 motor for yaw control.
@@ -224,7 +225,7 @@ also set :ref:`Q_TILT_YAW_ANGLE<Q_TILT_YAW_ANGLE>` to the angle in degrees that 
 can go up past 90 degrees.
 
 For example, if you have a tilt-tricopter with vectored yaw, and your
-motors can tilt through a total of 110 degrees from forward flight,
+front motors can tilt through a total of 110 degrees from forward flight,
 then your :ref:`Q_TILT_YAW_ANGLE<Q_TILT_YAW_ANGLE>` would be 20, as that is the angle past 90
 degrees that the tilt mechanism can go.
 
@@ -285,7 +286,12 @@ Tilt Rotor Movement Setup
 Also:
     :ref:`Tilt Rotor Servo Setup<tilt-rotor-setup>`
 
+Tilt Wing Flap Emulation
+========================
 
+Tilt Wing Tilt Rotors are where the entire wing rotates, instead of the motors. These frames use the "TiltMotorsFront" ``SERVOx_FUNCTION`` (41) to tilt the entire wing for fixed-wing or VTOL operation.
+
+You can  also set up the wing to tilt just like (or in addition to) normal manually controlled or :ref:`automaticflaps <automatic-flaps>`, and the wing will tilt in fixed wing modes just as a flap would activate. The amount of wing tilt when flaps are fully extended is set by the :ref:`Q_TILT_WING_FLAP<Q_TILT_WING_FLAP>` parameter to tilt the wing up to 15 degrees when full flaps are activated.
 
 Pre Flight Checks
 =================

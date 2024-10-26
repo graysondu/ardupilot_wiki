@@ -4,8 +4,7 @@
 Power Monitor/Module Configuration in Mission Planner
 =====================================================
 
-
-.. note:: Up to 10 battery monitors may be used in ArduPilot, with parameter groups named BATT\_ through BATT9\_. For this article all parameter name references will be shown for the first monitor, BATT\_
+.. note:: Up to 16 battery monitors may be used in ArduPilot, with parameter groups named BATT\_ through BATT9\_ for the first 10, and BATTA\_ thru BATTF\_ for the last 6 monitors. For this article all parameter name references will be shown for the first monitor, BATT\_
 
 A power monitor can be used to measure the battery voltage and current for use in the battery failsafe and a power module can also provide a stable power supply to the autopilot.
 
@@ -48,9 +47,9 @@ In addition to normal analog voltage and current sensing modules, ArduPilot supp
 
 These are selected via the ``BATTx_MONITOR`` parameter for each battery monitor. These can be set directly via the CONFIG/Parameter Tree tab for each battery monitor. Here are the monitor types supported:
 
-=================================     =============================
+=================================     ========================================================
 :Ref:`BATT_MONITOR<BATT_MONITOR>`       TYPE
-=================================     =============================
+=================================     ========================================================
 0 	                                    Disabled
 3 	                                    Analog Voltage Only
 4 	                                    Analog Voltage and Current
@@ -59,21 +58,22 @@ These are selected via the ``BATTx_MONITOR`` parameter for each battery monitor.
 7 	                                    :ref:`SMBus-Generic<common-smart-battery-landingpage>`
 8 	                                    DroneCAN-BatteryInfo
 9 	                                    :ref:`ESC<blheli32-esc-telemetry>`
-10 	                                    Sum Of Selected Monitors, see BATTx_SUM_MASK parameter
-11 	                                    :ref:`FuelFlow <common-fuel-sensors>`
-12 	                                    :ref:`FuelLevelPWM <common-fuel-sensors>`
-13 	                                    :ref:`SMBUS-SUI3<common-smart-battery-landingpage>`
-14 	                                    :ref:`SMBUS-SUI6<common-smart-battery-landingpage>`
-15              	                    NeoDesign
-16              	                    SMBus-Maxell
-17 	                                    :ref:`Generator-Elec<common-ie650-fuelcell>`
-18 	                                    :ref:`Generator-Fuel<common-ie650-fuelcell>`
-19 	                                    :ref:`Rotoye<common-smart-battery-rotoye>`
-20 	                                    MPPT
-21 	                                    INA2XX
-22 	                                    LTC2946
-23 	                                    Torqeedo Motor Controller
-=================================     =============================
+10 	                                 Sum Of Selected Monitors, see BATTx_SUM_MASK parameter
+11 	                                 :ref:`FuelFlow <common-fuel-sensors>`
+12 	                                 :ref:`FuelLevelPWM <common-fuel-sensors>`
+13 	                                 :ref:`SMBUS-SUI3<common-smart-battery-landingpage>`
+14 	                                 :ref:`SMBUS-SUI6<common-smart-battery-landingpage>`
+15              	                     NeoDesign
+16              	                     SMBus-Maxell
+17 	                                 :ref:`Generator-Elec<common-ie650-fuelcell>`
+18 	                                 :ref:`Generator-Fuel<common-ie650-fuelcell>`
+19 	                                 :ref:`Rotoye<common-smart-battery-rotoye>`
+20 	                                 MPPT
+21 	                                 INA2XX
+22 	                                 LTC2946
+23 	                                 Torqeedo Motor Controller
+24 	                                 :ref:`FuelLevelAnalog <common-fuel-sensors>`
+=================================     ========================================================
 
 
 .. note:: Once a specific monitor type is selected, parameters associated with that type of monitor will be revealed once parameters are refreshed. Scales and offsets, bus addresses, etc. will be displayed, as appropriate, for that monitor.
@@ -81,12 +81,13 @@ These are selected via the ``BATTx_MONITOR`` parameter for each battery monitor.
 Other Parameters
 ----------------
 
-- :ref:`BATT_OPTIONS<BATT_OPTIONS>` bit 0, if set, will ignore the State Of Charge field in DroneCAN monitors, since some do not populate this field with meaningful data. Also various options for MPPT type monitors are provided.
-- :ref:`BATT_SUM_MASK<BATT_SUM_MASK>` is used if the monitor is type "10" (Sum Of Selected Monitors) to select which monitors' reported voltages will be averaged, and current values will be summed, and reported for this monitor. Selecting this monitor's own instance number has no effect. If no bits are set, it will average all lower numbered instance's reports.
+- :ref:`BATT_OPTIONS<BATT_OPTIONS>` bit 0, if set, will ignore the State Of Charge field in DroneCAN monitors, since some do not populate this field with meaningful data. Also various options for MPPT type monitors are provided. Bit 6 allows the resting voltage to be sent in place of battery voltage, which is sometime more useful. Bit 7 allows the Battery Auxilliary info from another DroneCAN monitor with the same :ref:`BATT_SERIAL_NUM<BATT_SERIAL_NUM>` to be used for this monitor instance.
+- :ref:`BATT_SUM_MASK<BATT_SUM_MASK>` is used if the monitor is type "10" (Sum Of Selected Monitors) to select which monitors' reported voltages will be averaged, and current values will be summed, and reported for this monitor. Selecting this monitor's own instance number has no effect. If no bits are set, it will average all higher numbered instance's reports.
 - :ref:`BATT_ARM_VOLT<BATT_ARM_VOLT>` is the minimum voltage reported from this monitor that will allow arming to occur.
 - :ref:`BATT_ARM_MAH<BATT_ARM_MAH>` is the minimum capacity remaining reported from this monitor that will allow arming to occur.
 - :ref:`BATT_CURR_MULT<BATT_CURR_MULT>` allows adjusting the current scale for DroneCAN(UAVCAN) monitors which do not have a CAN parameter exposed for adjustment.
-
+- :ref:`BATT_SERIAL_NUM<BATT_SERIAL_NUM>` is used to designate which battery an SMBUS or DroneCAN monitor is associated, since multiple instances of these monitors are possible.
+- :ref:`BATT_MAX_AMPS<BATT_MAX_AMPS>` applies only to INA2xx sensors. Controls the maximum current which can be reported. This sensor is usually integrated onto the autopilot board and this value preset appropriately in the firmware. Normally, the user would only adjust this if the power monitor OEM suggest that it be set to a certain value.
 
 Failsafe
 --------

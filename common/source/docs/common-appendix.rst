@@ -23,7 +23,9 @@ the wiki.
     History of ArduPilot <common-history-of-ardupilot>
     Partners <common-partners>
     Partners Program <common-partners-program>
+[site wiki="plane, copter, rover, sub, blimp"]
     Ready-To-Use vehicles <common-rtf>
+[/site]
     Stores <common-stores>
     Top Contributors <common-team>
 [site wiki="plane, copter, rover"]    
@@ -34,7 +36,6 @@ the wiki.
 [site wiki="planner"]
     Archived - Recording and Playing Back Missions<common-recording-and-playing-back-missions>
     Archived - Loading ChiBios Firmware Onto Pixhawk<common-loading-chibios-firmware-onto-pixhawk>
-    Mission Planner – Proposed Table Of Contents (TOC) <mission-planner-toc-planning>
 [/site]
 
 [site wiki="plane"]
@@ -56,4 +57,4 @@ the wiki.
 
 
 
-[copywiki destination="copter,plane,rover,planner,planner2,dev,antennatracker,mavproxy,ardupilot"]
+[copywiki destination="copter,plane,rover,blimp,planner,planner2,dev,antennatracker,mavproxy,ardupilot"]

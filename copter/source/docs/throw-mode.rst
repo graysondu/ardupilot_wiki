@@ -7,6 +7,10 @@ Throw Mode
 This slightly dangerous flight mode allows the pilot to throw the vehicle into the air (or drop the vehicle) in order to start the motors.
 Once in the air, this mode does not accept any input from the pilot.  This mode requires GPS.
 
+.. note::
+
+    This flight mode is available for multirotors only. 
+
 .. warning::
 
    Use with caution!  It is dangerous to get close to an armed multicopter as is required to throw the vehicle.  It is recommended to takeoff normally instead of using throw mode whenever possible.
@@ -29,9 +33,10 @@ After the motors start this flight mode will first try to control it's attitude 
 
 Settings
 ========
-- :ref:`THROW_TYPE <THROW_TYPE>` : set to 0 if throwing the vehicle up, 1 if dropping the vehicle.  If dropping, drop from a height of at least 10m.
-- :ref:`THROW_MOT_START <THROW_MOT_START>` : controls whether the motors will spin slowly or not at all while waiting for the throw (0 = stopped, 1 = spinning slowly).  The default is 0 (will not spin after arming).
-- :ref:`THROW_NEXTMODE <THROW_NEXTMODE>` : the vehicle will switch into this flight mode after stopping (Auto, Guided, RTL, Land and Brake are support).  Set to "Throw" (the default) to simply remain in Throw mode and wait for the pilot to switch modes manually
+- :ref:`THROW_TYPE <THROW_TYPE>`: set to 0 if throwing the vehicle up, 1 if dropping the vehicle.  If dropping, drop from a height of at least 10m.
+- :ref:`THROW_MOT_START <THROW_MOT_START>`: controls whether the motors will spin slowly or not at all while waiting for the throw (0 = stopped, 1 = spinning slowly).  The default is 0 (will not spin after arming).
+- :ref:`THROW_NEXTMODE <THROW_NEXTMODE>`: the vehicle will switch into this flight mode after stopping (Auto, Guided, RTL, Land and Brake are support).  Set to "Throw" (the default) to simply remain in Throw mode and wait for the pilot to switch modes manually
+- :ref:`THROW_ALT_MIN<THROW_ALT_MIN>` and :ref:`THROW_ALT_MAX<THROW_ALT_MAX>`: set the altitude limits for THROW mode launch. Throw must happen above the minimum and below the maximum altitude above home after arming. Useful for plane or balloon drop launches, allowing arming on ground to establish home altitude, then rising in secondary release vehicle and dropping to launch.
 
 ..  youtube:: ZnEFcJx1qko
     :width: 100%

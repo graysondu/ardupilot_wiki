@@ -17,12 +17,16 @@ ArduPilot autopilots are compatible with the following receiver output protocols
 
     #. PPM-Sum receivers
     #. SBus receivers 
+    #. Fast SBus (from DJI HDL video/RC systems)
     #. IBUS receivers
     #. :ref:`common-FPort-receivers`
     #. :ref:`Spektrum SRXL2,DSM, DSM2, and DSM-X Satellite receivers<common-spektrum-rc>`
     #. :ref:`Multiplex SRXL version 1 and version 2 receivers<common-srxl-receivers>`
-    #. :ref:`CRSF receivers <common-tbs-rc>`
+    #. :ref:`CRSF receivers <common-tbs-rc>` (including ExpressLRS systems)
+    #. :ref:`mLRS (with telemetry) <common-mlrs-rc>` (MAVLink)
     #. :ref:`Graupner SUM-D<common-graupner-rc>`
+    #. `IRC Ghost <https://www.immersionrc.com/fpv-products/ghost/>`__
+    #. DroneCAN peripherals can decode these RC protocols on a peripheral and pass to the autopilot
     #. Parallel PWM outputs encoded to PPM-Sum using an external encoder (see below)
 
 Connecting the Receiver
@@ -30,12 +34,14 @@ Connecting the Receiver
 
 For all protocols above, ArduPilot auto-detects the protocol of the RC receiver system. However, depending on the protocol and autopilot type, the physical connection to the autopilot may differ.
 
+Some protocols, most notably SRXL2, CRSF, and ELRS, require a full UART connection.
+
+In addition other protocols that also provide telemetry, like FPort, would generally require a bi-directional half-duplex connection in order to obtain telemetry. For these protocols the TX output of the UART should be connected to the serial input of the receiver. It is also possible on F7 and H7 boards to connect to the UART RX input with some additional configuration.
+
 PPM-Sum/SBus/IBus
 -----------------
 
 These receivers are usually connected to the RCin or SBUS input pin on the autopilot.
-
-Some protocols, most noticeably SRXL2, require a bi-directional, half-duplex UART connection. In addition protocols that provide telemetry also generally require a bi-directional half-duplex connection. For these protocols the TX output of the UART should be connected to the serial input of the receiver. It is also possible on F7 and H7 boards to connect to the UART RX input with some additional configuration.
 
 To connect a PPM-Sum receiver or an SBus receiver to a Pixhawk, for example, plug the ground (black), power (red) and signal (usually white - orange in the diagram below) wires to the RC pins on the Pixhawk.
 
@@ -45,7 +51,7 @@ To connect a PPM-Sum receiver or an SBus receiver to a Pixhawk, for example, plu
 .. tip::
 
    The parameter to enable the SBus output from the PixHawk style autopilots is
-   :ref:`BRD_SBUS_OUT<BRD_SBUS_OUT>` . This is only to pass SBus externally to other devices, like servos. Not to connect a receiver to RCin or SBus In.
+   :ref:`BRD_SBUS_OUT<BRD_SBUS_OUT>`. This is only to pass SBus externally to other devices, like servos. Not to connect a receiver to RCin or SBus In.
 
 
 DSM/DSM2/DSM-X/SRXL/SUM-D
@@ -62,16 +68,37 @@ FPort/FPort2
 FPort is a bi-directional protocol, using SBus RC in one direction, and serial telemetry in the other. The RC portion can be decoded when attached to an autopilot as if it were SBus, but the embedded telemetry would be lost. See the :ref:`FPort setup documentation<common-FPort-receivers>` for details on connection to one of the autopilots Serial Ports.
 
 
-SRXL2/CRSF
------------
+:ref:`mLRS <common-mlrs-rc>`
+----------------------------
+
+mLRS can provide RC control and MAVLink telemetry. mLRS receivers have an RC output pin that can be configured for either SBUS or CRSF protocol (CRSF would be only RC data). For SBUS you can connect it to the autopilot's RCin pin. For CRSF or SBUS, it can be connected to any autopilot UART RX pin and that port configured for RC protocol. Using CRSF portocol, allows RSSI/LQ information to be delivered to the autopilot.
+
+For optional telemetry a separate TX/RX port is provided on the receiver to be connected to an autopilot MAVLink telemetry serial port. You can omit the single wire RC connection and configure the mLRS receiver to output RC channels over MAVLink if you are not using GCS RC overrides (eg, joystick)
+
+
+SRXL2/CRSF/ELRS
+---------------
 
 These bi-directional protocols require the use of a Serial Port. See links below for setup and connections.
 
+IRC Ghost
+---------
+
+This requires a connection to a full UART port via its TX pin. The port should be set for half-duplex RC input:
+
+using SERIAL2 as the port:
+
+- :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` = 23 (RCinput)
+- :ref:`SERIAL2_OPTIONS<SERIAL2_OPTIONS>` = 4 (Half-Duplex)
+- :ref:`RSSI_TYPE<RSSI_TYPE>` = 3
 
 RC input to Serial Port
 -----------------------
 
-.. note:: ArduPilot firmware releases 4.0 and later, any UART RX input will auto-detect all the protocols (except PPM), if the serial port protocol is set to 23 (for example :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` for the TELEM2 UART is used).
+.. note:: any UART RX input will auto-detect all the protocols (except PPM, or SRXL2/CRSF/ELRS which also require connection of the UART's TX pin), if the serial port protocol is set to 23 (for example, generally, :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` for the TELEM2 UART if used). The exception to this is for SBUS attached to UARTs on F4 based autopilots. This requires an external inverter since SBUS is inverted and F4 autopilots do not have selectable inversion on their UART pins.
+
+.. note:: The serial port baudrate is automatically set and controlled by the firmware when any serial RC protocol is detected.
+
 
 Radio System Selection
 ======================
@@ -90,9 +117,11 @@ FrSky Horus Transmitter running Yaapu LUA script
 
 .. image:: ../../../images/x10-horus.png
 
-Some systems provide transparent radio modems to the telemetry from the autopilot, and others have proprietary protocols. Those with proprietary protocols often have means of displaying  telemetry data on the transmitter display itself, like FRSky or other `OpenTX <https://www.open-tx.org/>`__ based Transmitters.
+Some systems provide transparent radio modems sending the telemetry from the autopilot, and others have proprietary protocols. Those with proprietary protocols often have means of displaying  telemetry data on the transmitter display itself, like FRSky or `OpenTX <https://www.open-tx.org/>`__ based Transmitters.
 
 Telemetry speeds vary from 56K to 1-2K baud depending on protocol and, in some cases, distance. Often telemetry range will be less than radio control range.
+
+Consult
 
 Number of channels
 ------------------
@@ -104,28 +133,48 @@ Below is a table with some commonly  available systems showing these elements. N
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |Original Manufacturer  |Range | Telemetry| Telem Speed| TX Display| RC Protocol  |  Notes |
 +=======================+======+==========+============+===========+==============+========+
-|DragonLink             |Long  |  Bi-dir  |     56K    |    na     | PPM_SUM/SBUS |    1   |
+|DragonLink             |Long  |  Bi-dir  |     56K    |via MTP/LUA|PPM_SUM/SBUS  |    1   |
++-----------------------+------+----------+------------+-----------+--------------+--------+
+|CRSF                   |Long  |  Bi-Dir  |   Variable |  yes      |SBUS/CRSF     |    3   |
++-----------------------+------+----------+------------+-----------+--------------+--------+
+|ELRS                   |Long  |  Bi-Dir  |   Variable |  optional |SBUS/CRSF     |    4   |
+|                       |      |          |            |           | Mavlink      |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |FLYSKY                 |Short |    No    |     -      |   -       |  IBus        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
-|FRSky  X series        |Short |  Bi-dir  |    Medium  |   yes     | PPM-SUM/SBUS |    2   |
+|FrSky  X series        |Short |  Bi-dir  |    Medium  |   yes     | PPM-SUM/SBUS/|    2   |
+|                       |      |          |            |           | FPort        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
-|FRSky  R9 series       |Medium|  Bi-dir  |    Medium  |   yes     | PPM-SUM/SBUS |    2   |
+|FrSky  R9 series       |Medium|  Bi-dir  |    Medium  |   yes     | PPM-SUM/SBUS/|    2   |
+|                       |      |          |            |           | FPort        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |Futaba                 |Short |    No    |     -      |   -       |  SBus        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 |Graupner               |Short |    Yes   |    Medium  |   yes     |  SUM-D       |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
+|IRC Ghost              |Medium| Vendor   |            |   yes     | IRC Ghost    |        |
+|                       |      | Specific |            |           |              |        |
++-----------------------+------+----------+------------+-----------+--------------+--------+
+|mLRS                   |Long  |  Bi-Dir  |  12K - 91K |via LUA    |SBUS/CRSF     |    5   |
++-----------------------+------+----------+------------+-----------+--------------+--------+
 |Multiplex              |Short |     No   |      -     |    -      |   SRXL       |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
-|Spektrum               |Short |    No    |     -      |   -       |  DSM/DSM2    |        |
-|                       |      |          |            |           |  DSM-X/      |        |
+|Spektrum               |Short |Vendor    |     -      |  yes      |  DSM/DSM2    |        |
+|                       |      |Specific  |            |           |  DSM-X/      |        |
 |                       |      |          |            |           |  SRXL        |        |
 +-----------------------+------+----------+------------+-----------+--------------+--------+
 
-Note 1: DragonLink provides a 56Kbaud transparent link for telemetry, allowing full MAVLink telemetry to/from the vehicle from the transmitter module. Dragonlink is an add-on module to the transmitter, such as an FRSky Taranis or RadioMaster T16. See :ref:`common-dragonlink-rc`
+Note 1: DragonLink provides a 56Kbaud transparent link for telemetry, allowing full MAVLink telemetry to/from the vehicle from the transmitter module. Dragonlink is an add-on module to the transmitter, such as an FRSky Taranis or RadioMaster T16. See :ref:`common-dragonlink-rc`. `MTP (Mavlink to Passthru) converters <https://www.rcgroups.com/forums/showthread.php?3089648-Mavlink-To-FrSky-Passthrough-Converter>`__ are available to allow direct display of MAVLink Telemetry data on OpenTX transmitters using :ref:`Yaapu Telemetry LUA Script<common-frsky-yaapu>`.
 
-Note 2: See :ref:`common-frsky-yaapu`. Future firmware versions will offer the ability to change parameters over FRSky telemetry from an Open TX compatible transmitter in addition to displaying the telemetry data. Most FRSky compatible transmitters use `OpenTX <https://www.open-tx.org/>`__. Note that R9 systems are not quite Long Range, but much further range than normal FRSky systems, themselves at the very high end of the Short Range category at 1.6-2km range.
+Note 2: See :ref:`common-frsky-yaapu`. The ability to change parameters over FRSky telemetry from an Open TX compatible transmitter in addition to displaying the telemetry data is possible. Most FRSky compatible transmitters use `OpenTX <https://www.open-tx.org/>`__. Note that R9 systems are not quite Long Range, but much further range than normal FRSky systems, themselves at the very high end of the Short Range category at 1.6-2km range.
+
+Note 3: ArduPilot provides a means to send its telemetry data via CRSF such that it can be displayed on `OpenTX <https://www.open-tx.org/>`__ transmitters using the :ref:`Yaapu Telemetry LUA Script<common-frsky-yaapu>`. The ability to change parameters over CRSF telemetry from an Open TX compatible transmitter in addition to displaying the telemetry data is also possible. See :ref:`common-crsf-telemetry`
+
+Note 4: ELRS (ExpressLRS) is a flexible open-source system that can output CRSF, SBUS, or MAVLink (with embedded RC) protocols. Telemetry requires the use of CRSF or Mavlink, and the receiver must be wired to a full UART.  See `ExpressLRS site <https://www.expresslrs.org/>`  and :ref:`TBS CRSF/ ELRS <common-tbs-rc>` for more information.
+
+Note 5: The mLRS project is firmware designed specifically to carry both RC and MAVLink. The usable telemetry speed varies by the chosen mode and is managed via RADIO_STATUS flow control. It uses the CRSF (TBS Crossfire) RC protocol on both the receiver and Tx module.  It also integrates full MAVLink telemetry via serial connections on the Tx module and the receiver.
+
+Note 6: Vendor Specific Telem means that they accomodate sensor additions to the vehicle and can display the information on certain Vendor specific TXs but do not send ArduPilot telemetry from the vehicle to ArduPilot compatible GCS or OpenTX display scripts.
 
 Links to Radio Control Systems
 ==============================
@@ -148,9 +197,11 @@ With integrated telemetry:
     DragonLink <common-dragonlink-rc>
     FRSky <common-frsky-rc>
     Graupner (HOTT) <common-graupner-rc>
+    Herelink RC/Telemetry/HD Video System <common-herelink>
+    mLRS <common-mlrs-rc>
     Multiplex (no support in ArduPilot for M-Link telemetry yet) <common-multiplex-rc>
     Spektrum SRXL2 <common-spektrum-rc>
-    TBS CRSF <common-tbs-rc>
+    TBS CRSF/ ELRS <common-tbs-rc>
 
 Multi-Protocol:
 
@@ -171,40 +222,11 @@ FRSky and Spektrum enjoy the largest established bases with Spektrum dominant in
 
 The Jumper T16 and RadioMaster T16 are FRSky Horus-like OpenTX based transmitter clones with multiple RC protocols built-in.
 
-
 PPM encoders
 ============
 
-A `PPM Encoder <http://store.jdrones.com/pixhawk_px4_paparazzi_ppm_encoder_v2_p/eleppmenc20.htm>`__ will
-allow you to use any older style RC receiver with only PWM outputs for each channel. Both the new and previous versions of the *3DR PPM-Sum encoder* (the linked encoder is compatible) are shown
-below:
-
-.. figure:: ../../../images/PPM_cables_-_Copy.jpg
-   :target: ../_images/PPM_cables_-_Copy.jpg
-
-   Newest 3DR PPM-Sum encoder
-
-.. figure:: ../../../images/PPMEncoderDesc.jpg
-   :target: ../_images/PPMEncoderDesc.jpg
-
-   Original 3DR PPM-Sumencoder
-
-There are some downsides of using this encoder:
-
--  The PPM Encoder does require quite a bit of additional wiring to the receiver.
--  It uses quite a bit of power making it likely you will need to plug
-   in your battery while doing radio setup with USB cable in Mission Planner.
--  The encoder also costs as much or more than several of the
-   available PPM-Sum receivers including the FrSky Delta 8 below.
-
-There is addition information :ref:`about connecting and configuring the encoder here <common-ppm-encoder>`.
-
-.. note::
-
-   If you are using this PPM Encoder it is important to know that
-   when you are calibrating your transmitter you may need
-   to hook up your flight battery to the autopilot because the USB port
-   alone can't supply enough power.
+A `PPM Encoder <https://www.amazon.com/s?k=ppm+encoder>`__ will
+allow you to use any older style RC receiver that has only PWM outputs for each channel instead of an SBUS or PPM output. See :ref:`common-ppm-encoders-new` for more information.
 
 .. toctree::
    :hidden:

@@ -4,7 +4,7 @@
 Hex HereFlow Optical Flow Sensor
 ================================
 
-[copywiki destination="copter,plane"]
+[copywiki destination="copter,plane,rover"]
 
 The `HereFlow optical flow sensor <http://www.proficnc.com/all-products/185-pixhawk2-suite.html>`__ is a lightweight optical flow sensor including a short range lidar which uses the CAN protocol to communicate with the autopilot.  This can be used to improve horizontal position control especially in GPS denied environments.
 
@@ -32,6 +32,7 @@ Connection to Autopilot
 - Set :ref:`FLOW_TYPE <FLOW_TYPE>` = 6 (DroneCAN)
 - Set :ref:`CAN_P1_DRIVER <CAN_P1_DRIVER>` = 1 to enable DroneCAN
 - Set :ref:`CAN_D1_PROTOCOL <CAN_D1_PROTOCOL>` = 1 (DroneCAN)
+- Optionally set :ref:`BRD_BOOT_DELAY <BRD_BOOT_DELAY>` = 3000 (3 seconds) to slow the autopilot's startup which allows the flow sensor to boot up first and avoid initialisation issues
 
 To use the onboard lidar (not recommended):
 

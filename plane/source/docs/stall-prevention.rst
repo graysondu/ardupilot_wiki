@@ -49,7 +49,7 @@ There are two key parameters that control stall prevention:
    parameter. If this is set to zero then no stall prevention is done.
    This may be useful if you have no airspeed sensor and the synthetic
    airspeed estimate is not good enough
--  The :ref:`ARSPD_FBW_MIN <ARSPD_FBW_MIN>`
+-  The :ref:`AIRSPEED_MIN <AIRSPEED_MIN>`
    parameter, which is the configured minimum airspeed for level flight.
    It is this value that is scaled with the bank angle to calculate the
    safe airspeed for any demanded bank angle
@@ -75,7 +75,7 @@ In each of these modes the aircraft is either calculating a desired bank
 angle for the navigation code, or the user is inputting a desired bank
 angle via the aileron stick. In both cases the stall prevention code
 will limit the bank angle based on the amount of margin between
-``ARSPD_FBW_MIN`` and the current airspeed.
+``AIRSPEED_MIN`` and the current airspeed.
 
 The following modes are affected by the automatic speed increase in TECS
 when the bank angle is limited by stall prevention:

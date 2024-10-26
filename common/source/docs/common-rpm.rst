@@ -83,11 +83,11 @@ For reasons explained later it is recommended to use the highest number pin firs
 
 First the board needs to be configured to allow PWM pins to be set for GPIO.  This is done using the parameter ``BRD_PWM_COUNT`` .  Reduce the PWM count to free up a pin to be used for GPIO.  On non-Pixhawk boards the PWM count will include all PWM outputs.  On Pixhawk boards this parameter only affects AUX pins.  Write the parameter and reboot the autopilot.
 
-.. note:: in firmware versions 4.2 and later, the method for setting a PWM/SERVO/MOTOR outputs to be a GPIO function is changed. Instead of ``BRD_PWM_COUNT`` being used, the individual ``SERVOx_FUNCTION`` parameter is merely set to "-1". If set to "0", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being "mirrored" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device.
+.. note:: in firmware versions 4.2 and later, the method for setting a PWM/SERVO/MOTOR output to be a GPIO function is changed. Instead of ``BRD_PWM_COUNT`` being used, the individual ``SERVOx_FUNCTION`` parameter is merely set to "-1". If set to "0", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being "mirrored" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device.
 
 Now the RPM library must be enabled. In the following sections, we will use the second instance of RPM sensor for parameter examples.
 
-Set the parameter :ref:`RPM2_TYPE<RPM2_TYPE>` to 1 for a GPIO pin based sensor.  Write the parameter to ArduPilot then refresh/fetch the 
+Set the parameter :ref:`RPM2_TYPE<RPM2_TYPE>` to 2 for a GPIO pin based sensor.  Write the parameter to ArduPilot then refresh/fetch the 
 parameters.  You will now find that the instance of RPM (e.g. RPM2) has a number of other parameters available for editing, allowing you to complete your setup.
 
 Now the autopilot needs to be told which pin to find the RPM signal on.  To do this you will need to find the pin number in the hwdef.dat file for your
@@ -99,7 +99,7 @@ for example, if we have set AUX port 5 to a GPIO and its GPIO numbering correspo
 The parameter :ref:`RPM2SCALING<RPM2_SCALING>` will correspond to the number magnets used.  Most commonly only one magnet is used and this parameter is set to 1.  Some installations use 
 2 magnets, 180 degrees out of phase.  In this case this parameter should be set to 0.5.
 
-Initially, it is recommended to leave the parameters :ref:`RPM2_MIN<RPM2_MIN>` , :ref:`RPM2_MAX<RPM2_MAX>` , and :ref:`RPM2_MIN_QUAL<RPM2_MIN_QUAL>` as their defaults.  If an RPM signal exceeds any of these limits then the value reported in the ground station and the logs is zero.  Therefore, only adjust these values once you have confirmed that your RPM sensor is working as expected, otherwise it can make it more difficult to debug if nothing is getting reported.
+Initially, it is recommended to leave the parameters :ref:`RPM2_MIN<RPM2_MIN>`, :ref:`RPM2_MAX<RPM2_MAX>`, and :ref:`RPM2_MIN_QUAL<RPM2_MIN_QUAL>` as their defaults.  If an RPM signal exceeds any of these limits then the value reported in the ground station and the logs is zero.  Therefore, only adjust these values once you have confirmed that your RPM sensor is working as expected, otherwise it can make it more difficult to debug if nothing is getting reported.
 
 .. note::
 
@@ -127,7 +127,7 @@ via serial telemetry with ESCs.  For information on how to set up RPM reporting 
 
 The setup for electrical commutation RPM sensors is much the same as hall effect sensors, so the steps above are applicable.  The only difference is the scaling value 
 to be entered in the :ref:`RP2_SCALING<RPM2_SCALING>` parameter.  Now, the scaling value is a function of the number of poles in the motor and should be the reciprocal of the number of 
-poles.  E.g. A 4 pole motor will need a scaling value of 0.25.
+pole pairs.  E.g. A motor with 20 poles, therefore 10 pole pairs, needs a scaling value of 1/10 = 0.1.
 
 Optical Sensors
 ===============
@@ -135,8 +135,15 @@ Optical Sensors
 Again, the setup of optical sensors is much the same as the hall effect sensor.  The only difference is the scaling value.  :ref:`RPM2_SCALING<RPM2_SCALING>` should be set to be the reciprocal 
 of the number of reflective obstacles that pass the sensor in a single rotation.
 
-
 Harmonic Notch Center Frequency
 ===============================
 
 If ``RPMx_TYPE`` = 4, then the center frequency of the harmonic notch is reported.  See :ref:`common-imu-notch-filtering` for how this value is obtained.
+
+Heli Magnetic Sensors Known to Work with ArduPilot
+==================================================
+
+- `Align Magenetic Sensor <https://modelhelicopters.co.uk/products/align-beastx-governor-sensor-hegbp002t?variant=42819003220168>`__
+- `HoTT RPM Magnetic Sensor <https://www.controlhobbies.com/Telemetry-magnetic-sensor-to-measure-RPM-33616.html>`__
+- `SMModelBau Magnetic Sensor <https://www.sm-modellbau.de/magnetischer-Drehzahlsensor-fuer-UniTest-2-UniLog-1-2>`__
+

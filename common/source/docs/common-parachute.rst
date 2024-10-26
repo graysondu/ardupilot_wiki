@@ -4,6 +4,10 @@
 Parachute
 =========
 
+.. image:: ../../../images/parachute.png
+   :target: ../../images/parachute.png
+
+
 This topic describes how to set up manual and automatic parachute
 release.
 
@@ -36,7 +40,7 @@ parachute vendors:
 Connecting to the Autopilot
 ===========================
 
-The parachute release mechanism can be triggered from either a Relay or a PWM (i.e. Servo). Be sure that if a Relay pin is used, that the parachute release is active on a high level and that the Relay pin default, :ref:`RELAY_DEFAULT<RELAY_DEFAULT>` is OFF or No Change, to avoid triggering the release during initialization, since all GPIOs are forced low during the bootloader period.
+The parachute release mechanism can be triggered from either a Relay or a PWM (i.e. Servo). Be sure that if a Relay pin is used, that the parachute release is active on a high level and that the Relay pin default, ``RELAY_DEFAULT`` is OFF or No Change, to avoid triggering the release during initialization, since all GPIOs are forced low during the bootloader period.
 
 
 .. image:: ../../../images/Parachute_Pixhawk.jpg
@@ -64,10 +68,13 @@ Servo Release
 Relay Release
 -------------
 
+.. warning::
+    :ref:`This function is a GPIO and has limited current capabilities.<gpio-warning>`
+
 - Determine/Configure a pin to be a GPIO (see :ref:`common-gpios`).
-- Set that pin number as one of the first four (5 and 6 cannot be used) RELAY functions. ie For GPIO pin 51 using the first RELAY function, set :ref:`RELAY_PIN<RELAY_PIN>` = 51.
+- Set that pin number as one of the RELAY functions. ie For GPIO pin 51 using the first RELAY function, set :ref:`RELAY1_PIN<RELAY1_PIN>` = 51.
 - Since GPIOs are always set low initially during the bootloader period, to avoid accidental release, always use a release mechanism that needs a high output level to trigger and set:
-- :ref:`RELAY_DEFAULT<RELAY_DEFAULT>` = 1 or 2 (low or no change), which determines how RELAY pins are set during the post-bootloader, autopilot initialization period.
+- :ref:`RELAY1_DEFAULT<RELAY1_DEFAULT>` = 1 or 2 (low or no change), which determines how RELAY1 pins is set during the post-bootloader, autopilot initialization period.
 - :ref:`CHUTE_TYPE <CHUTE_TYPE>` = 0,1,2,or 3 to release with RELAY, RELAY2, RELAY3, or RELAY4 functions.
 
 .. image:: ../../../images/Parachute_MPSetup1.png
@@ -130,7 +137,7 @@ release:
 -  the roll and/or pitch angle of the vehicle is 30 degrees off from the
    target lean angle (Copter only)
 -  the barometer shows the vehicle is not climbing (excessive baro noise CAN prevent release in some cases) (Copter & Plane)
--  the vehicle is above the :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` altitude (Copter & Plane). A value of "0" diables this check.
+-  the vehicle is above the :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` altitude (Copter & Plane). A value of "0" disables this check.
 
 ..  youtube:: xaw3-oSahtE
     :width: 100%

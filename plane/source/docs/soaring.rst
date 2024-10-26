@@ -34,7 +34,7 @@ functionality:
    - :ref:`SOAR_ALT_MAX<SOAR_ALT_MAX>` is reached.
    - :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` is reached.
    - Flight mode is changed by the pilot.
-   - The estimate of achievable climb rate falls below :ref:`SOAR_VSPEED<SOAR_VSPEED>` , and 
+   - The estimate of achievable climb rate falls below :ref:`SOAR_VSPEED<SOAR_VSPEED>`, and 
      thermalling has lasted at least :ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>` seconds.
    - The aircraft drifts more than :ref:`SOAR_MAX_DRIFT<SOAR_MAX_DRIFT>` - see :ref:`Limit maximum distance from home<soaring_maximum-distance-from-home>`
 
@@ -65,7 +65,7 @@ Mission
 
 The main requirement for a mission is that it take the aircraft above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>`
 so that gliding flight is initiated. To achieve this, set the waypoints' altitude(s)
-above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` . 
+above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>`. 
 
 TECS
 ----
@@ -123,7 +123,7 @@ about airspeed squared over ~10 (for 45 degrees) or ~6 (for 30 degrees), from th
 
 The tangent is for the desired bank angle. The resulting radius will be in meters. Use g  = 9.81 m/s/s, and velocity (v) is in m/s. For example, if the airspeed in loiter is 20m/s, then the :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` should be 40m for a 45 degree bank.
 
-You should make sure that the limiting bank angle :ref:`LIM_ROLL_CD<LIM_ROLL_CD>` is set a bit larger than the desired bank angle to give some room for manoeuvring.
+You should make sure that the limiting bank angle :ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>` is set a bit larger than the desired bank angle to give some room for manoeuvring.
 
 
 Set limits
@@ -167,9 +167,9 @@ Time hysteresis
 
 Adding hysteresis can reduce the frequency of mode changes.
 
-:ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>` : Minimum time to remain in LOITER once entered for a thermal before exiting due to low lift or altitude limits.
+:ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>`: Minimum time to remain in LOITER once entered for a thermal before exiting due to low lift or altitude limits.
 
-:ref:`SOAR_MIN_CRSE_S<SOAR_MIN_CRSE_S>` : Minimum time to remain in glide after exiting LOITER due to low lift or altitude limits before entering LOITER mode again, or when entering Soaring initially.
+:ref:`SOAR_MIN_CRSE_S<SOAR_MIN_CRSE_S>`: Minimum time to remain in glide after exiting LOITER due to low lift or altitude limits before entering LOITER mode again, or when entering Soaring initially.
 
 TECS Tuning
 -----------

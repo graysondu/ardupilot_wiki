@@ -45,7 +45,7 @@ Screenshots
 
 .. figure:: ./images/mavproxy_windows.jpg
 
-   MAVProxy running under Windows 7
+   MAVProxy running under Windows 10
 
 Quick Reference Card
 ====================
@@ -64,11 +64,11 @@ Core Team
 MAVProxy is maintained by `Andrew Tridgell <https://github.com/tridge>`_, `Peter Barker <https://github.com/peterbarker>`_ and `Stephen Dade <https://github.com/stephendade>`_
 
 
-Full Table of Contents
-======================
+Table of Contents
+=================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    docs/getting_started/index
    docs/uav_configuration/index
@@ -76,8 +76,6 @@ Full Table of Contents
    docs/analysis/index
    docs/development/index
    docs/common-appendix
-   Full Table of Contents <docs/common-table-of-contents>
-
 
 
 

@@ -23,9 +23,13 @@ popular Companion Computer hardware are listed below.
 
     Arduino family <https://discuss.ardupilot.org/t/mavlink-and-arduino-step-by-step/25566/1>
     LYCHEE (Cube Carrier Board for Raspberry Pi Compute Module) <https://dronee.aero/pages/lychee>
+    ModalAI VOXL <https://www.modalai.com/collections/voxl/products/voxl>
+    ModalAI VOXL2 <https://www.modalai.com/collections/blue-uas-framework-components/products/voxl-2>
     NVidia TX1 <companion-computer-nvidia-tx1>
     NVidia TX2 <companion-computer-nvidia-tx2>
     ODroid <odroid-via-mavlink>
+    Pixhawk Rasberry Pi CM4 Baseboard <https://holybro.com/products/pixhawk-rpi-cm4-baseboard>
+    Pixhawk Jetson Baseboard <https://holybro.com/products/pixhawk-jetson-baseboard>
     Raspberry Pi <raspberry-pi-via-mavlink>
 
 The Companion Computer software refers to the programs and tools that run on the Companion
@@ -37,6 +41,7 @@ tools/suites are listed below.
     :maxdepth: 1
 
     APSync <apsync-intro>
+    BlueOS <https://blueos.cloud/>
     DroneKit <droneapi-tutorial>
     FlytOS <flytos>
     Maverick <https://goodrobots.github.io/maverick/#/>

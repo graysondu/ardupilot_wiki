@@ -1,8 +1,8 @@
 .. _common-pixhawk-camera-trigger-setup:
 
-================================
-Camera Trigger Setup for Pixhawk
-================================
+==============================
+DIY Camera Trigger using Relay
+==============================
 
 .. image:: ../../../images/CTimage0.png
     :width: 450px
@@ -132,12 +132,12 @@ e) Proceed to the CONFIG/TUNING -> EXTENDED TUNING screen in Mission Planner and
 .. note:: As of 4.0 firmware versions, any GPIO can be assigned as the Camera Trigger pin via its ``SERVOx_FUNCTION`` parameter, and any RC channel can be assigned to control that trigger via its ``RCx_OPTION`` parameter.
 
 
-f) Navigate to the FULL PARAMETER LIST under the main CONFIG/TUNING tab and locate the :ref:`CAM_TRIGG_TYPE<CAM_TRIGG_TYPE>` parameter. This parameter must show as 1 for “RELAY”. If it is not set to 1, change this parameter to 1 before proceeding to the next step.
+f) Navigate to the FULL PARAMETER LIST under the main CONFIG/TUNING tab and locate the ``CAMx_TRIGG_TYPE`` parameter. This parameter must show as 1 for “RELAY”. If it is not set to 1, change this parameter to 1 before proceeding to the next step.
 
 .. image:: ../../../images/CTimage15.png
     :width: 450px
 
-g) Scroll down through the parameters until you get to :ref:`RELAY_PIN<RELAY_PIN>` (for the first relay pin...there can be up to 6) . Here you will want to set the :ref:`RELAY_PIN<RELAY_PIN>`  parameter to match the GPIO pin you have connected the shutter release cable to. Since we have connected the cable to AUX6 on a Pixhawk, we need to change the :ref:`RELAY_PIN<RELAY_PIN>`  parameter to “55” (55:Pixhawk AUXOUT6).
+g) Scroll down through the parameters until you get to ``RELAYx_PIN`` (for the first relay pin...there can be up to 6) . Here you will want to set the ``RELAY_PIN``  parameter to match the GPIO pin you have connected the shutter release cable to. Since we have connected the cable to AUX6 on a Pixhawk, we need to change the ``RELAYx_PIN``  parameter to “55” (55:Pixhawk AUXOUT6).
 
 .. image:: ../../../images/CTimage16.png
     :width: 450px

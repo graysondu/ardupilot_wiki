@@ -4,7 +4,11 @@
 APJ Tools for Custom Parameter Defaults
 =======================================
 
-`APJ Tools <https://github.com/ArduPilot/ardupilot/blob/master/Tools/scripts/apj_tool.py>`__ is a command-line `Python <https://www.python.org/downloads/>`__ program which can be used to add custom default parameter values to a pre-built ArduPilot firmware.  It can also mark these parameter as read-only to avoid users accidentally overwriting them.  This can help companies reduce the time required to set-up many identical vehicles.
+.. note:: this capability has been removed as of ArduPilot version 4.5 and later. See instead :ref:`common-oem-customizations`.
+
+`APJ Tools <https://github.com/ArduPilot/ardupilot/blob/master/Tools/scripts/apj_tool.py>`__ is a command-line `Python <https://www.python.org/downloads/>`__ program which can be used to add custom default parameter values to a pre-built ArduPilot firmware.  It can also mark these parameters as read-only to avoid users accidentally overwriting them.  This can help companies reduce the time required to set up many identical vehicles.
+
+Additional customization options are possible by creating a new build target for a specific vehicle. :ref:`OEM Customization<common-oem-customizations>`
 
 How to Install APJ Tools
 ------------------------
@@ -15,7 +19,7 @@ How to Install APJ Tools
 How to update the Defaults
 --------------------------
 
-- Find and download the ArduPilot firmware you wish to customise from `firmware.ardupilot.org <https://firmware.ardupilot.org/>`__.  For example the stable version of ArduPilot Copter for the Hex Cube Black is the "arducopter.apj" file found at `firmware.ardupilot.org/Copter/stable/CubeBlack/ <https://firmware.ardupilot.org/Copter/stable/CubeBlack>`__.
+- Find and download the ArduPilot firmware you wish to customize from `firmware.ardupilot.org <https://firmware.ardupilot.org/>`__.  For example, the stable version of ArduPilot Copter for the Hex Cube Black is the "arducopter.apj" file found at `firmware.ardupilot.org/Copter/stable/CubeBlack/ <https://firmware.ardupilot.org/Copter/stable/CubeBlack>`__.
 - Place the above .apj file in the same directory as the apj_tool.py file
 - Use a text editor to create a parameters file (maybe called "param-defaults.parm") of this format
 
@@ -29,13 +33,13 @@ How to update the Defaults
 
 ::
 
-    python apj_tool.py --set-file param-defaults.parm arducopter.apj
+    python3 apj_tool.py --set-file param-defaults.parm arducopter.apj
 
 - Check the defaults have been applied correctly with this command
 
 ::
 
-    python apj_tool.py --show arducopter.apj
+    python3 apj_tool.py --show arducopter.apj
 
 - Load the modified .apj file to your vehicle and check the defaults have worked correctly
 
@@ -46,7 +50,7 @@ Additional Info
 
 ::
 
-    python apj_tool.py --help
+    python3 apj_tool.py --help
 
 - The parameters will be the new default values only if the user has not modified them
 - If all parameters are reset to their defaults, they will return to the values specified in the file

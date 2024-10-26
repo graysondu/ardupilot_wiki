@@ -138,11 +138,19 @@ AutoTest can run the ArduPilot binary under gdb:
 
 In an X Windowing System environment, an xterm window will contain the GDB terminal; stderr from the ArduPilot binary will also appear in this window.  Where X is not available but `GNU screen <https://www.gnu.org/software/screen/>`__ is, a detached screen will be created with the same content.
 
+You can insert breakpoints on the command-line (use multiple times to insert multiple breakpoints):
+
+::
+
+   ./Tools/autotest/autotest.py --no-clean --gdb --debug -B Copter::update build.Copter test.Copter
+
 You can insert a Python method call into your test to cause the autopilot to enter the attached debugger:
 
 ::
 
    self.send_debug_trap()
+
+This feature works well when combined with the ``--disable-breakpoints`` command-line option as you can enable the breakpoints when the debug trap is sent.
 
 Using with Valgrind
 ...................
@@ -231,7 +239,7 @@ Tools/autotest/quadplane.py
     contains tests for ArduPlane's QuadPlane code
 Tools/autotest/pysim/util.py
     various utility functions used by AutoTest
-Tools/autotest/common.py
+Tools/autotest/vehicle_test_suite.py
     Contains a base class inherited by the per-vehicle testing routines
 
 Network Structure
@@ -274,20 +282,20 @@ Adding a Test
 Conducting an automated git bisect with an autotest
 ===================================================
 
-`Tools/autotest/bisect-helper.py` can be used as the script argument to `git bisect run`.  It can run an autotest test - by name - and tell you which commit broke that test.
+``Tools/autotest/bisect-helper.py`` can be used as the script argument to ``git bisect run``.  It can run an autotest test - by name - and tell you which commit broke that test.
 
 To accomplish this:
 
-    - make sure you're not already running a bisect - `git bisect reset`
+    - make sure you're not already running a bisect - ``git bisect reset``
     - create a topic branch for your new test (based on master) which fails now but you know would have passed at some stage in the past
     - write your test - which should fail on your topic branch, and commit it
     - you can test your branch by creating a branch at some stage in the past and cherry-picking your test into that branch.  This may not be trivial depending on what changes have been made in the autotest framework
-    - `cp Tools/autotest/bisect-helper.py /tmp`  # always use modern helper
-    - `git bisect reset`
-    - `git bisect start`
-    - `git bisect bad`  - we know the test fails where it was written
-    - `git bisect good HEAD~1024`  - this is where we know the test passes
-    - `time git bisect run /tmp/bisect-helper.py --autotest --autotest-vehicle=Plane --autotest-test=NeedEKFToArm --autotest-branch=wip/bisection-using-named-test`
+    - ``cp Tools/autotest/bisect-helper.py /tmp``  # always use modern helper
+    - ``git bisect reset``
+    - ``git bisect start``
+    - ``git bisect bad``  - we know the test fails where it was written
+    - ``git bisect good HEAD~1024``  - this is where we know the test passes
+    - ``time git bisect run /tmp/bisect-helper.py --autotest --autotest-vehicle=Plane --autotest-test=NeedEKFToArm --autotest-branch=wip/bisection-using-named-test``
 
 In the last command, you need to specify the vehicle, new test name, and the name of the topic branch which contains your new test.
 

@@ -48,8 +48,8 @@ DroneCAN
 --------
 - :ref:`CAN_D1_PROTOCOL<CAN_D1_PROTOCOL>`   = 1
 - :ref:`CAN_P1_DRIVER<CAN_P1_DRIVER>`       = 1
-- :ref:`GPS_TYPE<GPS_TYPE>`                 = 9 (DroneCAN)
-- :ref:`COMPASS_TYPEMASK<COMPASS_TYPEMASK>` = 0 (or make sure DroneCAN bit is not checked)
+- :ref:`GPS1_TYPE<GPS1_TYPE>`                 = 9 (DroneCAN)
+- :ref:`COMPASS_DISBLMSK<COMPASS_DISBLMSK>` = 0 (or make sure DroneCAN bit is not checked)
 
 if Airspeed sensor is connected to I2C port,
 
@@ -60,20 +60,20 @@ The default airspeed sensor is expected to be a "DLVR-L10D" type , if not then y
 
 if using an:
 
-- MS4525    set ARSP_TYPE -> 1,
-- MS5525    set ARSP_TYPE -> 5 (note: only an MS5525 with address 0x77 can be used to avoid conflict with DPS310 barometer.)
-- SDP3X     set ARSP_TYPE -> 6
-- DLVR-L10D set ARSP_TYPE -> 9
+- MS4525    set :ref:`ARSPD_TYPE<ARSPD_TYPE>` -> 1,
+- MS5525    set :ref:`ARSPD_TYPE<ARSPD_TYPE>` -> 5 (note: only an MS5525 with address 0x77 can be used to avoid conflict with DPS310 barometer.)
+- SDP3X     set :ref:`ARSPD_TYPE<ARSPD_TYPE>` -> 6
+- DLVR-L10D set :ref:`ARSPD_TYPE<ARSPD_TYPE>` -> 9
 - the Write, and reboot
 
 MSP
 ---
 
 - ``SERIALx_PROTOCOL``                      = 32  (MSP) where x is the SERIAL port used for connection on autopilot
-- :ref:`GPS_TYPE<GPS_TYPE>`                 = 19 (MSP)
+- :ref:`GPS1_TYPE<GPS1_TYPE>`                 = 19 (MSP)
 - :ref:`BARO_PROBE_EXT<BARO_PROBE_EXT>`     = 4096  (MSP Baro)
 - :ref:`BARO_PRIMARY<BARO_PRIMARY>`         = 1  (If you want to use MSP baro as primary baro, otherwise leave as default)
-- :ref:`COMPASS_TYPEMASK<COMPASS_TYPEMASK>` = 0 (or make sure MSP bit is not checked)
+- :ref:`COMPASS_DISBLMSK<COMPASS_DISBLMSK>` = 0 (or make sure MSP bit is not checked)
 
 MSP Firmware Update
 ===================

@@ -4,8 +4,8 @@
 ArduPilot Style Guide
 =====================
 
-In order to improve the readability of the ArduPilot code and help new
-users pick up the code quickly please use the following styles.
+In order to improve the readability of the ArduPilot code, and help new
+users pick up the code more quickly, please use the following styles. Code submitted may be rejected if these styles are not followed.
 
 .. note::
 
@@ -318,7 +318,7 @@ Names
 Private members
 ---------------
 
-Private members in classes should be prefixed with an underscore:
+Private members in classes may be prefixed with an underscore:
 
 **Right:**
 
@@ -329,7 +329,7 @@ Private members in classes should be prefixed with an underscore:
         int _field;
     };
 
-**Wrong:**
+**Right:**
 
 ::
 
@@ -337,6 +337,8 @@ Private members in classes should be prefixed with an underscore:
     private:
         int field;
     };
+
+The ArduPilot codebase contains a mixture of the two styles.  Either is acceptable, with a preference for no-leading-underscores in new code.
 
 Class names
 -----------
@@ -356,6 +358,31 @@ underscores.
 
     class ap_compass { };
 
+Enums
+---------------
+
+Prefer enum classes over raw enums. Enums should be PascalCase, and be singular.
+All entries should have trailing commas, even the last one.
+
+**Right:**
+
+::
+
+    enum class CompassType {
+        FOO,
+        BAR,
+    };
+
+**Wrong:**
+
+::
+
+    enum compass_types {
+        FOO,
+        BAR
+    };
+
+
 Functions and variables
 -----------------------
 
@@ -364,6 +391,7 @@ Functions that return a single physical value or variables that represent a phys
 **Right:**
 
 ::
+
     uint16 get_angle_rad() { ... };
     float distance_m;
 
@@ -379,6 +407,7 @@ Functions or variables that represent a value relative to a frame should be suff
 **Right:**
 
 ::
+
     uint16 get_distance_ned_cm() { ... };
     uint16 get_distance_enu_m() { ... };
     float position_neu_mm;
@@ -417,7 +446,7 @@ The total length of the parameter name must be 16 characters or less.
 Display Name
 ------------
 
-The display name is typically a 2-5 word phrase that describes what the parameter changes. Often this is the Parameter Name spelled out in full words. Do not start with nondescriptive word like "the." A good Display Name for LIM_PITCH_MAX is "Maximum Pitch Angle".
+The display name is typically a 2-5 word phrase that describes what the parameter changes. Often this is the Parameter Name spelled out in full words. Do not start with nondescriptive word like "the." A good Display Name for PTCH_LIM_MAX_DEG is "Maximum Pitch Angle".
 
 
 Description

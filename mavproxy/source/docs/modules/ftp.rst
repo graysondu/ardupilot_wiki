@@ -1,4 +1,4 @@
-.. _ftp:
+.. _mavproxy-modules-ftp:
 
 ===
 FTP
@@ -24,4 +24,4 @@ Usage: ftp <list|get|put|rm|rmdir|rename|mkdir|crc>
 - crc: check a files CRC validity
 
 .. image:: ../../../../images/mavproxy-ftp.png
-    :target: ../../_images/mavproxy-ftp.png
+    :target: ../_images/mavproxy-ftp.png

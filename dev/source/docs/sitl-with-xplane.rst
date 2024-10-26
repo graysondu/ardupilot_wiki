@@ -12,7 +12,7 @@ ArduPilot :ref:`SITL <sitl-simulator-software-in-the-loop>`.
 
 .. youtube:: llRii8hmG1M
     :width: 100%
-       
+
 Overview
 ========
 
@@ -27,14 +27,30 @@ also be used to see how ArduPilot handles unusual aircraft and to
 develop support for aircraft features that may not be available in
 other simulator backends.
 
-Setup of X-Plane 10/11
-======================
-
 Before starting SITL the only thing you need to setup on X-Plane is
 the network data to send the sensor data to the IP address of the
 computer that will run ArduPilot. This can be the same computer that
 is running X-Plane (in which case you should use an IP address of
 127.0.0.1) or it can be another computer on your network.
+
+Setup of X-Plane 11
+===================
+
+Go to *Settings* -> *Data Output* menu in X-Plane 11 and activate the *General Data Output* tab.
+Check the *Network via UDP* column for at least one of the settings that ArduPilot will use (e.g. *Times* in the second row).
+The other will be set with commands over network by ArduPilot itself, note that you can use that to verify a two-way connection.
+
+In the right part of the interface, set *UDP Rate* to 50.0 and make sure that the checkbox below labeled *Send network data output* is set.
+Set the *IP Address* field to the address of the computer running SITL.
+Set *Port* field to 49001.
+
+.. Verified that this is the correct port to set also when using 127.0.0.1; 49002 did not work
+
+.. figure:: ../images/xplane11-data-output.png
+   :target: ../_images/xplane11-data-output.png
+
+Setup of X-Plane 10
+===================
 
 Go to the Settings -> Net Connections menu in X-Plane and then to the
 Data tab. Set the right IP address, and set the destination port
@@ -45,6 +61,11 @@ sure the "port that we send from" is not 49001. In the example below
 
 .. figure:: ../images/xplane-network-data.jpg
    :target: ../_images/xplane-network-data.jpg
+
+You will also need to output data from X-Plane. Click on *Settings*, then *Data Input & Output*. Copy at least 1 setting from the screenshot below. ArduPilot will then send commands to X-Plane that will enable all of the output data fields that it needs to operate.
+
+.. figure:: ../images/mavlinkhil1.jpg
+   :target: ../_images/mavlinkhil1.jpg
 
 If you have a joystick then you can configure the joystick for
 X-Plane. A joystick controlled by X-Plane will be available as R/C
@@ -75,8 +96,7 @@ what you are wanting to do.
 
 The first approach is good if you just want to test ArduPilot with
 SITL but you don't want to make changes to the code. MissionPlanner
-will download a build of ArduPilot SITL for Windows that is built each
-night from git master.
+will download a build of ArduPilot SITL for Windows that is either the current stable release version or a nightly build of the latest ArduPilot code that is under development.
 
 The second approach is good if you want to do ArduPilot development
 and try out code changes and you want to use a ground station of your
@@ -90,31 +110,17 @@ development.
 Using SITL from MissionPlanner
 ------------------------------
 
-To start SITL directly from MissionPlanner you need to have a very
-recent version of MissionPlanner. Get the latest beta from the help
-screen.
-
-Then go to the SIMULATION tab:
-
-.. figure:: ../images/xplane-missionplanner1.jpg
-   :target: ../_images/xplane-missionplanner1.jpg
-
-In the SIMULATION tab select X-plane and Xplane 10. Then select
-Advanced IP Settings and click through the IP addresses, set them 
-to 127.0.0.1, with the default network ports.
-
-Press "Start SITL"
+To start SITL directly from MissionPlanner go to the Simulation tab:
 
 .. figure:: ../images/xplane-missionplanner2.jpg
    :target: ../_images/xplane-missionplanner2.jpg
 
-In the SITL screen you need to select Model "xplane" and then select
+In the Simulation screen you need to select Model "xplane" and then select
 "Plane". At the moment we only support fixed wing and helicopter
 aircraft in X-Plane with SITL. In the future we may support other
 aircraft types. See below for more information on flying a helicopter.
 
-When you select "Plane" MissionPlanner will download a nightly build
-of ArduPilot SITL and will then launch SITL.
+When you select "Plane" MissionPlanner will present a selection for downloading the current stable release or a nightly build of ArduPilot. 
 
 .. figure:: ../images/xplane-missionplanner3.jpg
    :target: ../_images/xplane-missionplanner3.jpg
@@ -155,13 +161,13 @@ Using SITL with sim_vehicle.py
 
 The sim_vehicle.py script gives you a lot of options for launching all
 of the different simulation systems that work with ArduPilot,
-including X-Plane 10.
+including X-Plane.
 
 To use sim_vehicle.py you will need to install MAVProxy. If you are on
 Linux then make sure pip is installed and run::
 
   $ pip install --upgrade pymavlink mavproxy
-  
+
 If you are on Windows then download and install MAVProxy from
 https://firmware.ardupilot.org/Tools/MAVProxy/
 
@@ -173,11 +179,41 @@ ArduPlane directory and run sim_vehicle.py from there. In the
 following example I will be using the PT60 aircraft in X-Plane, so I
 create a PT60 directory::
 
- $ cd ArduPlane
- $ mkdir PT60
- $ cd PT60
- $ sim_vehicle.py -D -f xplane --console --map
+  $ cd ArduPlane
+  $ mkdir PT60
+  $ cd PT60
+  $ sim_vehicle.py -D -f xplane --console --map
 
+Using SITL running inside WSL2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :ref:`currently recommended<dev:sitl-native-on-windows>` way of setting up SITL for Windows runs in Windows Subsystem for Linux, as explained in :ref:`building-setup-windows10_new` for Windows 10 systems or :ref:`building-setup-windows11` for Windows 11 systems.
+
+To connect X-Plane and SITL in this environment you need to manually point each of them at the right address in the virtual network created between the two operating systems.
+
+Find the address of Windows reachable from WSL by running ``ipconfig.exe`` in PowerShell or Command Prompt, and looking for the following device::
+
+  Ethernet adapter vEthernet (WSL):
+  
+      Connection-specific DNS Suffix  . :
+      IPv4 Address. . . . . . . . . . . : 172.25.64.1
+      Subnet Mask . . . . . . . . . . . : 255.255.240.0
+      Default Gateway . . . . . . . . . :
+
+This is the address that you need to pass to the SITL instance running in WSL.
+In this example it would look like the following::
+
+  $ sim_vehicle.py -D -f xplane --sim-address 172.25.64.1
+
+On the side of Linux, you can get the address with ``ip addr`` command, look for the address from the same subnet, i.e. with same prefix, as the one you found for Windows.
+For example, the relevant block looks like this in Ubuntu 20.04::
+
+  2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+      link/ether 00:15:5d:43:ee:d1 brd ff:ff:ff:ff:ff:ff
+      inet 172.25.67.144/20 brd 172.25.79.255 scope global eth0
+         valid_lft forever preferred_lft forever
+
+Set this address (172.25.67.144 in this example) in the *IP Address* field shown in section `Setup of X-Plane 11`_ above
 
 Flying a Helicopter
 -------------------
@@ -221,12 +257,12 @@ instead of "xplane" to activate Helicopter controls.
 
 The startup procedure for a helicopter is:
 
-  - set interlock on (so RC input channel 8 is low)
-  - set zero collective (so RC input channel 3 is low)
-  - arm the helicopter
-  - set interlock off (so RC input channel 8 is high)
-  - wait for the head to reach full speed
-  - takeoff
+   #. set interlock on (so RC input channel 8 is low)
+   #. set zero collective (so RC input channel 3 is low)
+   #. arm the helicopter
+   #. set interlock off (so RC input channel 8 is high)
+   #. wait for the head to reach full speed
+   #. takeoff
 
 .. youtube:: JNNSoMrAFn4
     :width: 100%

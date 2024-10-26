@@ -19,6 +19,8 @@ the above images and some content courtesy of `mateksys.com <http://www.mateksys
 	Due to flash memory limitations, this board does not include all ArduPilot features.
         See :ref:`Firmware Limitations <common-limited_firmware>` for details.
 
+.. warning:: some variants of these autopilots do not have a barometer. An external barometer can be added, or operation with an alternate altitude sensor, such as GPS for outdoor use or rangefinder for indoor applications is supported (see :ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>`), with the following caveats. In Plane, if GPS is lost, then the user should switch to MANUAL mode immediately to avoid a crash. In Copter, operation is allowed using GPS, but not recommended, due to the imprecision in altitude hold modes. Bear in mind if GPS fails and the vehicle is using it for altitude information, a crash can eventually result due to lack of accurate altitude information.See :ref:`common-gps-for-alt` for more information.
+
 Specifications
 ==============
 
@@ -30,14 +32,14 @@ Specifications
 -  **Sensors**
 
    -  ICM20602 IMU on STD version, MPU6000 on CTR version
-   -  BMP280 barometer (STD and CTR)
+   -  BMP280 barometer (STD and CTR only)
    -  184A Voltage & current sensor on CTR version
 
 
 -  **Interfaces**
 
    -  5x UARTS
-   -  6x PWM outputs
+   -  6x PWM outputs (7 on -STD)
    -  1x RC input PWM/PPM, SBUS
    -  I2C port for external compass and airspeed sensor (STD, CTR and AIO)
    -  USB port
@@ -80,17 +82,17 @@ Serial protocols can be adjusted to personal preferences.
 RC Input
 ========
 
-TThe SBUS pin, is passed by an inverter to R2 (UART2 RX), which by default is mapped to a timer input instead of the UART, and can be used for all ArduPilot supported receiver protocols, except CRSF which requires a true UART connection. However, bi-directional protocols which include telemetry, such as SRXL2 and FPort, when connected in this manner, will only provide RC without telemetry. 
+The SBUS pin, is passed by an inverter to R2 (UART2 RX), which by default is mapped to a timer input instead of the UART, and can be used for all ArduPilot supported receiver protocols, except CRSF/ELRS and SRXL2 which require a true UART connection. However, FPort, when connected in this manner, will only provide RC without telemetry. 
 
-To allow CRSF and embedded telemetry available in Fport, CRSF, and SRXL2 receivers, the R2 pin can also be configured to be used as true UART2 RX pin for use with bi-directional systems by setting the :ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` to “1” so it becomes the SERIAL7 port's RX input pin.
+To allow CRSF and embedded telemetry available in Fport, CRSF, and SRXL2 receivers, the R2 pin can also be configured to be used as true UART2 RX pin for use with bi-directional systems by setting the :ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` to “1” so it becomes the SERIAL5 port's RX input pin.
 
-With this option, :ref:`SERIAL7_PROTOCOL<SERIAL7_PROTOCOL>` must be set to "23", and:
+With this option, :ref:`SERIAL5_PROTOCOL<SERIAL5_PROTOCOL>` must be set to "23", and:
 
 - PPM is not supported.
 
 - DSM/SRXL connects to the R2  pin, but SBUS would still be connected to SBUS.
 
-- FPort requires connection to T2 and R2 via a bi-directional inverter. See :ref:`common-FPort-receivers` .
+- FPort requires connection to T2 and R2 via a bi-directional inverter. See :ref:`common-FPort-receivers`.
 
 - CRSF also requires a T2 connection, in addition to R2, and automatically provides telemetry.
 
@@ -101,7 +103,7 @@ Any UART can be used for RC system connections in ArduPilot also, and is compati
 Dshot capability
 ================
 
-All motor/servo outputs are Dshot and PWM capable. However, mixing Dshot and normal PWM operation for outputs is restricted into groups, ie. enabling Dshot for an output in a group requires that ALL outputs in that group be configured and used as Dshot, rather than PWM outputs. The output groups that must be the same (PWM rate or Dshot, when configured as a normal servo/motor output) are: 1, 2/3/4, 5, and 6.
+All motor/servo outputs are Dshot and PWM capable. However, mixing Dshot and normal PWM operation for outputs is restricted into groups, ie. enabling Dshot for an output in a group requires that ALL outputs in that group be configured and used as Dshot, rather than PWM outputs. The output groups that must be the same (PWM rate or Dshot, when configured as a normal servo/motor output) are: 1, 2/3/4, 5, 6, and 7 (-STD only).
 
 Where to Buy
 ============
@@ -123,6 +125,6 @@ Wiring Diagram
 ==============
 
 .. image:: ../../../images/MatekF405-STD.jpg
-    :target: ../../_images/MatekF405-STD.jpg
+    :target: ../_images/MatekF405-STD.jpg
     
 [copywiki destination="plane,copter,rover,blimp"]

@@ -77,11 +77,11 @@ Setup
 Verify the following parameters are set on your autopilot via your ground station.
 
 - :ref:`CAN_P1_DRIVER<CAN_P1_DRIVER>` = 1 (assuming its on the first CAN bus of the autopilot)
-- :ref:`GPS_TYPE<GPS_TYPE>` = 9 (DroneCAN) or if it will be the secondary GPS, set instead
-- :ref:`GPS_TYPE2<GPS_TYPE2>` = 9 (DroneCAN)
+- :ref:`GPS1_TYPE<GPS1_TYPE>` = 9 (DroneCAN) or if it will be the secondary GPS, set instead
+- :ref:`GPS2_TYPE<GPS2_TYPE>` = 9 (DroneCAN)
 - Reboot
 
-Make sure the DroneCAN compass driver is not disabled. (:ref:`COMPASS_TYPEMASK<COMPASS_TYPEMASK>` bit 9 should not be set). 
+Make sure the DroneCAN compass driver is not disabled. (:ref:`COMPASS_DISBLMSK<COMPASS_DISBLMSK>` bit 9 should not be set). 
 
 If your controller has multiple compasses attached already, you may want to set the attached compass as a higher priority than others, if it has better precision or performance.
 
@@ -89,7 +89,7 @@ To enable the integrated I2C RGB LED set:
 
 - :ref:`NTF_LED_TYPES<NTF_LED_TYPES>` bit 5 (DroneCAN) should be set in the autopilot. 
 
-The integrated safety switch is automatically used, if the autopilot has enabled the use of safety switches via :ref:`BRD_SAFETYENABLE<BRD_SAFETYENABLE>` is "1" (default).
+The integrated safety switch is automatically used, if the autopilot has enabled the use of safety switches via :ref:`BRD_SAFETY_DEFLT<BRD_SAFETY_DEFLT>` is "1" (default).  (``BRD_SAFETYENABLE`` in older firmware versions)
 
 If you want to enable an attached I2C airspeed sensor, set:
 

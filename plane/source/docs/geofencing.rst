@@ -1,5 +1,7 @@
 .. _geofencing:
 
+ARCHIVED: See :ref:`common-geofencing-landing-page` for info for firmware versions 4.1 and later
+
 ====================
 Geo-Fencing in Plane
 ====================
@@ -112,9 +114,9 @@ geo-fencing behaviour:
    breach to the GCS but take no other action.  Set to 3 to have the
    plane head to the return point on breach, but the pilot will maintain
    manual throttle control in this case.
-#. ``FENCE_MINALT`` - the minimum altitude in meters. If this is zero then
+#. :ref:`FENCE_ALT_MIN<FENCE_ALT_MIN>` - the minimum altitude in meters. If this is zero then
    you will not have a minimum altitude.
-#. ``FENCE_MAXALT`` - the maximum altitude in meters. If this is zero then
+#. :ref:`FENCE_ALT_MAX<FENCE_ALT_MAX>` - the maximum altitude in meters. If this is zero then
    you will not have a maximum altitude.
 #. ``FENCE_CHANNEL<FENCE_CHANNEL>`` (revs previous to 4.1), ``RCx_OPTION`` = 11 - the RC input channel to watch for enabling the
    geo-fence. This defaults to zero, which disables geo-fencing. You
@@ -247,8 +249,8 @@ If you set ``FENCE_MINALT`` and ``FENCE_MAXALT`` to other than zero (and have
 will be half way between ``FENCE_MINALT`` and ``FENCE_MAXALT``.
 
 If you don't setup ``FENCE_MINALT`` and ``FENCE_MAXALT`` (ie. leave them at
-zero) then the return point altitude will be given by the :ref:`ALT_HOLD_RTL<ALT_HOLD_RTL>`
-parameter, which is also used for RTL mode. Note that :ref:`ALT_HOLD_RTL<ALT_HOLD_RTL>` is
+zero) then the return point altitude will be given by the :ref:`RTL_ALTITUDE<RTL_ALTITUDE>`
+parameter, which is also used for RTL mode. Note that :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` is
 in centimetres, whereas ``FENCE_MINALT`` and ``FENCE_MAXALT`` are in meters.
 
 If your flying club and local flying rules don't set a maximum altitude

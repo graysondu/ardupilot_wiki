@@ -6,9 +6,7 @@ Windspeed Estimation and Baro Compensation
 
 ArduPilot's :ref:`EKF<common-apm-navigation-extended-kalman-filter-overview>` can estimate the windspeed a multicopter is flying in without requiring an airspeed sensor.  This can be useful information for the pilot but it can also be used to compensate for wind related barometer interference.  This interference can occur on vehicles where the autopilot is exposed to the open air and can lead to the vehicle climbing or descending a few meters especialy after slowing down from fast-forward flight.
 
-The mechanism and setup are explained below.
-
-.. youtube:: xVVtvVuZGQE
+.. youtube:: Xq-ecwgFKzA
 
 Calculate the Body Drag Coefficient
 -----------------------------------
@@ -50,7 +48,7 @@ For the IRIS shown above:
 Calculate the Propeller Drag Coefficient
 ----------------------------------------
 
-The :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` should be calculated after performing a flight test as described `here in the video <https://youtu.be/xVVtvVuZGQE?t=1421>`__.
+The :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` should be calculated after performing a flight test as described `here in the video <https://youtu.be/xVVtvVuZGQE&t=1421s>`__.
 
 1. Fly in a low wind conditions in a wide open space
 2. Optionally set :ref:`LOG_DISARMED <LOG_DISARMED>` = 1 and :ref:`LOG_REPLAY <LOG_REPLAY>` = 1 to allow post flight tuning with :ref:`Replay <dev:testing-with-replay>`
@@ -65,7 +63,7 @@ The :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` should be calculated after performing
 11. Repeat step 8 but with the vehicle's right side facing into the wind (pilot should apply full right roll to accelerate into the wind)
 12. Download the :ref:`onboard logs <common-downloading-and-analyzing-data-logs-in-mission-planner>` for analysis as described in the video
 
-The final value for :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` is normally between 1.1 and 2.0.
+The final value for :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` is normally between 0.1 and 1.0.
 
 Viewing Windspeed and Direction in Real-Time
 --------------------------------------------
@@ -88,7 +86,7 @@ The EKF's wind speed estimate is recorded in the onboard log XKF2 message's VWN 
 Barometer Position Error Compensation
 -------------------------------------
 
-Once wind estimation has been enabled, it can be used to compensate for the wind's effect on each barometer in each of four directions (foward, back, left right).  The method to calculate each parameter's value is discussed `here in the video <https://youtu.be/xVVtvVuZGQE?t=3486>`__.
+Once wind estimation has been enabled, it can be used to compensate for the wind's effect on each barometer in each of four directions (foward, back, left right).  The method to calculate each parameter's value is discussed `here in the video <https://youtu.be/xVVtvVuZGQE&t=3486s>`__.
 
 Perform a test flight
 
@@ -109,3 +107,9 @@ Enable the compensation and copy the calculated position error coefficients into
 - :ref:`BARO1_WCF_BCK <BARO1_WCF_BCK>`: Pressure error coefficient in negative X direction (backwards)
 - :ref:`BARO1_WCF_RGT <BARO1_WCF_RGT>`: Pressure error coefficient in positive Y direction (right)
 - :ref:`BARO1_WCF_LFT <BARO1_WCF_LFT>`: Pressure error coefficient in positive Y direction (left)
+- :ref:`BARO1_WCF_UP<BARO1_WCF_UP>`: Pressure error coefficient in positive Z direction (climbing)
+- :ref:`BARO1_WCF_DN<BARO1_WCF_DN>`: Pressure error coefficient in negative Z direction (descending)
+
+The mechanism and setup are explained below.
+
+.. youtube:: xVVtvVuZGQE

@@ -60,7 +60,7 @@ Unidirectional Rangefinders
 .. toctree::
     :maxdepth: 1
 
-    Aistein US-D1 Radar Altimeter <common-aerotenna-usd1>
+    Ainstein US-D1 Radar Altimeter <common-aerotenna-usd1>
     Attollo Engineering Wasp200 <common-wasp200-lidar>
     Avionics Anonymous DroneCAN LIDAR Interface <common-avanon-laserint>
     Benewake TF02 / TF03 <common-benewake-tf02-lidar>
@@ -69,7 +69,9 @@ Unidirectional Rangefinders
     GY-US42 Sonar <common-rangefinder-gy-us42>
     Hondex Sonar<common-hondex-sonar>
     HC-SR04 Sonar <common-rangefinder-hcsr04>
+    JAE JRE-30 <common-rangefinder-jae-jre-30>
     JSN-SR04T Sonar <common-jsn-sr04t>
+    LD-06 TOF Lidar <common-ld06>
     LeddarTech Leddar One <common-leddar-one-lidar>
     LeddarTech LeddarVu8 <common-leddartech-leddarvu8-lidar>
     LightWare SF10 / SF11 Lidar <common-lightware-sf10-lidar>
@@ -77,8 +79,12 @@ Unidirectional Rangefinders
     Lightware SF02 Lidar <common-rangefinder-sf02>
     Maxbotix I2C Sonar <common-rangefinder-maxbotixi2c>
     Maxbotix Analog Sonar <common-rangefinder-maxbotix-analog>
+    Nanoradar NRA24 <common-rangefinder-nra24>
+    Nooploop TOF-Sense P <common-rangefinder-nooploop-tofsense-p>
+    Nooploop TOF-Sense F <common-rangefinder-nooploop-tofsense-f>
     ST VL53L0X / VL53L1X Lidar <common-vl53l0x-lidar>
     TeraRanger One/EVO Rangefinders <common-teraranger-one-rangefinder>
+    TeraRanger NEO <common-teraranger-neo>
     Underwater Sonar <common-underwater-sonars-landingpage>
 
 Omnidirectional Proximity Rangefinders
@@ -89,8 +95,10 @@ Omnidirectional Proximity Rangefinders
 
     Lightware SF40/C (360 degree) <common-lightware-sf40c-objectavoidance>
     Lightware SF45/B (350 degree) <common-lightware-sf45b>
-    RPLidar A2 360 degree laser scanner <common-rplidar-a2>
-    TerraRanger Tower (360 degree) <common-teraranger-tower-objectavoidance>
+    Nanoradar MK72 (112 degree) <common-rangefinder-mr72>
+    RPLidar A2/C1/S1 360 degree Laser/TOF LIDAR <common-rplidar-a2>
+    TerraRanger Tower/ Tower EVO (360 degree) <common-teraranger-tower-objectavoidance>
+    Cygbot D1 (120 degree) <https://www.cygbot.com/_files/ugd/f5911d_726a54fc4f6644bcbec0d9b00236ffda.pdf>
 
 [site wiki="copter,rover"]
 Vision Based Sensors

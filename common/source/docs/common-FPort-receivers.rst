@@ -4,7 +4,7 @@
 FPort Receivers
 ===============
 
-Support for FPort/FPort2 will be in firmware revs 4.1 and later.
+ArduPilot supports FPort/FPort2.
 
 FPort protocol combines SBus RC control information being sent to the autopilot with bi-directional telemetry information to/from the autopilot on a single wire high baud rate bus.
 
@@ -69,7 +69,7 @@ Enhanced Configurations
 
 Since many autopilots have a UART tied to the normal RC input pin for that autopilot which has been disabled, partially or totally, to allow that pins use as a GPIO for RC protocol decodes, including the PWM based ones, several boards now have alternate pin assignment which can be selected with the :ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` parameter. This allows the use of those previously disabled UARTs for FPort, without consuming an additional UART.
 
-.. note:: The Pixhawk family of controllers (ie Pixhawkx, Cube, etc.) that use an IOMCU co-processor do not have alternate configurations allowing the use of the RCIN pin. A serial port must be used, as described above.
+.. note:: Several autopilots (e.g. Pixhawkx, Cube, etc.) that use an IOMCU co-processor do not have alternate configurations allowing the use of the RCIN pin. A serial port must be used, as described above.
 
 .. note:: CUAVv5Nano can use its normal RCinput for FPort. Setup configuration for SERIAL5 for a normal F7/H7 autopilot, as above.
 

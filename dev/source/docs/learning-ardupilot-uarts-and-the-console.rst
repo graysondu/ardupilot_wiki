@@ -11,27 +11,57 @@ the UARTs via the HAL will help you understand a lot of ArduPilot code.
 The 8 UARTs
 ===========
 
-The ArduPilot HAL currently defines 8 UARTs. The HAL itself does not define any particular roles for these UARTs, but the other parts of ArduPilot assume they will be assigned particular functions. The command-line options for using with sim_vehicle.py the serial port should be preceded by :code:`-A` to pass along to the vehicle binary. Make sure to include the :code:`uart` protocol. Specifying a baudrate is not required, but is more consistent. For example, :code:`sim_vehicle.py --console --map -A --serial5=uart:/dev/ttyS15:115200`. The :code:`uartX` options are older and the :code:`serialX` options are newer and more convenient.
+The ArduPilot HAL currently defines 8 UARTs. The HAL itself does not define any particular roles for these UARTs, but the other parts of ArduPilot assume they will be assigned particular functions. The command-line options for using with sim_vehicle.py the serial port should be preceded by :code:`-A` to pass along to the vehicle binary. Make sure to include the :code:`uart` protocol. Specifying a baudrate is not required, but is more consistent. For example, :code:`sim_vehicle.py --console --map -A --serial5=uart:/dev/ttyS15:115200`.
 
-+-------------+----------------------------+----------+-------------------------+
-| ParamPrefix | Sim_vehicle Cmd Line       | Def Role | Default Connection      |
-+=============+============================+==========+=========================+
-| \SERIAL0_   | \- -uartA= or \- -serial0= | Console  | tcp:localhost:5760:wait |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL1_   | \- -uartC= or \- -serial1= | MAVLink  | tcp:localhost:5762      |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL2_   | \- -uartD= or \- -serial2= | MAVLink  | tcp:localhost:5763      |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL3_   | \- -uartB= or \- -serial3= | GPS      | Simulated GPS           |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL4_   | \- -uartE= or \- -serial4= | GPS      | Simulated GPS           |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL5_   | \- -uartF= or \- -serial5= |          |                         |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL6_   | \- -uartG= or \- -serial6= |          |                         |
-+-------------+----------------------------+----------+-------------------------+
-| \SERIAL7_   | \- -uartH= or \- -serial7= |          |                         |
-+-------------+----------------------------+----------+-------------------------+
++-------------+----------------------+----------+-------------------------+
+| ParamPrefix | Sim_vehicle Cmd Line | Def Role | Default Connection      |
++=============+======================+==========+=========================+
+| \SERIAL0_   | \- -serial0=         | Console  | tcp:localhost:5760:wait |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL1_   | \- -serial1=         | MAVLink  | tcp:localhost:5762      |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL2_   | \- -serial2=         | MAVLink  | tcp:localhost:5763      |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL3_   | \- -serial3=         | GPS      | Simulated GPS           |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL4_   | \- -serial4=         | GPS      | Simulated GPS           |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL5_   | \- -serial5=         |          |                         |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL6_   | \- -serial6=         |          |                         |
++-------------+----------------------+----------+-------------------------+
+| \SERIAL7_   | \- -serial7=         |          |                         |
++-------------+----------------------+----------+-------------------------+
+
+The following are options for connecting a SITL serial port:
+
+-  Passthrough to a real serial device: ``--serialX=uart:<device>:<baudrate>`` 
+-  TCP server: ``--serialX=tcp:<port>:wait``
+-  TCP client: ``--serialX=tcpclient:<remote IP>:<port>``
+-  UDP client: ``--serialX=udpclient:<remote IP>:<port>``
+-  UDP multicast: ``--serialX=mcast:<multicast IP>:<port>``
+-  Log to file: ``--serialX=file:<path and filename>``
+-  Simulated sensor: ``--serialX=sim:<device name>``
+
+A few examples of usage are:
+
+::
+
+    --serial1=uart:/dev/ttyUSB0:57600
+    --serial1=uart:/dev/ttyS15:115200  #Cygwin comm ports are ttyS and they start at 0, so 15 is equivalent to COM16
+    --serial1=tcp:5800:wait # wait means pause SITL startup until a connection is established. Otherwise use nowait
+    --serial1=tcpclient:192.168.1.110:5760
+    --serial1=udpclient:192.168.1.110:14550
+    --serial1=mcast:239.255.145.50:14550
+    --serial1=file:/tmp/my-device-capture.BIN
+    --serial1=sim:ParticleSensor_SDS021:
+
+When using with ``sim_vehicle.py``, ensure that the ``-A`` option is used to pass the configuration
+option to the SITL executable. For example:
+
+::
+
+    sim_vehicle.py -v ArduCopter -A "--serial1=uart:/dev/ttyUSB0:115200" --console --map
 
 If you are writing your own sketch using the ArduPilot HAL then you can
 use these UARTs for any purpose you like, but if possible you should try

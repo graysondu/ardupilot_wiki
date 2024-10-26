@@ -38,7 +38,7 @@ Wiring and Connections
 
 All ArduSimple GNSS models come with a JST GH 6-pin connector/cable that is compatible with the Pixhawk family and many other autopilots.
 
-.. note:: The cables/connectors may be modified to connect to other flight controller boards, using the Pin Map information provided above.
+.. note:: The cables/connectors may be modified to connect to other autopilot boards, using the Pin Map information provided above.
 
 Configuration
 =============
@@ -51,6 +51,6 @@ For GPS-for-Yaw, please refer to :ref:`GPS-for-Yaw <common-gps-for-yaw>`, but Ar
 
 `simpleRTK3B instructions <https://www.ardusimple.com/ardupilot-simplertk3b-heading-configuration/>`__
 
-.. note:: ArduPilot does not currently configure UBlox F9P GPS constellations. User must assure that the GPS is properly configured for his region and application. See :ref:`common-gps-ublox-firmware-update`
+.. note:: ArduPilot does not currently configure UBlox F9P GPS constellations. User must assure that the GPS is properly configured for their region and application. See :ref:`common-gps-ublox-firmware-update`
 
 

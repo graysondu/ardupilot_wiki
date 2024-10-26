@@ -103,14 +103,14 @@ Verify the following parameters are set on your autopilot via your ground statio
 
 if optional GPS is connected to UART2, then set
 
-- :ref:`GPS_TYPE<GPS_TYPE>` = 9 (DroneCAN) or if it will be the secondary GPS, set instead
-- :ref:`GPS_TYPE2<GPS_TYPE2>` = 9 (DroneCAN)
+- :ref:`GPS1_TYPE<GPS1_TYPE>` = 9 (DroneCAN) or if it will be the secondary GPS, set instead
+- :ref:`GPS2_TYPE<GPS2_TYPE>` = 9 (DroneCAN)
 
 
 
 - Reboot
 
-Make sure the DroneCAN compass driver is not disabled if an optional external Compass is connected to the rear I2C pads:. (:ref:`COMPASS_TYPEMASK<COMPASS_TYPEMASK>` bit 9 should not be set). 
+Make sure the DroneCAN compass driver is not disabled if an optional external Compass is connected to the rear I2C pads:. (:ref:`COMPASS_DISBLMSK<COMPASS_DISBLMSK>` bit 9 should not be set). 
 
 
 I2C Mode
@@ -124,7 +124,7 @@ I2C Mode
 Firmware Update
 ---------------
 
-Firmware may be updated in the future to include the option of MSP connectivity. See `here <http://www.mateksys.com/?portfolio=aspd-dlvr#tab-id-4>`_  for instructions for using the firmware update UART1 pads, or if using DroneCAN, see instructions :ref:`here <common-mp-slcan>`
+Firmware may be updated in the future to include the option of MSP connectivity. See `here <http://www.mateksys.com/?portfolio=aspd-dlvr#tab-id-4>`_  for instructions for using the firmware update UART1 pads, or if using DroneCAN, see instructions :ref:`here <planner:dronecan-uavcan-slcan>`
 
 Where to Buy
 ------------

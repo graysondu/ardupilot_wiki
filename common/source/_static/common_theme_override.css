@@ -5,6 +5,20 @@ table.useralerts-table td {
     white-space: normal;
 }
 
+ /* override table width restrictions */ 
+ .wy-table-responsive table td, .wy-table-responsive table th { 
+     white-space: normal; 
+ } 
+  
+ .wy-table-responsive { 
+     margin-bottom: 24px; 
+     max-width: 100%; 
+     overflow: visible; 
+ } 
+  
+ .wy-table-responsive th p { 
+     margin-bottom: unset; 
+ } 
 /* CSS for Partners logo list */
 table.partners-table {
     width: 100%;
@@ -54,7 +68,10 @@ table.partners-table td {
 .wy-menu .toctree-l1 a[href*="apmrover-setup.html"],
 .wy-menu .toctree-l1 a[href*="rover-first-drive.html"],
 .wy-menu .toctree-l1 a[href*="quadplane-setup.html"],
-.wy-menu .toctree-l1 a[href*="quadplane-first-flight.html"] {
+.wy-menu .toctree-l1 a[href*="quadplane-flying"],
+.wy-menu .toctree-l1 a[href*="quadplane-tuning-landingpage"],
+.wy-menu .toctree-l1 a[href*="traditional-helicopter-first-time-setup"],
+.wy-menu .toctree-l1 a[href*="traditional-helicopter-first-flight"] {
     color: red;
     font-weight: bold;
 }

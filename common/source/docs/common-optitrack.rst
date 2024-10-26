@@ -39,9 +39,8 @@ Please refer to OptiTrack `quick start guides <https://v20.wiki.optitrack.com/in
 Required softwares
 ==================
 
-* `Motive:Tracker <https://optitrack.com/products/motive/tracker/>`__
+* `Motive 2 or 3 Tracker <https://optitrack.com/products/motive/tracker/>`__
 * `MAVProxy <https://github.com/ArduPilot/MAVProxy>`__
-
 
 Prepare the drone
 =================
@@ -112,18 +111,23 @@ If you set Motive data streaming local interface to other than loopback , it is 
 
    The coordinate system of both Motive and ArduPilot are right-handed. While Z axis of ArduPilot is pointing down, Y axis of Motive is pointing up.  
 
-Save and build the project
+After all parameters is set, start sending pose to ardupilot:
+
+.. code:: bash
+
+   optitrack start
 
 Ground testing
 ==============
 
-- Connect the drone to a ground station
+- Connect the drone to MAVProxy
 - Start Motive and make sure `data streaming <https://v20.wiki.optitrack.com/index.php?title=Data_Streaming>`__ is turned on.
-- If you see following message in ground station console (initial pos may vary), then the drone should be ready for flight test
+- load and start optitrack module.
+- If you see following message appearing (initial pos may vary), then the drone is receiving pose data from Optitrack system. 
 
-*EKF2 IMU0 is using external nav data
-EKF2 IMU0 initial pos NED = 0.1,-0.2,0.0 (m)
-EKF2 IMU0 ext nav yaw alignment complete*
+``EKF3 IMU0 is using external nav data
+EKF3 IMU0 initial pos NED = 0.1,-0.2,0.0 (m)
+EKF3 IMU0 ext nav yaw alignment complete``
 
 Flight testing
 ==============

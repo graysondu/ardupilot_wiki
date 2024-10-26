@@ -1,8 +1,12 @@
 .. _traditional-helicopter-connecting-apm:
 
-==============================================================
-Traditional Helicopter — Connecting and Calibrating the System
-==============================================================
+=====================================================================
+Traditional Helicopter — Configuring Servo, Motor, and RC Connections
+=====================================================================
+
+This page covers how to make the physical connections between the autopilot, RC receiver, ESC and servos as well as calibrating the RC transmitter, Compass, Accelerometer, and ESC.  The following video covers making the connections and setting up the transmitter to work with the autopilot.
+
+.. youtube:: JagHOc0_mNQ
 
 Autopilot Info
 ==============
@@ -17,7 +21,7 @@ Before you begin connecting the system it is recommended to review the docs for 
 Overview of servo, and RX connection
 ====================================
 
-The RC input for many ardupilot compatible autopilots is either PPM SUM (8 channels) or S.Bus (up to 18 channels).  Some controllers also accept Spektrum satellite receivers.  For receivers that only output PWM, a PPM encoder is required to connect to the autopilot, however this is not recommended for applications requiring minimum possible latency.  For all helicopter frames, an RC radio that has at least 6 channels is required.  For flight controllers, traditional helicopter and quadheli frames require one that has at least 5 output channels. The dual helicopter frame requires the flight controller have at least 7 output channels. 
+The RC input for many ardupilot compatible autopilots is either PPM SUM (8 channels) or S.Bus (up to 18 channels).  Some controllers also accept Spektrum satellite receivers.  For receivers that only output PWM, a PPM encoder is required to connect to the autopilot, however this is not recommended for applications requiring minimum possible latency.  For all helicopter frames, an RC radio that has at least 6 channels is required.  For autopilots, traditional helicopter and quadheli frames require one that has at least 5 output channels. The dual helicopter frame requires the autopilot have at least 7 output channels. 
 
 The default receiver channel to ArduCopter RC input function mapping is as follows:
 
@@ -43,7 +47,7 @@ The default receiver channel to ArduCopter RC input function mapping is as follo
 |              | (throttle) (note3) |
 +--------------+--------------------+
 
-Note1: These functions are  mapped by ``RCMAP_x`` parameters by default.
+Note1: These functions are mapped by the  default values of ``RCMAP_x`` parameters as shown,but can changed as desired.
 
 Note2: The :ref:`FLTMODE_CH<FLTMODE_CH>` defaults to RC Channel 5.
 
@@ -59,9 +63,7 @@ The :ref:`autopilot output functions wiki <common-rcoutput-mapping>` shows the c
 Tail Servo/Control
 ------------------
 
-Tail servo is designated as Motor 4 (servo function 36) and is defaulted to output 4. Direct Drive Fixed Pitch (DDFP) tail rotors will also be connected to Motor 4 and the tail type parameter (:ref:`H_TAIL_TYPE <H_TAIL_TYPE>`) set to DDFP.  Direct Drive Variable Pitch (DDVP) tail rotors will use Motor 4 (defaulted to output 4) to control tail rotor pitch and the tail ESC (servo function 32) connection is defaulted to output 7. This is automatically configured as tail RSC for the servo 7 function when the tail type parameter (:ref:`H_TAIL_TYPE <H_TAIL_TYPE>`) is set to DDVP. 
-
-Be sure to check the direction of operation of the Tail Servo. Move the rudder stick and notice the change in tail rotor pitch. Be sure that its increase or decrease of pitch is such that the change in thrust will result in the desired direction of movement. If not, reverse the servo direction with the :ref:`SERVO4_REVERSED<SERVO4_REVERSED>` parameter.
+See :ref:`traditional-helicopter-tailrotor-setup`
 
 Motor Control
 -------------
@@ -70,40 +72,3 @@ The throttle servo or ESC for the main rotor motor is defaulted to output 8.  Th
 Check the docs for your selected autopilot but most require a separate power supply to the servo rail to power your servos at their appropriate rated voltage. 
 
 Connect telemetry radios, GPS/compass module, power to autopilot itself, and any other peripherals as per the instructions in the owners manual for the unit.
-
-RC Calibration
---------------
-
-.. warning::
-
-   Before powering the autopilot and servo rail for the first time, 
-   disconnect the rudder linkage from the tail servo or bellcrank on the tail 
-   gearbox. If you have a piston engine helicopter, also disconnect the throttle
-   servo linkage. 
-
-The RC MUST be calibrated before proceeding once the autopilot is powered up. RC calibration is identical to all other vehicles. With helicopters using the ArduPilot system there can be no mixes in the RC radio. All the outputs must be
-"pure", i.e. use either airplane mode in your radio, or helicopter mode with H1 or "straight" swash.
-:ref:`See this topic <common-radio-control-calibration>`.
-
-Compass Calibration
--------------------
-
-It is recommended to calibrate the compasses at this time as well. This is the same as all other vehicles.
-:ref:`See this topic <common-compass-calibration-in-mission-planner>`.
-
-Accelerometer Calibration
--------------------------
-If the accelerometers were not calibrated on the bench prior to installation it must be calibrated before proceeding.(It is usually easier to calibrate on the bench and then re-calibrate only the level position, if required, once installed.)
-:ref:`See this topic <common-accelerometer-calibration>`.
-
-ESC Calibration
----------------
-
-
-.. warning:: be sure to remove all blades when doing ESC calibration.
-
-Some ESCs must be calibrated to the throttle range (ie HeliRSC output range, which defaults to 1000 to 2000us). In addition, it is often required to change ESC settings, such as enabling the governor mode and/or setting voltage protection levels.
-
-In order to do this, you must be able to directly control the input to the ESC. By default the output function where it is attached is set to HeliRSC (:ref:`SERVO8_FUNCTION<SERVO8_FUNCTION>` = 31). In order to pass the throttle stick directly to the ESC for ESC programming per the ESC's instructions, temporarily change this to :ref:`SERVO8_FUNCTION<SERVO8_FUNCTION>` = 53. Remember to change it back to "31", after completing the ESC programming.
-
-In addition, check to see that :ref:`RC3_MIN<RC3_MIN>` and :ref:`RC3_MAX<RC3_MAX>` match the MIN and MAX range of the HeliRSC output, which defaults to SERVO8 output (:ref:`SERVO8_MIN<SERVO8_MIN>`, :ref:`SERVO8_MAX<SERVO8_MAX>`), since passing through the throttle input will be direct and ignore those values, hich you are trying to match in the calibration. If not, temporarily change them to  match and then return them to the values when :ref:`common-radio-control-calibration` was done.

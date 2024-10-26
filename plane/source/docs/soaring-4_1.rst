@@ -34,11 +34,18 @@ functionality:
    - :ref:`SOAR_ALT_MAX<SOAR_ALT_MAX>` is reached.
    - :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` is reached.
    - Flight mode is changed by the pilot.
-   - The estimate of achievable climb rate falls below :ref:`SOAR_VSPEED<SOAR_VSPEED>` , and 
+   - The estimate of achievable climb rate falls below :ref:`SOAR_VSPEED<SOAR_VSPEED>`, and 
      thermalling has lasted at least :ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>` seconds.
    - The aircraft drifts more than :ref:`SOAR_MAX_DRIFT<SOAR_MAX_DRIFT>` - see :ref:`Limit maximum distance from home<soaring_maximum-distance-from-home>`
 
    The flight mode will be returned to whatever it was before THERMAL was triggered.
+
+Airspeed Control
+================
+
+When in SOARING, the target airspeed while cruising is set via throttle stick position for FBWB and CRUISE modes, even while gliding. For AUTO mode, it is set at  :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`, unless the :ref:`SOAR_CRSE_ARSPD<SOAR_CRSE_ARSPD>` parameter is set to a non-zero value ("0" is default). If it is set to "-1", then the :ref:`soaring-speed-to-fly` computed value will be used. If greater than zero, then that value in meters/sec will be used for target airspeed.
+
+While in THERMAL mode, the target airspeed will be :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`, unless the :ref:`SOAR_THML_ARSPD<SOAR_THML_ARSPD>` parameter is set to a non-zero value ("0" is default). Then that value in meters/sec will be used for target airspeed instead.
 
 
 Hardware
@@ -63,7 +70,7 @@ Mission
 
 The main requirement for a mission is that it take the aircraft above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>`
 so that gliding flight is initiated. To achieve this, set the waypoints' altitude(s)
-above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` . 
+above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>`. 
 
 Soaring Parameters
 ------------------
@@ -171,7 +178,7 @@ The parameter :ref:`SOAR_THML_BANK<SOAR_THML_BANK>` sets the bank angle when the
 
 If the aircraft is not achieving this average bank angle when thermalling, you should check - 
 
- - that the limiting bank angle :ref:`LIM_ROLL_CD<LIM_ROLL_CD>` is set a bit larger than SOAR_THML_BANK (note the units are different) to give some room for manoeuvring;
+ - that the limiting bank angle :ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>` is set a bit larger than SOAR_THML_BANK (note the units are different) to give some room for manoeuvring;
 
  - that the navigation parameter NAVL1_PERIOD is no larger than the time needed for a complete turn at the specified bank angle.
 
@@ -187,9 +194,9 @@ Time hysteresis
 
 Adding hysteresis can reduce the frequency of mode changes.
 
-:ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>` : Minimum time to remain in THERMAL once entered for a thermal before exiting due to low lift or altitude limits.
+:ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>`: Minimum time to remain in THERMAL once entered for a thermal before exiting due to low lift or altitude limits.
 
-:ref:`SOAR_MIN_CRSE_S<SOAR_MIN_CRSE_S>` : Minimum time to remain in glide after exiting THERMAL due to low lift or altitude limits before entering mode again, or when entering Soaring initially.
+:ref:`SOAR_MIN_CRSE_S<SOAR_MIN_CRSE_S>`: Minimum time to remain in glide after exiting THERMAL due to low lift or altitude limits before entering mode again, or when entering Soaring initially.
 
 TECS Tuning
 -----------

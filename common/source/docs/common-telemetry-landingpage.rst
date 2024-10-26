@@ -9,7 +9,8 @@ transmitter) using telemetry. Follow the links below for configuration
 information based upon your set-up.
 
 .. note:: Some RC systems incorporate telemetry in addition to RC control
-.. note:: ArduPilot will automatically fall back to back to MAVLink1 if MAVLink 2 serial port protocol is selected and no MAVLink 2 data is received from the groundstation in response
+.. note:: most pure telemetry radios connect to the autopilot via a serial UART using MAVLink 1 or 2 protocol. See :ref:`common-telemetry-port-setup`
+.. note:: ArduPilot will automatically fall back to MAVLink1 if MAVLink 2 serial port protocol is selected and no MAVLink 2 data is received from the groundstation in response in fimware versions before 4.2, but not after
 .. image:: ../../../images/Telemetry_LandingImage.jpg
     :target: ../_images/Telemetry_LandingImage.jpg
 
@@ -42,16 +43,21 @@ Long Range
 .. toctree::
     :maxdepth: 1
 
+    Andruav Android Cellular <https://cloud.ardupilot.org/andruav-index.html>
     Blicube RLINK P900 <common-blicube-rlink>
-    CRSF Telemetry <common-crsf-telemetry>
+    ClearSky Airlink 4G LTE Telemetry <common-airlink-telemetry>
+    CRSF/ELRS Telemetry <common-crsf-telemetry>
     CUAV P8 Radio <common-cuav-p8>
     CUAV P9 Radio <common-cuav-p9>
     DragonLink <common-dragonlink-rc>
+    Herelink <common-herelink>
     Holybro 900Mhz XBP9X Telemetry Radio <https://shop.holybro.com/xbp9x-radio_p1268.html>
     Holybro Microhard P900 Radio Telemetry Radio <http://www.holybro.com/product/microhard-p900-radio/>
     LTM telemetry <common-ltm-telemetry>
+    mLRS <common-mlrs-rc.rst>
     RFD900 <common-rfd900>
     Robsense SwarmLink <common-telemetry-robsense-swarmlink>
+    Rockblock Satellite Modem <common-telemetry-rockblock>
     SPL Satellite Telemetry <https://discuss.ardupilot.org/t/stretching-comm-links-from-indoors-to-the-globe/45896>
     UAVCast 3G/4G Cellular <common-uavcast-telemetry>
     XBStation 4G LTE Link <common-xbstation-telemetry>
@@ -64,6 +70,10 @@ Applications and Info
 
     FlightDeck FrSky Transmitter App <common-frsky-flightdeck>
     MAVLink2 Packet Signing (Security) <common-MAVLink2-signing>
+    MAVLink High Latency Protocol <common-MAVLink-high-latency>
     Repeater for Wireless Ground Station Connections <common-wireless-gcs-repeater>
     Telemetry Radio Regional Regulations <common-telemetry-radio-regional-regulations>
+
+
+-  :ref:`Yaapu Telemetry Scripts for OpenTX <common-frsky-yaapu>`
 

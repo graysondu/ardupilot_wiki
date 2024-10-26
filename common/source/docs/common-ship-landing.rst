@@ -1,5 +1,6 @@
 .. _common-ship-landing:
 
+[copywiki destination="plane"]
 =========================================================
 Moving Platform Takeoff and Landing (Ships, Trucks, etc.)
 =========================================================
@@ -9,14 +10,14 @@ The Plane 4.2 firmware supports VTOL taking off and landing on a moving platform
 Equipment Needed
 ================
 
-To use this feature you need a beacon setup on the landing platform. This beacon should be based on an ArduPilot flight controller running the ArduPilot Rover firmware. You can set the ``FRAME_CLASS`` parameter on the beacon flight controller to "2" to make it a “boat” or "1" to make it a truck, so that the right icon shows in the ground station. The beacon will be broadcasting its position to allow the QuadPlane to track its moving HOME position, similar to :ref:`Copter's Follow Mode<copter:follow-mode>`.
+To use this feature you need a beacon setup on the landing platform. This beacon should be based on an ArduPilot autopilot running the ArduPilot Rover firmware. You can set the ``FRAME_CLASS`` parameter on the beacon autopilot to "2" to make it a “boat” or "1" to make it a truck, so that the right icon shows in the ground station. The beacon will be broadcasting its position to allow the QuadPlane to track its moving HOME position, similar to :ref:`Copter's Follow Mode<copter:follow-mode>`.
 
 .. image:: ../../../images/ship-landing.jpg
 
 The beacon system needs the following:
 
 - a reliable yaw source. Using dual-F9P GPS with :ref:`moving baseline yaw<common-gps-for-yaw>` is recommended if the moving platform will cause problems with compasses.
-- a telemetry radio setup so that the aircraft can see GLOBAL_POSITION_INT mavlink messages from the beacon flight controller. There are multiple methods of achieving that, see the section below on radio setup
+- a telemetry radio setup so that the aircraft can see GLOBAL_POSITION_INT mavlink messages from the beacon autopilot. There are multiple methods of achieving that, see the section below on radio setup
 - the beacon needs a different mavlink system ID to the aircraft and the GCS. You set this with the :ref:`SYSID_THISMAV<SYSID_THISMAV>` parameter. In the example below, :ref:`SYSID_THISMAV<SYSID_THISMAV>` = 17, has been set.
 - the beacon can be offset from the actual landing location. The beacon should be placed for optimal radio performance, then the instructions below can be used to setup the actual landing location relative to the beacon.
 
@@ -50,7 +51,7 @@ You will need ArduPilot plane 4.2 or later
 Lua Script
 ----------
 
-The ship landing functionality is in a :ref:`LUA script<common-lua-scripts>`. You will need the plane_ship_landing.lua script from `here <https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_Scripting/examples/plane_ship_landing.lua>`__
+The ship landing functionality is in a :ref:`LUA script<common-lua-scripts>`. You will need the plane_ship_landing.lua script from `here <https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_Scripting/applets/plane_ship_landing.lua>`__
 
 This script needs to be put in the APM/scripts directory on your microSD card on the aircraft.
 
@@ -142,7 +143,7 @@ Landing Procedure
 =================
 When you are ready to land you can switch the vehicle to RTL mode. When in RTL mode the aircraft will fly towards the landing location (you can see this location before you land from the HOME icon on the GCS, which moves with the beacon).
 
-The aircraft will initially approach the “hold-off” position. The altitude of the holdoff position is set by the :ref:`ALT_HOLD_RTL<ALT_HOLD_RTL>` parameter (in centimeters above the landing location). A good value of this is around 9000, which is 90 meters above the landing location.
+The aircraft will initially approach the “hold-off” position. The altitude of the holdoff position is set by the :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` parameter (in centimeters above the landing location). A good value of this is around 9000, which is 90 meters above the landing location.
 
 The description below will assume that ``SHIP_LAND_ANGLE`` = 0 which means landing happens from behind the beacon. The approach and landing is rotated by the value of this parameter in degrees.
 With ``SHIP_LAND_ANGLE`` = 0, the hold-off position will be behind and above the beacon. The distance depends on the beacon speed, wind speed and the :ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` parameter (which controls the deceleration of the aircraft).
@@ -151,7 +152,7 @@ Once the aircraft arrives at the hold-off position it will circle until the thro
 
 Throttle stick controls are:
 
--  Throttle at 40% or above means to hold at the hold-off position (at :ref:`ALT_HOLD_RTL<ALT_HOLD_RTL>` height above beacon in centimeters)
+-  Throttle at 40% or above means to hold at the hold-off position (at :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` height above beacon in centimeters)
 -  Throttle below 40% and above 10% means to descend while loitering to the approach altitude. The approach altitude is giving by :ref:`Q_RTL_ALT<Q_RTL_ALT>` in meters above the beacon. A good value for testing may be 40 meters.
 -  Throttle below 10% means to start landing approach once the aircraft is at the :ref:`Q_RTL_ALT<Q_RTL_ALT>` and lined up with the ``SHIP_LAND_ANGLE`` to move toward the vehicle.
 
@@ -167,14 +168,33 @@ You could also switch to a fixed wing mode just before reaching the takeoff alti
 
 Simulation
 ==========
-To simulation ship landing you should set:
 
--   ``SIM_SHIP_ENABLE`` = 1
--   ``SIM_SHIP_SPEED`` = 5,speed of ship in m/s
--   ``SIM_SHIP_DSIZE`` = 50, size of the simulated deck of the ship
--   ``SIM_SHIP_PSIZE`` = 2000,radius of the circular path the ship follows in meters
--   ``SIM_SHIP_OFS_X`` = 5, distance of the beacon in front of the aircraft at startup
--   ``SIM_SHIP_OFS_Y`` = 0, distance of the beacon to the right of the aircraft at startup
+To simulate a QuadPlane ship landing:
+
+#. Copy the plane_ship_landing.lua LUA script, into the /scripts directory where you will run the simulation
+#. Run the following commands for Linux SITL:
+
+.. code-block:: bash
+
+    sim_vehicle.py -v plane -f quadplane --console --map -w  /start SITL with default params
+    param set sim_ship_enable 1                              /Enable ship sim
+    param set scr_enable 1                                   /Enable scripting on QuadPlane
+    param ftp                                                /Refresh params to see SCR_ params
+    param set scr_heap_size 100000                           /Set memory large enough to run script
+    reboot                                                   /Reboot and start running script
+    param set ship_enable 1                                  /Enable script action
+
+3. Then setup a mission item: VTOL_TAKEOFF to the desired altitude
+#. Enter:
+
+.. code-block:: bash
+
+   mode auto
+   arm throttle                                              /Takeoff will begin
+   rc 3 1500                                                 /Raise throttle to allow hold-off loiter
+
+The QuadPlane will takeoff and then execute an RTL to the hold-off point and wait until the throttle is lowered (rc 3 1000) to start the landing.
+
 
 Credit:
 

@@ -55,6 +55,8 @@ There are a number of way of using Git/Github - including a number of different 
        git add the_name_of_file_you_changed.rst
        git commit -m "A short explanation of the change"
 
+#. "Squash" your commmits. See :ref:`git-interactive-rebase`. There should be onlt one commit for changes related to a given topical change, even if multiple pages wuth changes are involved.
+
 #. Push your commits to your fork on GitHub
 
    .. code-block:: bash
@@ -85,4 +87,4 @@ How to get changes approved
 
 All changes to the wiki are `reviewed <https://github.com/ArduPilot/ardupilot_wiki/pulls>`__ by the wiki "maintainers" to help reduce the chance of misleading or incorrect information being posted.  Feel free to post comments in the PullRequest and/or attend the :ref:`weekly dev meeting <dev:ardupilot-discord-server>` to escalate getting your changes submitted.
 
-[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]
+[copywiki destination="copter,plane,rover,blimp,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]

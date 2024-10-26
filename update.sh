@@ -7,6 +7,31 @@ cd $HOME/build_wiki || exit 1
 
 START=$(date +%s)
 
+############################
+# grab a lock file. Not atomic, but close :)
+# tries to cope with NFS
+lock_file() {
+        lck="$1"
+        pid=`cat "$lck" 2> /dev/null`
+
+        if test -f "$lck" && kill -0 $pid 2> /dev/null; then
+	    LOCKAGE=$(($(date +%s) - $(stat -c '%Y' "build.lck")))
+	    test $LOCKAGE -gt 30000 && {
+                echo "old lock file $lck is valid for $pid with age $LOCKAGE seconds"
+	    }
+            return 1
+        fi
+        /bin/rm -f "$lck"
+        echo "$$" > "$lck"
+        return 0
+}
+
+
+lock_file build.lck || {
+    echo "$(date +%s) already locked" >>build.lck.log
+    exit 1
+}
+
 test -n "$FORCEBUILD" || {
     (cd ardupilot_wiki && git fetch > /dev/null 2>&1)
     (cd sphinx_rtd_theme && git fetch > /dev/null 2>&1)
@@ -57,32 +82,6 @@ test -n "$FORCEBUILD" || {
     [ $changed = 1 ] || exit 0
 }
 
-############################
-# grab a lock file. Not atomic, but close :)
-# tries to cope with NFS
-lock_file() {
-        lck="$1"
-        pid=`cat "$lck" 2> /dev/null`
-
-        if test -f "$lck" && kill -0 $pid 2> /dev/null; then
-	    LOCKAGE=$(($(date +%s) - $(stat -c '%Y' "build.lck")))
-	    test $LOCKAGE -gt 30000 && {
-                echo "old lock file $lck is valid for $pid with age $LOCKAGE seconds"
-	    }
-            return 1
-        fi
-        /bin/rm -f "$lck"
-        echo "$$" > "$lck"
-        return 0
-}
-
-
-lock_file build.lck || {
-    echo "already locked"
-    exit 1
-}
-
-
 (
 date
 
@@ -108,7 +107,7 @@ git fetch origin
 git submodule update
 git reset --hard origin/master
 git clean -f -f -x -d -d
-python -m pip install --user -U .
+python3 -m pip install --user -U .
 popd
 
 cd ardupilot_wiki
@@ -123,8 +122,8 @@ MPARAMS_TIME=$(echo "($END_BUILD_MPARAMS - $END_UPDATES)" | bc)
 echo "[Buildlog] Time to run build_parameters.py: $MPARAMS_TIME seconds"
 
 echo "[Buildlog] Starting to build the wiki at $(date '+%Y-%m-%d-%H-%M-%S')"
-# python update.py --clean --parallel 4 # Build without versioning for parameters. It is better for editing wiki.
-python update.py --clean --paramversioning --parallel 4 --enablebackups # Enables parameters versioning and backups, should be used only on the wiki server
+# python3 update.py --clean --parallel 4 # Build without versioning for parameters. It is better for editing wiki.
+python3 update.py --destdir /var/sites/wiki/web --clean --paramversioning --parallel 4 --enablebackups --verbose # Enables parameters versioning and backups, should be used only on the wiki server
 
 
 END_BUILD_WIKI=$(date +%s)

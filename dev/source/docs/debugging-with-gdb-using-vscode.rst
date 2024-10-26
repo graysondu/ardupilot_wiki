@@ -33,13 +33,10 @@ In order to use GDB, you need to configure your SITL build with debug symbols. U
 
 Setting up VSCode Debugger
 ==========================
-With the VSCode open to the ArduPilot directory. Open the `Run and Debug` menu (Ctrl+Shift+D). In the Run and Debug menu, `create a launch.json file`. Then `Add Configuration`, it should open a launch.json file for setting up debugging configurations.
+With VSCode open to the ArduPilot directory. Open the `Run and Debug` menu (Ctrl+Shift+D). Within the `Run and Debug` menu, select `create a launch.json file`. Then select `Add Configuration`, it should open a launch.json file for setting up debugging configurations.  An example launch.json file can be found below.  Copy-paste the example into the newly created launch.json file in VSCode, overwitting anything that has was pre-defined in the file, and save the file.  This example file is a good place to start but can be modified to your liking.  Should you need to access or edit the file in the future, you can find it in the .vscode directory, or you can simply click on the cog icon in the `Run and Debug` menu.
 
 .. image:: ../images/VSCode-config1.png
     :target: ../_images/VSCode-config1.png
-
-
-
 
 Example launch.json File
 ------------------------
@@ -114,7 +111,7 @@ Example launch.json File
                     "--home", "36.146,-113.89,1429.75,90",   // Grand Canyon Plateau for terrain following
                     "--config", "-G",                        // "-G" option sets debug symbols
                     "--speedup", "8",                        // Set the how much faster relative to real-time the simulation runs
-                    // "--uartE=sim:lightwareserial",        // Used to attach simulated serial devices
+                    // "--serial4=sim:lightwareserial",        // Used to attach simulated serial devices
                     "--defaults",
                     "${workspaceRoot}/ArduCopter/mav.parm",  // set path to defaults file
                     "-I0",
@@ -131,6 +128,13 @@ Example launch.json File
                         "description": "Enable pretty-printing for gdb",
                         "text": "-enable-pretty-printing",
                         "ignoreFailures": true
+                    }
+                ],
+                "postRemoteConnectCommands": [
+                    {
+                        "description": "Set breakpoint at AP_HAL::panic",
+                        "text": "-break-insert AP_HAL::panic",
+                        "ignoreFailures": false
                     }
                 ]
             },
@@ -149,7 +153,21 @@ Example launch.json File
                 ],
                 "miDebuggerPath": "/usr/bin/gdb",
                 "MIMode": "gdb",
-                "launchCompleteCommand": "exec-run"
+                "launchCompleteCommand": "exec-run",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ],
+                "postRemoteConnectCommands": [
+                    {
+                        "description": "Set breakpoint at AP_HAL::panic",
+                        "text": "-break-insert AP_HAL::panic",
+                        "ignoreFailures": false
+                    }
+                ]
             },
 
         // Autotest Debugging Profile
@@ -196,15 +214,12 @@ Launch SITL with using ``sim_vehicle.py`` : be sure to add ``-D`` to build and l
 
     sim_vehicle.py -v ArduCopter -f quad --console --map -D
 
-Click and select ``C/C++ : (gdb) Attach`` option.
+From the Run and Debug menu select ``(gdb) Attach``, push the green arrow and select the process name for your vehicle's binary (e.g. ``arducopter``)
 
 .. image:: ../images/VSCode-config2.png
     :target: ../_images/VSCode-config2.png
 
-To start debugging with VSCode, select the process name for your vehicle's binary : example ``arducopter``.
-
-.. image:: ../images/VSCode-attach1.png
-    :target: ../_images/VSCode-attach1.png
+Note that you can switch between the Debug and SITL terminals by clicking in the areas shown in yellow above.
 
 Before or after attaching you may put breakpoints in the code to start debugging.
 

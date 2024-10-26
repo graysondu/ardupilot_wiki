@@ -72,7 +72,7 @@ Check servo movements
 =====================
 
 **BEFORE EVERY FLIGHT**: before take off, hold the aircraft in your
-hands and switch to :ref:`FBWA <fbwa-mode>` mode, then pitch and tilt the plane it to
+hands and switch to :ref:`FBWA <fbwa-mode>` mode, then pitch and tilt the plane to
 confirm that the control surfaces move the correct way to return it to
 level flight. (The ailerons and elevators will move; the rudder only
 coordinates turns with the ailerons in flight, so it won't move much on
@@ -143,5 +143,5 @@ autopilot board and your planes attitude when flying straight and level, as expl
 
 For roll errors (ie heading keeps changing with sticks neutral), use the "LEVEL" accelerometer calibrate button in Mission Planner with the wings level using a spirit level and the nose to tail fuselage line of the aircraft also level. Unless the plane is warped this will assure that the wings are level in flight. If the aircraft still rotates in heading with sticks neutral, then you will need to trim the rudder, if equipped, also in flight.
 
-If the plane is not generally holding altitude in FBWA at the desired cruise throttle position (ie speed), then you can adjust the cruising pitch attitude using the :ref:`TRIM_PITCH_CD<TRIM_PITCH_CD>` parameter. Most planes required this to be a few degrees positive for best cruise trim in FBWA. This parameter is in centi-degrees, so 3 degs is 300 for its value.
+If the plane is not generally holding altitude in FBWA at the desired cruise throttle position (ie speed), then you can adjust the cruising pitch attitude using the :ref:`PTCH_TRIM_DEG<PTCH_TRIM_DEG>` parameter. Most planes required this to be a few degrees positive for best cruise trim in FBWA. This parameter is in centi-degrees, so 3 degs is 300 for its value.
 

@@ -20,6 +20,10 @@ Overview
 .. image:: ../images/auto.jpg
     :target: ../_images/auto.jpg
 
+AUTO mode navigates between each waypoint in a straight line and as it approaches each waypoint follows a smooth curving path towards the next waypoint (S-Curve). It controls the path as it approaches a waypoint to be within the WPNAV_RADIUS of each waypoint. The speed is lowered below :ref:`WPNAV_SPEED<WPNAV_SPEED>`, as necessary, to keep the path within the set corner lateral acceleration limit parameter (:ref:`WPNAV_ACCEL_C<WPNAV_ACCEL_C>`).
+
+.. note:: this smooth curving path as it changes direction to the next waypoint will not occur if the next naviation mission item after the waypoint is anything other than a normal waypoint, ie LAND, LOITER_TURNS, etc., etc. In these cases the copter will approach the waypoint, stop, and then proceed to the next navigation waypoint instead of smoothly curving in front of it and proceeding to that next navigation waypoint. Also, small :ref:`WPNAV_RADIUS<WPNAV_RADIUS>` values will require that the curve be very small, effectively appearing like the non-S-Curve behavior explained above.
+
 AUTO mode incorporates the altitude control from :ref:`AltHold mode <altholdmode>` and position
 control from :ref:`Loiter mode <loiter-mode>` and should not
 be attempted before these modes are flying well.  All the same
@@ -91,21 +95,21 @@ AUTO mode incorporates the altitude control from :ref:`AltHold mode <altholdmode
 control from :ref:`Loiter mode <loiter-mode>`.
 
 The maximum horizontal speed of the copter can be adjusted with the
-**Speed** (aka WPNAV_SPEED) parameter from the Mission Planner's
+**Speed** (:ref:`WPNAV_SPEED<WPNAV_SPEED>`) parameter from the Mission Planner's
 Config/Tuning >> Copter Pids screen (see blue box above).  The default
-is 500 meaning 5m/s.  A typical copter can reach top speeds of 10m/s ~
+is 1000 meaning 10m/s.  A typical copter can reach top speeds of 10m/s ~
 13m/s (i.e. 1000 ~ 1300) before it becomes unable to both maintain
 altitude and horizontal speed.
 
-The vertical speeds up and down can similar be adjusted with the **Speed
-Up** (WPNAV_SPEED_UP) and **Speed Dn** (WPNAV_SPEED_DN) parameters.
+The vertical speeds up and down can similar be adjusted with the **Speed Up** (:ref:`WPNAV_SPEED_UP<WPNAV_SPEED_UP>`) and **Speed Dn** (:ref:`WPNAV_SPEED_DN<WPNAV_SPEED_DN>`) parameters. :ref:`WPNAV_ACCEL_Z<WPNAV_ACCEL_Z>` determines how fast the speed can change.
 
-The **Radius** allows you to control how close the copter must come to
-the exact waypoint position before the waypoint is considered "complete"
+Other speed control related parameters that can be adjusted to manage how fast speed changes occur are: :ref:`WPNAV_ACCEL<WPNAV_ACCEL>`, and :ref:`WPNAV_JERK<WPNAV_JERK>`.
+
+The **Radius** (:ref:`WPNAV_RADIUS<WPNAV_RADIUS>` allows you to control how close the copter must come to the exact waypoint position before the waypoint is considered "complete"
 and the copter moves onto the next waypoint.  This only applies when the
 waypoint command includes a delay of 1 second or more.  Without a delay
 the waypoint is considered a "fast waypoint" and the copter will begin
 towards the next waypoint once the intermediate target that it is
-chasing has reached the waypoint.  This intermediate target can be 10m
+chasing has reached the waypoint (S-Curve behavior only applies to "fast" waypoints).  This intermediate target can be 10m
 or more ahead of the copter (its distance ahead of the copter increases
 with the Speed parameter).

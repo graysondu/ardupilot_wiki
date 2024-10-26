@@ -28,12 +28,29 @@ Manual Forward Throttle in VTOL Modes
 
 By setting an RC channel option (``RCx_OPTION``) to "209", that channel can provide a separate throttle input to the forward motor(s) in QSTABILIZE, QACRO, and QHOVER VTOL modes. This allows forward movement without having to tilt the QuadPlane forward requiring throttle stick repositioning in QSTABILIZE and QACRO to maintain altitude, and present more forward flat plate resistance to forward movement in all modes. The maximum percentage throttle that will be applied by this channel is set by :ref:`Q_FWD_MANTHR_MAX<Q_FWD_MANTHR_MAX>`.
 
+.. _quadplane_failsafe:
+
 Radio or Throttle Failsafe
 ==========================
 
 If flying in a plane mode or AUTO, behaviour is determined by the :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>` and :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` parameter settings (see Plane Failsafe Function). QuadPlanes can be set such that instead of normal plane behaviour on Failsafe induced RTLs, to transition to QRTL and land once at the rally point or home, if  :ref:`Q_RTL_MODE<Q_RTL_MODE>` =1. If :ref:`Q_RTL_MODE<Q_RTL_MODE>` =2, then a fixed wing approach followed by a loiter to alt and QRTL will be executed, similar to that described in the "AUTO VTOL Landing" section of :ref:`quadplane-auto-mode`.
 
-If not flying a mission, and are flying in any copter mode (QHOVER,QSTAB,etc.), failsafe will evoke QLAND or QRTL, depending on how :ref:`Q_OPTIONS<Q_OPTIONS>`, bit 5, is set.
+If lying in any VTOL mode (QHOVER,QSTAB,etc.) and not flying a mission, failsafe will evoke QLAND , QRTL or RTL, depending on how :ref:`Q_OPTIONS<Q_OPTIONS>`, bits 5 and 20, are set.
+
+VTOL Landing Repositioning
+==========================
+
+During the final descent phase of QRTL/QLAND or a mission VTOL LAND command, repositioning the vehicle or pausing the descent is usually not possible unless switching to a pilot controlled mode like QLOITER. However, there are two options that can be enabled to give the pilot control:
+
+Throttle Descent Control
+------------------------
+
+If :ref:`Q_OPTIONS<Q_OPTIONS>` bit 15(+32768 to param value), is set, it will allow pilot to control descent during VTOL AUTO-LAND phases, similar to throttle stick action during QHOVER or QLOITER. However, this will not become active until the throttle stick is raised above 70% momentarily during the descent at least once.
+
+Horizontal Repositioning
+------------------------
+
+If :ref:`Q_OPTIONS<Q_OPTIONS>` bit 17(+131072 to param value), is set, it will enable pilot horizontal re-positioning during VTOL auto LAND phases using the pitch and roll sticks like QLOITER, momentarily pausing the descent while doing so.
 
 .. _what-will-happen:
 
@@ -64,8 +81,8 @@ a right roll at low speed will cause the aircraft to move to the right.
 It will also cause the aircraft to yaw to the right (as the QuadPlane
 code interprets right aileron in fixed wing mode as a commanded turn).
 
-Once the aircraft reaches an airspeed of :ref:`ARSPD_FBW_MIN <ARSPD_FBW_MIN>`
-(or :ref:`Q_ASSIST_SPEED <Q_ASSIST_SPEED>` if that is set and is greater than :ref:`ARSPD_FBW_MIN <ARSPD_FBW_MIN>`)
+Once the aircraft reaches an airspeed of :ref:`AIRSPEED_MIN <AIRSPEED_MIN>`
+(or :ref:`Q_ASSIST_SPEED <Q_ASSIST_SPEED>` if that is set and is greater than :ref:`AIRSPEED_MIN <AIRSPEED_MIN>`)
 the amount of assistance the quad motors provide will decrease over 5
 seconds. After that time the aircraft will be flying purely as a fixed wing.
 
@@ -87,22 +104,20 @@ rudder.
 I switch to RTL mode while hovering
 -----------------------------------
 
-The aircraft will transition to fixed wing flight. The quad motors will
+The aircraft will generally transition to fixed wing flight. The quad motors will
 provide assistance with lift and attitude while the forward motor starts
-to pull the aircraft forward.
+to pull the aircraft forward. Depending on the :ref:`Q_RTL_MODE<Q_RTL_MODE>`,
+different behaviors can be selected as it returns to the return point (rally or home).
+See :ref:`quadplane_rtl` for details.
 
-The normal Plane RTL flight plan will then be run, which defaults to
-circling at the RTL altitude above the arming position or nearest rally
-point. If you have :ref:`RTL_AUTOLAND <RTL_AUTOLAND>`
-setup then the aircraft will do a fixed wing landing.
+If you have :ref:`RTL_AUTOLAND <RTL_AUTOLAND>`
+setup then the aircraft will follow the mission configuration.
 
-If you set :ref:`Q_RTL_MODE <Q_RTL_MODE>` to 1 then the aircraft will switch to a VTOL
-landing when it gets close to return point.
 
 I switch into QRTL close to HOME
 --------------------------------
 
-If closer than 1.5X the larger of either :ref:`RTL_RADIUS<RTL_RADIUS>` or :ref:`WP_LOITER_RAD<RTL_RADIUS>`, then the vehicle will proceed toward home in VTOL mode and land. If greater, it will transition to fixed wing, climbing toward :ref:`ALT_HOLD_RTL<ALT_HOLD_RTL>` and executing a normal QRTL. Depending on how far from home, the vehicle may only briefly climb and then switch back to approach or airbrake phases. The further away, the higher the climb as it flies back toward home. If the approach behavior has ben disabled with :ref:`Q_OPTIONS<Q_OPTIONS>` bit 16, then it will just switch to VTOL (if not already in that mode, navigate to home and land).
+If closer than 1.5X the larger of either :ref:`RTL_RADIUS<RTL_RADIUS>` or :ref:`WP_LOITER_RAD<RTL_RADIUS>`, then the vehicle will proceed toward home in VTOL mode and land. If greater, it will transition to fixed wing, climbing toward :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` and executing a normal QRTL. Depending on how far from home, the vehicle may only briefly climb and then switch back to approach or airbrake phases. The further away, the higher the climb as it flies back toward home. If the approach behavior has ben disabled with :ref:`Q_OPTIONS<Q_OPTIONS>` bit 16, then it will just switch to VTOL (if not already in that mode, navigate to home and land).
 
 I have an EKF Failsafe
 ----------------------

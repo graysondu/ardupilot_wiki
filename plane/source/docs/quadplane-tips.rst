@@ -1,10 +1,18 @@
 .. _quadplane-tips:
 
-==============
-QuadPlane Tips
-==============
+====================
+QuadPlane Setup Tips
+====================
 
 There are a few helpful hints and tips for first-time QuadPlane users.
+
+Heavy commercial QuadPlane operators should also read:
+
+.. toctree::
+   :maxdepth: 1
+
+   High Reliability QuadPlane Operation <quadplane-reliability>
+   ESC Signalling Issues <common-esc-issues>
 
 Motor Alignment
 ===============
@@ -18,17 +26,15 @@ Miss-alignment can also be seen in the dataflash log RCOUT values in a hover for
 
 For vectored thrust frames, fixed-wing mode alignment is also critical. Very small differences between motor thrust angles in forward flight will generate undesirable, and sometimes uncontrollable, roll trim tendencies. Careful bench checking and adjustment of forward fixed-wing mode positions with respect to airframe and one another is required.
 
+.. _h-vs-x-mixing:
+
 X vs H Quad Mixing
 ==================
 
-In theory, it does not matter which is used. With perfectly rigid mounting, no performance or flight difference will be noted as far as motor control dynamics. However, the actual implementation of the mounting can result in differences in drag and efficiency.
+If the airframe is perfectly rigid, the performance difference between X and H mixing schemes is negligible. However, quadplanes structures are often less rigid than traditional multirotors and torsional effects must be considered. When a yaw input results in most of a quadplane's weight being supported by a diagonal pair of motors, the fuselage or wing of a quadplane may twist and distort the thrust vectors of some or all motors. This distortion often induces a yaw moment that can reduce or even completely disable yaw effectiveness unless the appropriate mixing scheme is used. While this effect is airframe dependent, it usually can be summarized in one of two ways:
 
-- X frame mounting or horizontal H frame type mounting creates the most drag.
-- H frame mounting fore-aft (i.e., on the wings in line with wing chord) is the least drag, but also can result in a lot of flexing, depending on wing construction
-
-In addition, if the mounting method allows ANY twist to occur, serious performance degradation can occur. For example, a conventional style plane airframe can have the motors mounted on cross members in the nose and rear fuselage. If the fuselage allows a minor twist to occur (like during yaw with one diagonal supporting most of the plane's weight), which most foam style planes will, then if X mixing is used, the twist induced during yaw actually acts to decrease the yaw. In some cases, it can completely disable yaw effectiveness. However, the same configuration using H mixing, the twist will actually aid the desired yaw.
-
-In general, in a Quad configuration, use H mixing and not X mixing, independent of the actual physical mounting arrangement.
+- Airframes with quad motors mounted to arms extending forward and aft of the wings, aligned with the chord direction. X mixing scheme should be used such that any induced twist complements the desired yaw. If the H mixing scheme is used with this configuration, yaw inputs may induce wing twist that counteracts the desired yaw.
+- Airframes with quad motors mounted to arms extending left and right from the fuselage, usually attached near the nose and tail. H mixing scheme should be used such that any induced twist complements the desired yaw. If the X mixing scheme is used with this configuration, yaw inputs can induce fuselage twist that counteracts the desired yaw.
 
 Increasing YAW Authority
 ========================
@@ -52,7 +58,19 @@ However, there is a better way for non-tailsitter QuadPlanes. If mechanically po
 
 .. note:: Those fabricating their mounts via a 3D printer, this is very easy to do, as well as tilt for yaw enhancement discussed above.
 
-.. note:: Fixed wing pitch "level" trim is set by the AHRS "level" done during accelerometer calibration, which adjusts the :ref:`AHRS_TRIM_Y<AHRS_TRIM_Y>` values, PLUS any :ref:`TRIM_PITCH_CD<TRIM_PITCH_CD>` (in centidegrees). See :ref:`common-accelerometer-calibration` and :ref:`tuning-cruise` for more details.
+.. note:: Fixed wing pitch "level" trim is set by the AHRS "level" done during accelerometer calibration, which adjusts the :ref:`AHRS_TRIM_Y<AHRS_TRIM_Y>` values, PLUS any :ref:`PTCH_TRIM_DEG<PTCH_TRIM_DEG>` (in degrees). See :ref:`common-accelerometer-calibration` and :ref:`tuning-cruise` for more details.
+
+Trimming VTOL "Level" thru Accelerometer LeveL only Calibration
+---------------------------------------------------------------
+
+There is another, slightly more complex, way to set the VTOL stance pitch trim without using :ref:`Q_TRIM_PITCH<Q_TRIM_PITCH>`, in tailsitters only:
+
+- Do the normal fixed wing accelerometer calibration. But read and save the :ref:`AHRS_TRIM_Y<AHRS_TRIM_Y>` value after the calibration.
+- Place the vehicle in VTOL stance (nose pointing veritically) and set the mode to QSTABILIZE. Be sure that  :ref:`Q_TRIM_PITCH<Q_TRIM_PITCH>` = "0" or the next step will fail.
+- Do a "LEVEL only" accelerometer calibration. In Mission Planner there is a button for this under the Accelerometer calibration. In MAVProxy, its the "ahrstrim" command.
+- Restore the previously noted and saved :ref:`AHRS_TRIM_Y<AHRS_TRIM_Y>` value to restore the fixed wing attitude pitch trim.
+
+In some cases, :ref:`Q_TRIM_PITCH<Q_TRIM_PITCH>` may still need to be adjusted if the calibration stance used is not the true hovering attitude.
 
 Copter Motors vs Servos
 =======================
@@ -89,7 +107,7 @@ Optional Features Sometimes Overlooked
 
 In case you missed them:
 
-- Various QuadPlane Options: :ref:`Q_OPTIONS<Q_OPTIONS>` , bits 0,and 3-5 being especially interesting
+- Various QuadPlane Options: :ref:`Q_OPTIONS<Q_OPTIONS>`, bits 0,and 3-5 being especially interesting
 - RTL Behaviour; :ref:`Q_RTL_MODE<Q_RTL_MODE>`
 - :ref:`Assisted Flight<assisted_fixed_wing_flight>`
 - :ref:`Weathervaning<quadplane-weathervaning>`

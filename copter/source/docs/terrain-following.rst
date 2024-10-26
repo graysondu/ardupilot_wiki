@@ -4,7 +4,7 @@
 Terrain Following (in Auto, Guided, etc)
 ========================================
 
-Copter 3.4 (and higher) support "terrain following" in nearly all modes including autonomous modes like :ref:`AUTO <auto-mode>`, :ref:`Guided <ac2_guidedmode>`, :ref:`RTL <rtl-mode>` and :ref:`Land <land-mode>`.  This feature allows the vehicle to climb or descend to maintain a specified distance above the terrain using either a :ref:`downward facing Lidar or Sonar <common-rangefinder-landingpage>` or from `SRTM <https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission>`__ data (aka terrain altitude data) provided by the ground station using a mapping service such as Google maps.  Details of how the SRTM data is used can be found on the :ref:`plane terrain following page <plane:common-terrain-following>`
+Copter supports "terrain following" in nearly all autonomous modes :ref:`AUTO <auto-mode>`, :ref:`Guided <ac2_guidedmode>`, :ref:`RTL <rtl-mode>` and :ref:`Land <land-mode>`.  This feature allows the vehicle to climb or descend to maintain a specified distance above the terrain using either a :ref:`downward facing Lidar or Sonar <common-rangefinder-landingpage>` or from `SRTM <https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission>`__ data (aka terrain altitude data) provided by the ground station using a mapping service such as Google maps or stored on the autopilot's SD card in the "Terrain" subdirectory.  Details of how the SRTM data is used and stored can be found on the :ref:`plane terrain following page <plane:common-terrain-following>`
 
 ..  youtube:: mT67QOAxuG8
     :width: 100%
@@ -13,7 +13,7 @@ See :ref:`common-understanding-altitude` for altitude definitions.
 
 .. note::
 
-   :ref:`Loiter <loiter-mode>`, :ref:`PosHold <poshold-mode>` and :ref:`AltHold <altholdmode>` modes also support low altitude terrain following, called Surface Tracking.  Please refer to the :ref:`Surface Tracking <terrain-following-manual-modes>` wiki page.
+   :ref:`Loiter <loiter-mode>`, :ref:`PosHold <poshold-mode>` and :ref:`AltHold <altholdmode>` modes also support low altitude terrain following, called Surface Tracking. Please refer to the :ref:`Surface Tracking <terrain-following-manual-modes>` wiki page.
 
 Setting up a Mission to use Terrain data
 ========================================
@@ -28,9 +28,9 @@ Setting up a Mission to use Terrain data
 
 .. warning::
 
-    Do not set the :ref:`EK2_ALT_SOURCE <EK2_ALT_SOURCE>` or ``EK3_ALT_SOURCE`` parameters.  These parameters should be left at "0" (barometer).
+    Do not set the :ref:`EK3_SRC1_POSZ <EK3_SRC1_POSZ>` to Rangefinder.  This parameter should be left at the default.
 
-    Do not set the :ref:`EK2_RNG_USE_HGT <EK2_RNG_USE_HGT>`  or :ref:`EK3_RNG_USE_HGT <EK3_RNG_USE_HGT>` parameters.  These parameters should be left at "-1".
+    Do not set :ref:`EK3_RNG_USE_HGT <EK3_RNG_USE_HGT>` parameter.  This parameter should be left at "-1".
 
 Sources of Terrain Data
 =======================
@@ -49,14 +49,31 @@ It will create tiles for the specified radius around a geographic location. Then
 
 You can also download .zip files for entire continents, or individual tiles from `here <https://terrain.ardupilot.org/data/>`__. Note that ArduPilot 4.0.x and 4.1.x have different tilesets. Use the "continents"/"tiles" folders for ArduPilot 4.0.x, or use the "continentsapm41"/"tilesapm41" folders for ArduPilot 4.1.x. 
 
+Beginning with the beta version released on 20th September 2024 you can create terrain dat files from Mission Planner and upload them to the SD card. 
+
+- Go to FlightPlanner.
+- Select area with ALT+MouseCLICK and drag
+- Open context menu and select Make Terrain DAT
+
+if no area is selected the actual displayed area is used.
+
+If you loaded Digital Elevation Model files into Mission Planner, then the generated terrain file will use them as source. You can specify the spacing between 5 and 100 meters. (Smaller spacing is not possible due to a bug in Ardupilot code, which does not allow files larger than 2Gbyte)
+
+A grid spacing of 100 meters is adequate for most uses, especially for fast-flying vehicles. Using a smaller grid spacing often results in unnecessary SD card storage consumption. However, in specific cases where precise terrain following is required—such as when spraying with a copter over uneven terrain—a smaller grid spacing can be beneficial.
+Don't forget to match the terrain spacing parameter with the grid size you generated and uploaded.
+
+Terrain data files are always created as one file per one-by-one degree area, the file size depends on the spacing.
+
 .. warning:: A long standing bug in the downloaded terrain data files, which occasionally caused terrain data to be missing, even though supposedly downloaded, was fixed in Plane 4.0.6, Copter 4.0.4, and Rover 4.1. It will automatically be re-downloaded when connected to a compatible GCS. However, if you are relying on SD terrain data for an area and don't plan on being connected to a GCS when flying over it, or its not part of a mission, you should download the area data using the utility above, or from the linked tiles data repository and place on your SD card in the Terrain directory.
 
 .. warning:: ArduPilot 4.0.x and 4.1.x use different terrain tilesets. When upgrading from 4.0.x to 4.1.x, any tiles on the SD card will need to be re-downloaded. This will happen automatically when your GCS is connected to the Internet for areas covered by loaded missions and/or home location. Otherwise, you may set the :ref:`TERRAIN_MARGIN <TERRAIN_MARGIN>` to 50 to continue using the old tileset.
 
 Using Terrain Altitude during RTL and Land
 ==========================================
-Set the :ref:`TERRAIN_FOLLOW <TERRAIN_FOLLOW>` parameter to 1 to enable using terrain data in :ref:`RTL <rtl-mode>` and :ref:`Land <land-mode>` flight modes.  If set the vehicle will interpret the :ref:`RTL_ALT <RTL_ALT>` as an altitude-above-terrain meaning it will generally climb over hills on it's return path to home.  Similarly Land will slow to the :ref:`LAND_SPEED <LAND_SPEED>` (normally 50cm/s) when it is 10m above the terrain (instead of 10m above home).
+Set the :ref:`TERRAIN_FOLLOW <TERRAIN_FOLLOW>` parameter to 1 to enable using terrain data in :ref:`RTL <rtl-mode>` and :ref:`Land <land-mode>` flight modes. Also set :ref:`RTL_ALT_TYPE<RTL_ALT_TYPE>` = 1.  If set the vehicle will interpret the :ref:`RTL_ALT <RTL_ALT>` as an altitude-above-terrain instead of above home altitude, meaning it will generally climb over hills on its return path to home.  Similarly Land will slow to the :ref:`LAND_SPEED <LAND_SPEED>` (normally 50cm/s) when it is 10m above the terrain (instead of 10m above home).
 Currently setting this parameter is not recommended because of the edge case mentioned below involving the somewhat unlikely situation in which the vehicle is unable to retrieve terrain data during the :ref:`RTL <rtl-mode>`.  In these cases the :ref:`RTL_ALT <RTL_ALT>` will be interpreted as an alt-above home. 
+
+In addition, if :ref:`WPNAV_RFND_USE<WPNAV_RFND_USE>` is also set to 1, the rangefinder will be used instead of the terrain database during RTL. Of course the :ref:`RTL_ALT <RTL_ALT>` must be within the rangefinder's operating range and it must be healthy.
 
 Failsafe in case of no Terrain data
 ===================================
